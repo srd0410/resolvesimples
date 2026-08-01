@@ -1,0 +1,15 @@
+{
+  "name": "resolvesimples",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev --port 4331",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vercel": "^9.0.5",
+    "astro": "^5.18.2"
+  }
+}

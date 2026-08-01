@@ -1,0 +1,215 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import OfferCard from '../../components/OfferCard.astro';
+import { OFFERS, SITE } from '../../consts';
+
+export function getStaticPaths() {
+  return OFFERS.map((offer) => ({
+    params: { slug: offer.slug },
+    props: { offer },
+  }));
+}
+
+const { offer } = Astro.props;
+const { page } = offer;
+const others = OFFERS.filter((o) => o.slug !== offer.slug).slice(0, 3);
+const hasProducts = page.products.length > 0;
+const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
+---
+<Layout title={offer.title} description={offer.painPoint}>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <nav class="crumbs" aria-label="Você está em">
+        <a href="/">Início</a>
+        <span aria-hidden="true">/</span>
+        <span>{offer.niche}</span>
+      </nav>
+
+      <p class="eyebrow eyebrow-on-dark">{page.eyebrow}</p>
+      <h1>{page.h1}</h1>
+      <p class="hero-lede">{page.lede}</p>
+
+      <a href={hasProducts ? '#selecao' : `mailto:${SITE.email}?subject=${mailSubject}`} class="btn btn-primary btn-lg">
+        {hasProducts ? 'Ver o que indicamos' : 'Quero ser avisado'}
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ O PROBLEMA ============ -->
+  <section class="section">
+    <div class="wrap-narrow">
+      <p class="eyebrow">O problema</p>
+      <h2>{page.problemTitle}</h2>
+      {page.problemBody.map((par) => <p class="body-par">{par}</p>)}
+    </div>
+  </section>
+
+  <!-- ============ CRITÉRIOS DA CATEGORIA ============ -->
+  <section class="section section-tint">
+    <div class="wrap-narrow">
+      <p class="eyebrow">Antes de indicar</p>
+      <h2>O que conferimos nesta categoria.</h2>
+      <ul class="checks">
+        {page.checks.map((c) => (
+          <li>
+            <span class="check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12.5 L9.5 18 L20 6" />
+              </svg>
+            </span>
+            <span>{c}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SELEÇÃO ============ -->
+  <section id="selecao" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">A seleção</p>
+        <h2>{hasProducts ? 'O que passou no filtro.' : 'Ainda estamos testando as opções.'}</h2>
+        <p class="lede">
+          {hasProducts
+            ? 'Poucas indicações, cada uma com o motivo explícito. Os links abaixo são de afiliado.'
+            : 'Preferimos não indicar nada a indicar qualquer coisa. Assim que algo passar em todos os critérios acima, esta página é atualizada.'}
+        </p>
+      </div>
+
+      {hasProducts ? (
+        <div class="products-grid">
+          {page.products.map((product) => <ProductCard product={product} />)}
+        </div>
+      ) : (
+        <div class="waiting">
+          <p>
+            Quer ser avisado quando a indicação desta categoria sair? Manda um e-mail
+            que a gente responde assim que publicar.
+          </p>
+          <a href={`mailto:${SITE.email}?subject=${mailSubject}`} class="btn btn-primary">
+            Avisem quando sair
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ============ OUTRAS ÁREAS ============ -->
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Outras áreas</p>
+        <h2>Talvez isso também te interesse.</h2>
+      </div>
+      <div class="others-grid">
+        {others.map((o) => <OfferCard offer={o} />)}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--command);
+    color: #fff;
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 4.5rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 70% 55% at 12% 0%, rgba(13, 138, 99, 0.28), transparent 65%),
+      radial-gradient(ellipse 55% 50% at 95% 15%, rgba(240, 135, 44, 0.20), transparent 62%),
+      linear-gradient(180deg, var(--command-2) 0%, var(--command) 70%);
+  }
+  .hero-inner { max-width: 48rem; position: relative; }
+  .hero h1 { color: #fff; }
+  .hero-lede {
+    font-size: clamp(1.02rem, 1.6vw, 1.16rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.76);
+    max-width: 40rem;
+    margin: 1.2rem 0 2rem;
+  }
+
+  .crumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 1.6rem;
+  }
+  .crumbs a { color: rgba(255, 255, 255, 0.72); text-decoration: none; }
+  .crumbs a:hover { color: var(--accent-lt); }
+
+  .body-par {
+    font-size: 1.075rem;
+    line-height: 1.68;
+    color: var(--ink-soft);
+  }
+  .body-par:first-of-type { color: var(--ink-2); }
+
+  .checks { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+  .checks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 1rem;
+    color: var(--ink-2);
+  }
+  .checks li:last-child { border-bottom: 0; }
+  .check-icon {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: var(--brand-wash);
+    color: var(--brand-dk);
+    flex: none;
+    margin-top: 0.15rem;
+  }
+  .check-icon svg { width: 0.8rem; height: 0.8rem; }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .waiting {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    background: var(--paper-2);
+    border: 1px dashed var(--line-2);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    max-width: 42rem;
+  }
+  .waiting p { margin: 0; color: var(--ink-soft); }
+
+  .others-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 1000px) {
+    .others-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .others-grid { grid-template-columns: 1fr; }
+  }
+</style>

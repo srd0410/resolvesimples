@@ -1,0 +1,65 @@
+---
+import type { Product } from '../consts';
+interface Props { product: Product }
+const { product } = Astro.props;
+---
+<article class="product">
+  <div class="product-head">
+    <span class="badge badge-accent">{product.platform}</span>
+    <span class="price">{product.price}</span>
+  </div>
+
+  <h3>{product.name}</h3>
+  <p class="pitch">{product.pitch}</p>
+
+  <p class="take"><strong>Por que indicamos:</strong> {product.take}</p>
+
+  <a
+    class="btn btn-primary"
+    href={product.href}
+    target="_blank"
+    rel="sponsored noopener"
+  >
+    Ver oferta
+  </a>
+</article>
+
+<style>
+  .product {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+  }
+  .product-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .price {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .product h3 { margin: 0 0 0.5rem; }
+  .pitch { color: var(--ink-soft); font-size: 0.96rem; margin: 0 0 1rem; }
+  .take {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    background: var(--paper-2);
+    border-left: 3px solid var(--brand);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.8rem 1rem;
+    margin: 0 0 1.4rem;
+    flex: 1;
+  }
+  .take strong { color: var(--ink); }
+  .product .btn { width: 100%; }
+</style>

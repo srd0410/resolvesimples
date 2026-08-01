@@ -1,0 +1,124 @@
+---
+import { SITE, OFFERS } from '../consts';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="brand-col">
+      <p class="logo">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12.5 L9.5 18 L20 6" />
+          </svg>
+        </span>
+        <span>resolve<strong>simples</strong></span>
+      </p>
+      <p class="tagline">{SITE.tagline}</p>
+      <a href={`mailto:${SITE.email}`} class="mail">{SITE.email}</a>
+    </div>
+
+    <nav class="links-col" aria-label="Áreas">
+      <p class="col-title">Áreas</p>
+      <ul>
+        {OFFERS.map((o) => (
+          <li><a href={`/${o.slug}/`}>{o.niche}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="disclosure-col">
+      <p class="col-title">Aviso de afiliação</p>
+      <p>
+        Este site indica produtos e serviços de terceiros. Parte dos links é de afiliado:
+        se você comprar através deles, podemos receber uma comissão — sem nenhum custo
+        adicional para você. Isso não muda o critério de seleção: só indicamos o que
+        avaliamos como solução real para o problema descrito.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap bottom">
+    <span>&copy; {year} {SITE.name}</span>
+    <span class="bottom-note">Resultados variam conforme a aplicação de cada negócio.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--command);
+    color: #fff;
+    padding: clamp(3rem, 6vw, 4.5rem) 0 1.75rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1.4fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--line-dk);
+  }
+  @media (max-width: 880px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .disclosure-col { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.7rem;
+  }
+  .logo strong { font-weight: 800; color: var(--accent-lt); }
+  .logo-mark {
+    display: grid;
+    place-items: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 7px;
+    background: var(--accent);
+    color: #fff;
+    flex: none;
+  }
+  .logo-mark svg { width: 1.05rem; height: 1.05rem; }
+
+  .tagline { color: rgba(255, 255, 255, 0.62); font-size: 0.95rem; margin: 0 0 1rem; }
+  .mail { color: rgba(255, 255, 255, 0.85); font-size: 0.92rem; text-decoration: none; }
+  .mail:hover { color: var(--accent-lt); }
+
+  .col-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent-lt);
+    margin: 0 0 0.9rem;
+  }
+
+  .links-col ul { list-style: none; margin: 0; padding: 0; }
+  .links-col li { margin-bottom: 0.55rem; font-size: 0.93rem; color: rgba(255, 255, 255, 0.6); }
+  .links-col a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
+  .links-col a:hover { color: var(--accent-lt); }
+
+  .disclosure-col p:last-child {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding-top: 1.75rem;
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.42);
+  }
+</style>

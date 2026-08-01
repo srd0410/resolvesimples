@@ -1,0 +1,80 @@
+<header class="site-header">
+  <div class="wrap bar">
+    <a href="/" class="logo" aria-label="resolvesimples — página inicial">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 12.5 L9.5 18 L20 6" />
+        </svg>
+      </span>
+      <span class="logo-text">resolve<strong>simples</strong></span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="/#areas">Áreas</a>
+      <a href="/#criterios">Critérios</a>
+      <a href="/#areas" class="btn btn-primary btn-sm">Ver soluções</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(13, 16, 23, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-dk);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4rem;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: #fff;
+  }
+  .logo:hover { color: #fff; }
+  .logo-mark {
+    display: grid;
+    place-items: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 7px;
+    background: var(--accent);
+    color: #fff;
+    flex: none;
+  }
+  .logo-mark svg { width: 1.05rem; height: 1.05rem; }
+  .logo-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.08rem;
+    letter-spacing: -0.02em;
+  }
+  .logo-text strong { font-weight: 800; color: var(--accent-lt); }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+  .nav a {
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+  }
+  .nav a:hover { color: #fff; }
+  .nav a.btn { color: #fff; }
+
+  @media (max-width: 640px) {
+    .nav a:not(.btn) { display: none; }
+  }
+</style>
