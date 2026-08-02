@@ -19,6 +19,8 @@ export interface Product {
   /** De onde vem a confiança: uso próprio, teste, ou análise. Sempre explícito. */
   take: string;
   href: string;
+  /** 'deal' = preço bom mas sem vantagem clara sobre concorrentes; fica fora d'"A seleção". Default: pick. */
+  kind?: 'pick' | 'deal';
 }
 
 // ---------------------------------------------------------------------------
@@ -189,6 +191,47 @@ export const OFFERS: Offer[] = [
           pitch: 'Mantém bebida fria por até 30h ou quente por até 8h — parede dupla a vácuo, sem vazar na bolsa.',
           take: 'Nota 4,8 com quase 3.800 avaliações — durabilidade testada por alto volume de uso diário.',
           href: 'https://www.amazon.com.br/dp/B0D9GDTM67?tag=felipearraiss-20',
+        },
+        {
+          name: 'Suporte Organizador de Esponja para Pia em Aço Carbono',
+          platform: 'Amazon',
+          price: 'R$ 31,77',
+          pitch: 'Prende esponja, detergente e escovinha longe da água parada da pia — acaba com o mofo e o cheiro que se acumulam no cantinho onde tudo isso fica largado.',
+          take: 'Um dos mais vendidos da categoria organização de pia, nota 4,4 em 93 avaliações — volume de compras consistente confirma fixação firme na bancada.',
+          href: 'https://www.amazon.com.br/dp/B0FM6MNDKH?tag=felipearraiss-20',
+        },
+        {
+          name: 'Kit 4 Peneiras de Cozinha RJI Utilidades (7 a 18 cm)',
+          platform: 'Amazon',
+          price: 'R$ 34,90',
+          pitch: 'Quatro tamanhos numa peça só acabam com o vaivém de trocar de peneira no meio da receita — de farinha fina a suco com polpa.',
+          take: 'Nota 4,6 com 64 avaliações e selo Escolha da Amazon na categoria — volume ainda modesto, mas consistente entre quem já comprou.',
+          href: 'https://www.amazon.com.br/dp/B0G1L62P2J?tag=felipearraiss-20',
+        },
+        {
+          name: 'Panela de Pressão Tramontina Vancouver Effect Antiaderente 4,5L',
+          platform: 'Amazon',
+          price: 'R$ 171,41',
+          pitch: 'Corta pela metade o tempo de cozinhar feijão, carne e grão duro — sem gastar mais gás nem precisar vigiar o fogão o tempo todo.',
+          take: 'Nº 1 mais vendida em panelas de pressão na Amazon Brasil, nota 4,8 com quase 10 mil avaliações — volume alto o suficiente para confirmar durabilidade da vedação e do revestimento.',
+          href: 'https://www.amazon.com.br/dp/B0CD4SCM33?tag=felipearraiss-20',
+        },
+        {
+          name: 'Fritadeira Air Fryer Forno Mondial Oven 12L com Assadeiras',
+          platform: 'Amazon',
+          price: 'R$ 515,12',
+          pitch: 'Frita, assa e reaquece sem óleo e sem esquentar a cozinha inteira como um forno tradicional — os 12L dão conta da família toda de uma vez.',
+          take: 'Mais de 9,4 mil avaliações e nota 4,7, um dos maiores volumes entre air fryers grandes — histórico de recompra consistente também nos modelos menores da mesma linha.',
+          href: 'https://www.amazon.com.br/dp/B0BZJDLT6Z?tag=felipearraiss-20',
+        },
+        {
+          name: 'Kit 4 Formas de Gelo com Tampa Autorient, 14 Cubos Cada',
+          platform: 'Amazon',
+          price: 'R$ 19,00',
+          pitch: 'Preço baixo pra quem só precisa congelar porção de tempero, papinha ou gelo sem forma velha rachando na mão.',
+          take: 'Quase 2.800 avaliações confirmam que o preço é bom, mas parte dos comentários reclama que a tampa não encaixa perfeitamente e os cubos saem pequenos — não é a melhor do mercado, é a mais barata que ainda funciona.',
+          href: 'https://www.amazon.com.br/dp/B0CCB3HLGK?tag=felipearraiss-20',
+          kind: 'deal',
         },
       ],
     },

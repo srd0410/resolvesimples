@@ -14,6 +14,8 @@ export function getStaticPaths() {
 const { offer } = Astro.props;
 const { page } = offer;
 const others = OFFERS.filter((o) => o.slug !== offer.slug).slice(0, 3);
+const picks = page.products.filter((p) => p.kind !== 'deal');
+const deals = page.products.filter((p) => p.kind === 'deal');
 const hasProducts = page.products.length > 0;
 const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
 ---
@@ -82,7 +84,7 @@ const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
 
       {hasProducts ? (
         <div class="products-grid">
-          {page.products.map((product) => <ProductCard product={product} />)}
+          {picks.map((product) => <ProductCard product={product} />)}
         </div>
       ) : (
         <div class="waiting">
@@ -97,6 +99,25 @@ const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
       )}
     </div>
   </section>
+
+  <!-- ============ SÓ OFERTA BOA ============ -->
+  {deals.length > 0 && (
+    <section class="section section-tint">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Só oferta boa</p>
+          <h2>Preço bom, sem virar recomendação.</h2>
+          <p class="lede">
+            Não passou em todos os critérios da seção acima, mas o preço compensa o risco.
+            Não é indicação, é preço — a diferença fica explícita em cada item.
+          </p>
+        </div>
+        <div class="products-grid">
+          {deals.map((product) => <ProductCard product={product} />)}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- ============ OUTRAS ÁREAS ============ -->
   <section class="section section-tint">

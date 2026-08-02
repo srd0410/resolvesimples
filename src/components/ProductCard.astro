@@ -2,17 +2,20 @@
 import type { Product } from '../consts';
 interface Props { product: Product }
 const { product } = Astro.props;
+const isDeal = product.kind === 'deal';
 ---
-<article class="product">
+<article class={isDeal ? 'product product-deal' : 'product'}>
   <div class="product-head">
-    <span class="badge badge-accent">{product.platform}</span>
+    <span class={isDeal ? 'badge badge-deal' : 'badge badge-accent'}>{isDeal ? 'Oferta' : product.platform}</span>
     <span class="price">{product.price}</span>
   </div>
 
   <h3>{product.name}</h3>
   <p class="pitch">{product.pitch}</p>
 
-  <p class="take"><strong>Por que indicamos:</strong> {product.take}</p>
+  <p class={isDeal ? 'take take-deal' : 'take'}>
+    <strong>{isDeal ? 'Por que é só oferta:' : 'Por que indicamos:'}</strong> {product.take}
+  </p>
 
   <a
     class="btn btn-primary"
@@ -62,4 +65,12 @@ const { product } = Astro.props;
   }
   .take strong { color: var(--ink); }
   .product .btn { width: 100%; }
+
+  .product-deal { border-style: dashed; }
+  .badge-deal {
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    border: 1px solid var(--line-2);
+  }
+  .take-deal { border-left-color: var(--line-2); }
 </style>
