@@ -1,15 +1,22 @@
+---
+import SiteMenu from './SiteMenu.astro';
+---
 <header class="site-header">
   <div class="wrap bar">
-    <a href="/" class="logo" aria-label="resolvesimples — página inicial">
-      <span class="logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 12.5 L9.5 18 L20 6" />
-        </svg>
-      </span>
-      <span class="logo-text">resolve<strong>simples</strong></span>
-    </a>
+    <div class="bar-left">
+      <SiteMenu />
+      <a href="/" class="logo" aria-label="resolvesimples — página inicial">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12.5 L9.5 18 L20 6" />
+          </svg>
+        </span>
+        <span class="logo-text">resolve<strong>simples</strong></span>
+      </a>
+    </div>
 
     <nav class="nav" aria-label="Navegação principal">
+      <a href="/ranking/">Ranking</a>
       <a href="/#areas">Áreas</a>
       <a href="/#criterios">Critérios</a>
       <a href="/#areas" class="btn btn-primary btn-sm">Ver soluções</a>
@@ -33,6 +40,7 @@
     gap: 1rem;
     min-height: 4rem;
   }
+  .bar-left { display: flex; align-items: center; gap: 0.9rem; }
   .logo {
     display: inline-flex;
     align-items: center;

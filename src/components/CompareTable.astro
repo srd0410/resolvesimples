@@ -1,0 +1,61 @@
+---
+import type { Product } from '../consts';
+interface Props { products: Product[]; label: string }
+const { products, label } = Astro.props;
+---
+<div class="compare">
+  <p class="compare-label">Comparando: {label}</p>
+  <div class="compare-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Produto</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Nota</th>
+          <th scope="col">Avaliações</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <th scope="row">{p.name}</th>
+            <td>{p.price}</td>
+            <td>{p.rating ? `★ ${p.rating.toFixed(1).replace('.', ',')}` : '—'}</td>
+            <td>{p.reviews ? p.reviews.toLocaleString('pt-BR') : '—'}</td>
+            <td>
+              <a href={p.href} target="_blank" rel="sponsored noopener" class="btn btn-primary btn-sm">
+                Ver oferta
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .compare {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .compare-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 1rem;
+  }
+  .compare-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 32rem; }
+  th, td { text-align: left; padding: 0.7rem 0.75rem; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
+  thead th { color: var(--ink-soft); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.02em; }
+  tbody th { font-weight: 600; color: var(--ink); }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+  .btn-sm { white-space: nowrap; }
+</style>

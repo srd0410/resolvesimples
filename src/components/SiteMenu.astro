@@ -1,0 +1,247 @@
+---
+import { OFFERS, getAllProducts, slugifyProduct } from '../consts';
+
+const searchIndex = getAllProducts()
+  .filter((p) => p.kind !== 'deal')
+  .map((p) => ({
+    name: p.name,
+    price: p.price,
+    cat: p.offerNiche,
+    href: `/${p.offerSlug}/#${slugifyProduct(p.name)}`,
+  }));
+---
+<button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Abrir menu">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+  <span>Menu</span>
+</button>
+
+<div id="menu-backdrop" class="menu-backdrop" hidden></div>
+
+<aside id="site-menu" class="site-menu" aria-hidden="true">
+  <div class="menu-head">
+    <p class="menu-title">Buscar e navegar</p>
+    <button id="menu-close" aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19" /></svg>
+    </button>
+  </div>
+
+  <div class="menu-search">
+    <input id="menu-search-input" type="search" placeholder="Buscar produto (ex: air fryer)..." autocomplete="off" />
+    <ul id="menu-search-results" class="search-results" hidden></ul>
+  </div>
+
+  <nav class="menu-nav" aria-label="Categorias e ranking">
+    <a href="/ranking/" class="menu-ranking-link">
+      🏆 Ranking Geral do site
+    </a>
+
+    {OFFERS.filter((o) => o.page.products.length > 0).map((offer) => {
+      const top = offer.page.products.filter((p) => p.kind !== 'deal').slice(0, 3);
+      return (
+        <details class="menu-category">
+          <summary>{offer.niche}</summary>
+          <ul class="menu-top-products">
+            {top.map((p) => (
+              <li>
+                <a href={`/${offer.slug}/#${slugifyProduct(p.name)}`}>
+                  {p.name} <span>{p.price}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a class="menu-see-all" href={`/${offer.slug}/`}>Ver todos em {offer.niche} &rarr;</a>
+        </details>
+      );
+    })}
+  </nav>
+</aside>
+
+<script define:vars={{ searchIndex }}>
+  const toggle = document.getElementById('menu-toggle');
+  const close = document.getElementById('menu-close');
+  const backdrop = document.getElementById('menu-backdrop');
+  const menu = document.getElementById('site-menu');
+  const input = document.getElementById('menu-search-input');
+  const results = document.getElementById('menu-search-results');
+
+  function openMenu() {
+    menu.classList.add('open');
+    backdrop.hidden = false;
+    toggle.setAttribute('aria-expanded', 'true');
+    menu.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input && input.focus(), 50);
+  }
+  function closeMenu() {
+    menu.classList.remove('open');
+    backdrop.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', openMenu);
+  close.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    results.innerHTML = '';
+    if (q.length < 2) { results.hidden = true; return; }
+    const matches = searchIndex.filter((p) => p.name.toLowerCase().includes(q)).slice(0, 8);
+    if (matches.length === 0) {
+      results.innerHTML = '<li class="no-match">Nada encontrado.</li>';
+      results.hidden = false;
+      return;
+    }
+    for (const p of matches) {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${p.href}"><span class="r-name">${p.name}</span><span class="r-meta">${p.cat} · ${p.price}</span></a>`;
+      results.appendChild(li);
+    }
+    results.hidden = false;
+  });
+</script>
+
+<style>
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid var(--line-dk);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .menu-toggle svg { width: 1.05rem; height: 1.05rem; }
+  .menu-toggle:hover { border-color: var(--accent-lt); color: var(--accent-lt); }
+
+  .menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 16, 23, 0.55);
+    z-index: 90;
+  }
+
+  .site-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: min(22rem, 88vw);
+    background: var(--paper);
+    box-shadow: var(--shadow-lg);
+    z-index: 91;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .site-menu.open { transform: translateX(0); }
+
+  .menu-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .menu-title { margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--ink); }
+  #menu-close { background: none; border: none; cursor: pointer; color: var(--ink-soft); padding: 0.2rem; }
+  #menu-close svg { width: 1.2rem; height: 1.2rem; }
+
+  .menu-search { padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); position: relative; }
+  #menu-search-input {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line-2);
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+  }
+  #menu-search-input:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+
+  .search-results {
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 0;
+    max-height: 18rem;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+  .search-results li { border-bottom: 1px solid var(--line); }
+  .search-results li:last-child { border-bottom: 0; }
+  .search-results a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.6rem 0.75rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .search-results a:hover { background: var(--paper-2); }
+  .r-name { font-size: 0.9rem; font-weight: 600; }
+  .r-meta { font-size: 0.78rem; color: var(--ink-soft); }
+  .no-match { padding: 0.6rem 0.75rem; font-size: 0.85rem; color: var(--ink-soft); }
+
+  .menu-nav { padding: 0.75rem 1.25rem 1.5rem; }
+  .menu-ranking-link {
+    display: block;
+    font-weight: 700;
+    color: var(--brand-dk);
+    background: var(--brand-wash);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 0.85rem;
+    text-decoration: none;
+    margin-bottom: 1rem;
+  }
+  .menu-ranking-link:hover { background: var(--paper-3); }
+
+  .menu-category {
+    border-bottom: 1px solid var(--line);
+  }
+  .menu-category summary {
+    cursor: pointer;
+    padding: 0.85rem 0.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    list-style: none;
+  }
+  .menu-category summary::-webkit-details-marker { display: none; }
+  .menu-category summary::after {
+    content: '+';
+    float: right;
+    color: var(--ink-soft);
+  }
+  .menu-category[open] summary::after { content: '−'; }
+
+  .menu-top-products { list-style: none; margin: 0 0 0.5rem; padding: 0; }
+  .menu-top-products a {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.4rem 0.1rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+  }
+  .menu-top-products a:hover { color: var(--ink); }
+  .menu-top-products a span { color: var(--ink-mute); white-space: nowrap; }
+
+  .menu-see-all {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--brand-dk);
+    text-decoration: none;
+    margin-bottom: 0.85rem;
+  }
+  .menu-see-all:hover { text-decoration: underline; }
+</style>

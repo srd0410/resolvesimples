@@ -2,7 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import OfferCard from '../../components/OfferCard.astro';
-import { OFFERS, SITE } from '../../consts';
+import CompareTable from '../../components/CompareTable.astro';
+import { OFFERS, SITE, getCompareGroups } from '../../consts';
 
 export function getStaticPaths() {
   return OFFERS.map((offer) => ({
@@ -17,6 +18,7 @@ const others = OFFERS.filter((o) => o.slug !== offer.slug).slice(0, 3);
 const picks = page.products.filter((p) => p.kind !== 'deal');
 const deals = page.products.filter((p) => p.kind === 'deal');
 const hasProducts = page.products.length > 0;
+const compareGroups = getCompareGroups(picks);
 const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
 ---
 <Layout title={offer.title} description={offer.painPoint}>
@@ -83,9 +85,14 @@ const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
       </div>
 
       {hasProducts ? (
-        <div class="products-grid">
-          {picks.map((product) => <ProductCard product={product} />)}
-        </div>
+        <>
+          <div class="products-grid">
+            {picks.map((product, i) => <ProductCard product={product} rank={i + 1} />)}
+          </div>
+          {Object.entries(compareGroups).map(([group, items]) => (
+            <CompareTable products={items} label={group.replace(/-/g, ' ')} />
+          ))}
+        </>
       ) : (
         <div class="waiting">
           <p>

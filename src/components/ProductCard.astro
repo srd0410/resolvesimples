@@ -1,16 +1,27 @@
 ---
 import type { Product } from '../consts';
-interface Props { product: Product }
-const { product } = Astro.props;
+import { slugifyProduct } from '../consts';
+interface Props { product: Product; rank?: number }
+const { product, rank } = Astro.props;
 const isDeal = product.kind === 'deal';
+const id = slugifyProduct(product.name);
 ---
-<article class={isDeal ? 'product product-deal' : 'product'}>
+<article id={id} class={isDeal ? 'product product-deal' : 'product'}>
   <div class="product-head">
-    <span class={isDeal ? 'badge badge-deal' : 'badge badge-accent'}>{isDeal ? 'Oferta' : product.platform}</span>
+    <span class="badges">
+      <span class={isDeal ? 'badge badge-deal' : 'badge badge-accent'}>{isDeal ? 'Oferta' : product.platform}</span>
+      {rank && <span class="rank-badge">{rank}º</span>}
+    </span>
     <span class="price">{product.price}</span>
   </div>
 
   <h3>{product.name}</h3>
+  {product.rating && (
+    <p class="rating">
+      ★ {product.rating.toFixed(1).replace('.', ',')}
+      {product.reviews && <span> · {product.reviews.toLocaleString('pt-BR')} avaliações</span>}
+    </p>
+  )}
   <p class="pitch">{product.pitch}</p>
 
   <p class={isDeal ? 'take take-deal' : 'take'}>
@@ -25,6 +36,12 @@ const isDeal = product.kind === 'deal';
   >
     Ver oferta
   </a>
+
+  {product.alt && (
+    <a class="alt-link" href={product.alt.href} target="_blank" rel="sponsored noopener">
+      {product.alt.label}
+    </a>
+  )}
 </article>
 
 <style>
@@ -45,14 +62,27 @@ const isDeal = product.kind === 'deal';
     gap: 0.75rem;
     margin-bottom: 1rem;
   }
+  .badges { display: flex; align-items: center; gap: 0.5rem; }
   .price {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 1.15rem;
     color: var(--ink);
   }
-  .product h3 { margin: 0 0 0.5rem; }
+  .product h3 { margin: 0 0 0.35rem; }
+  .rating { font-size: 0.85rem; color: var(--brand-dk); margin: 0 0 0.6rem; }
+  .rating span { color: var(--ink-soft); }
   .pitch { color: var(--ink-soft); font-size: 0.96rem; margin: 0 0 1rem; }
+  .rank-badge {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    background: var(--paper-2);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    padding: 0.1rem 0.55rem;
+  }
   .take {
     font-size: 0.9rem;
     color: var(--ink-soft);
@@ -73,4 +103,14 @@ const isDeal = product.kind === 'deal';
     border: 1px solid var(--line-2);
   }
   .take-deal { border-left-color: var(--line-2); }
+
+  .alt-link {
+    display: block;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-decoration: underline;
+    margin-top: 0.6rem;
+  }
+  .alt-link:hover { color: var(--ink); }
 </style>

@@ -21,6 +21,25 @@ export interface Product {
   href: string;
   /** 'deal' = preço bom mas sem vantagem clara sobre concorrentes; fica fora d'"A seleção". Default: pick. */
   kind?: 'pick' | 'deal';
+  /** Link secundário opcional (ex: variante de voltagem, produto complementar). */
+  alt?: { label: string; href: string };
+  /** Nota da Amazon (0-5), quando conhecida — usada no comparativo e na busca. */
+  rating?: number;
+  /** Nº de avaliações da Amazon, quando conhecido. */
+  reviews?: number;
+  /** Posição no Ranking Geral do site (1 = melhor). Só produtos 'pick' entram no ranking. Atualizado manualmente a cada produto novo. */
+  globalRank?: number;
+  /** Agrupa produtos do mesmo tipo (ex: 'fone-bluetooth') para gerar comparativo automático na página da categoria. */
+  compareGroup?: string;
+}
+
+export function slugifyProduct(name: string) {
+  return name
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 }
 
 // ---------------------------------------------------------------------------
@@ -123,6 +142,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Protege até 5 aparelhos ao mesmo tempo contra surto elétrico — o tipo de queima que custa muito mais que o filtro.',
           take: 'Mais de 12 mil avaliações e nota 4,9 — volume alto o suficiente para confirmar durabilidade real, não só embalagem bonita.',
           href: 'https://www.amazon.com.br/dp/B0D8V3QLDD?tag=felipearraiss-20',
+          rating: 4.9,
+          reviews: 12000,
+          globalRank: 4,
         },
         {
           name: 'Fone Philips TWS TAT1109BK Bluetooth',
@@ -131,6 +153,10 @@ export const OFFERS: Offer[] = [
           pitch: 'Até 24h de bateria e microfone embutido — resolve sem pagar por recurso que você não vai usar no dia a dia.',
           take: 'Mais de 7 mil avaliações com nota 4,6, num histórico consistente de recompra pela mesma marca.',
           href: 'https://www.amazon.com.br/dp/B0DVMQVVDY?tag=felipearraiss-20',
+          rating: 4.6,
+          reviews: 7000,
+          globalRank: 10,
+          compareGroup: 'fone-bluetooth',
         },
         {
           name: 'Fone JBL Tune 520BT Bluetooth',
@@ -139,6 +165,10 @@ export const OFFERS: Offer[] = [
           pitch: 'Bluetooth 5.3 com bateria de até 57h — categoria intermediária que aguenta uso diário sem sacrificar o bolso.',
           take: 'Quase 29 mil avaliações e nota 4,8 — um dos volumes de venda mais altos da categoria fones no Brasil.',
           href: 'https://www.amazon.com.br/dp/B0C4CCMNQT?tag=felipearraiss-20',
+          rating: 4.8,
+          reviews: 29000,
+          globalRank: 2,
+          compareGroup: 'fone-bluetooth',
         },
       ],
     },
@@ -175,6 +205,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Vedação de silicone e livre de BPA — organiza a geladeira e evita desperdiçar comida que estraga por falta de vedação.',
           take: 'Mais de 53 mil avaliações e nota 4,9 — um dos itens de organização mais recomprados da Amazon Brasil.',
           href: 'https://www.amazon.com.br/dp/B09XJL4B9H?tag=felipearraiss-20',
+          rating: 4.9,
+          reviews: 53000,
+          globalRank: 1,
         },
         {
           name: 'Sanduicheira Elétrica Cadence Click',
@@ -183,6 +216,10 @@ export const OFFERS: Offer[] = [
           pitch: 'Resolve o lanche rápido do dia a dia sem sujar fogão nem frigideira — liga, usa, guarda.',
           take: 'Mais de 20 mil avaliações com nota 4,8, sinal de uso recorrente e não só compra por impulso.',
           href: 'https://www.amazon.com.br/dp/B0CDJ4L7CZ?tag=felipearraiss-20',
+          alt: { label: 'Precisa em 220V? Ver aqui', href: 'https://www.amazon.com.br/dp/B0CDJ5DQ7M?tag=felipearraiss-20' },
+          rating: 4.8,
+          reviews: 20000,
+          globalRank: 3,
         },
         {
           name: 'Copo Térmico 1,18L em Aço Inoxidável',
@@ -191,6 +228,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Mantém bebida fria por até 30h ou quente por até 8h — parede dupla a vácuo, sem vazar na bolsa.',
           take: 'Nota 4,8 com quase 3.800 avaliações — durabilidade testada por alto volume de uso diário.',
           href: 'https://www.amazon.com.br/dp/B0D9GDTM67?tag=felipearraiss-20',
+          rating: 4.8,
+          reviews: 3800,
+          globalRank: 12,
         },
         {
           name: 'Suporte Organizador de Esponja para Pia em Aço Carbono',
@@ -199,6 +239,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Prende esponja, detergente e escovinha longe da água parada da pia — acaba com o mofo e o cheiro que se acumulam no cantinho onde tudo isso fica largado.',
           take: 'Um dos mais vendidos da categoria organização de pia, nota 4,4 em 93 avaliações — volume de compras consistente confirma fixação firme na bancada.',
           href: 'https://www.amazon.com.br/dp/B0FM6MNDKH?tag=felipearraiss-20',
+          rating: 4.4,
+          reviews: 93,
+          globalRank: 18,
         },
         {
           name: 'Kit 4 Peneiras de Cozinha RJI Utilidades (7 a 18 cm)',
@@ -207,6 +250,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Quatro tamanhos numa peça só acabam com o vaivém de trocar de peneira no meio da receita — de farinha fina a suco com polpa.',
           take: 'Nota 4,6 com 64 avaliações e selo Escolha da Amazon na categoria — volume ainda modesto, mas consistente entre quem já comprou.',
           href: 'https://www.amazon.com.br/dp/B0G1L62P2J?tag=felipearraiss-20',
+          rating: 4.6,
+          reviews: 64,
+          globalRank: 19,
         },
         {
           name: 'Panela de Pressão Tramontina Vancouver Effect Antiaderente 4,5L',
@@ -215,6 +261,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Corta pela metade o tempo de cozinhar feijão, carne e grão duro — sem gastar mais gás nem precisar vigiar o fogão o tempo todo.',
           take: 'Nº 1 mais vendida em panelas de pressão na Amazon Brasil, nota 4,8 com quase 10 mil avaliações — volume alto o suficiente para confirmar durabilidade da vedação e do revestimento.',
           href: 'https://www.amazon.com.br/dp/B0CD4SCM33?tag=felipearraiss-20',
+          rating: 4.8,
+          reviews: 9841,
+          globalRank: 5,
         },
         {
           name: 'Fritadeira Air Fryer Forno Mondial Oven 12L com Assadeiras',
@@ -223,6 +272,44 @@ export const OFFERS: Offer[] = [
           pitch: 'Frita, assa e reaquece sem óleo e sem esquentar a cozinha inteira como um forno tradicional — os 12L dão conta da família toda de uma vez.',
           take: 'Mais de 9,4 mil avaliações e nota 4,7, um dos maiores volumes entre air fryers grandes — histórico de recompra consistente também nos modelos menores da mesma linha.',
           href: 'https://www.amazon.com.br/dp/B0BZJDLT6Z?tag=felipearraiss-20',
+          rating: 4.7,
+          reviews: 9422,
+          globalRank: 6,
+        },
+        {
+          name: 'Cafeteira Arno Nescafé Dolce Gusto Genio S Basic Grafite DGS5',
+          platform: 'Amazon',
+          price: 'R$ 473,95',
+          pitch: 'A mais em conta da linha Dolce Gusto com reputação consolidada — função XL e tanque removível, sem pagar pelos recursos das versões Plus que a maioria não usa.',
+          take: 'Nota 4,8 com 950 avaliações e mais de 100 compras no mês passado — volume consistente dentro da linha para confirmar durabilidade.',
+          href: 'https://www.amazon.com.br/dp/B0BMW95J7F?tag=felipearraiss-20',
+          alt: { label: 'Já tem a máquina? Ver cápsulas', href: 'https://www.amazon.com.br/dp/B07H45XJ2D?tag=felipearraiss-20' },
+          rating: 4.8,
+          reviews: 950,
+          globalRank: 17,
+        },
+        {
+          name: 'Nescafé Dolce Gusto Espresso, 10 Cápsulas',
+          platform: 'Amazon',
+          price: 'R$ 16,73',
+          pitch: 'Café pronto em segundos sem passar, coar ou lavar filtro — resolve o café da manhã apressado sem sacrificar sabor.',
+          take: 'Mais de 8 mil compras no mês passado e nota 4,8 com 5.228 avaliações — mais vendido da linha na Amazon Brasil. Só funciona com máquina Dolce Gusto (indicamos uma acima).',
+          href: 'https://www.amazon.com.br/dp/B07H45XJ2D?tag=felipearraiss-20',
+          alt: { label: 'Não tem a máquina ainda? Ver aqui', href: 'https://www.amazon.com.br/dp/B0BMW95J7F?tag=felipearraiss-20' },
+          rating: 4.8,
+          reviews: 5228,
+          globalRank: 8,
+        },
+        {
+          name: 'Pilão de Inox com Socador GODREAM',
+          platform: 'Amazon',
+          price: 'R$ 89,99',
+          pitch: 'Esmaga alho, pimenta e especiarias sem enferrujar como pilão comum — base antiderrapante evita bagunça na bancada.',
+          take: 'Nota 4,7, mas ainda com poucas avaliações (4) — evidência de durabilidade a longo prazo ainda é escassa. O preço compensa o risco de testar.',
+          href: 'https://www.amazon.com.br/dp/B0H3NTKV23?tag=felipearraiss-20',
+          kind: 'deal',
+          rating: 4.7,
+          reviews: 4,
         },
         {
           name: 'Kit 4 Formas de Gelo com Tampa Autorient, 14 Cubos Cada',
@@ -232,6 +319,8 @@ export const OFFERS: Offer[] = [
           take: 'Quase 2.800 avaliações confirmam que o preço é bom, mas parte dos comentários reclama que a tampa não encaixa perfeitamente e os cubos saem pequenos — não é a melhor do mercado, é a mais barata que ainda funciona.',
           href: 'https://www.amazon.com.br/dp/B0CCB3HLGK?tag=felipearraiss-20',
           kind: 'deal',
+          rating: 4.4,
+          reviews: 2749,
         },
       ],
     },
@@ -268,6 +357,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Reduz roupa e roupa de cama a até 20% do volume — armário rende mais sem precisar de móvel novo.',
           take: 'Mais de 5 mil avaliações e nota 4,8 na categoria de organização mais vendida da Amazon Brasil.',
           href: 'https://www.amazon.com.br/dp/B0H5D2Z4P4?tag=felipearraiss-20',
+          rating: 4.8,
+          reviews: 5000,
+          globalRank: 9,
         },
         {
           name: 'Lixeira Powermaid Retangular com Pedal Inox 5L',
@@ -276,6 +368,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Tampa com fechamento suave e pedal — resolve o incômodo de tocar na lixeira sem gerar barulho.',
           take: 'Mais de 2 mil avaliações com nota 4,6, item recorrente entre os mais vendidos de organização para casa.',
           href: 'https://www.amazon.com.br/dp/B0CXVQRPK7?tag=felipearraiss-20',
+          rating: 4.6,
+          reviews: 2000,
+          globalRank: 15,
         },
         {
           name: 'Super Varal de Chão 3 Andares Regulável e Dobrável',
@@ -284,6 +379,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Triplica a área de secagem sem ocupar espaço fixo — dobra e guarda quando não está em uso.',
           take: 'Quase 6 mil avaliações e nota 4,4 — volume alto que confirma resistência ao uso semanal.',
           href: 'https://www.amazon.com.br/dp/B0C1HNKQLR?tag=felipearraiss-20',
+          rating: 4.4,
+          reviews: 6000,
+          globalRank: 13,
         },
       ],
     },
@@ -320,6 +418,8 @@ export const OFFERS: Offer[] = [
           pitch: 'Lavagem e proteção da pintura em um kit só — cuidado preventivo que evita polimento caro lá na frente.',
           take: 'Marca de referência em estética automotiva, nota 4,8 confirmada por quem já testou o resultado na pintura.',
           href: 'https://www.amazon.com.br/dp/B0F9Z3D8TZ?tag=felipearraiss-20',
+          rating: 4.8,
+          globalRank: 20,
         },
         {
           name: 'Aspirador de Pó Automotivo WAP Car 12V2',
@@ -328,6 +428,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Portátil, liga na tomada 12V do carro — resolve a limpeza rápida sem depender de lava-rápido.',
           take: 'Mais de 4.700 avaliações e nota 4,4 — volume alto o suficiente para confirmar que aguenta uso frequente.',
           href: 'https://www.amazon.com.br/dp/B0CLDRS18S?tag=felipearraiss-20',
+          rating: 4.4,
+          reviews: 4700,
+          globalRank: 14,
         },
       ],
     },
@@ -364,6 +467,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Absorção premium que reduz o tempo de limpeza diária e o cheiro que fica no ambiente.',
           take: 'Mais de 8,5 mil avaliações e nota 4,4 — um dos itens mais recomprados da categoria pet na Amazon Brasil.',
           href: 'https://www.amazon.com.br/dp/B07PZWDZT9?tag=felipearraiss-20',
+          rating: 4.4,
+          reviews: 8500,
+          globalRank: 11,
         },
         {
           name: 'Viva Verde Areia Higiênica Biodegradável para Gatos 4kg',
@@ -372,6 +478,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Biodegradável e de grãos finos — controla odor sem espalhar poeira pela casa a cada troca.',
           take: 'Mais de 5,4 mil avaliações com nota 4,8, sinal de recompra constante e não só teste único.',
           href: 'https://www.amazon.com.br/dp/B07YP1K82Z?tag=felipearraiss-20',
+          rating: 4.8,
+          reviews: 5400,
+          globalRank: 7,
         },
         {
           name: 'Bebedouro Fonte para Gatos 3L em Inox, Silencioso e Bivolt',
@@ -380,6 +489,9 @@ export const OFFERS: Offer[] = [
           pitch: 'Água corrente filtrada estimula o pet a beber mais — reduz risco de problema renal, comum em gatos.',
           take: 'Nota 4,7 com mais de 1.400 avaliações — item recorrente entre os mais vendidos de acessórios para gatos.',
           href: 'https://www.amazon.com.br/dp/B0DGTKZ2S1?tag=felipearraiss-20',
+          rating: 4.7,
+          reviews: 1400,
+          globalRank: 16,
         },
       ],
     },
@@ -387,3 +499,35 @@ export const OFFERS: Offer[] = [
 ];
 
 export const getOffer = (slug: string) => OFFERS.find((o) => o.slug === slug);
+
+export interface RankedProduct extends Product {
+  offerSlug: string;
+  offerNiche: string;
+}
+
+/** Todos os produtos de todas as categorias, com a categoria anexada. */
+export function getAllProducts(): RankedProduct[] {
+  return OFFERS.flatMap((o) =>
+    o.page.products.map((p) => ({ ...p, offerSlug: o.slug, offerNiche: o.niche }))
+  );
+}
+
+/** Ranking Geral: só produtos 'pick' com globalRank definido, do menor pro maior (1 = melhor). */
+export function getRanking(): RankedProduct[] {
+  return getAllProducts()
+    .filter((p) => p.kind !== 'deal' && typeof p.globalRank === 'number')
+    .sort((a, b) => (a.globalRank as number) - (b.globalRank as number));
+}
+
+/** Agrupa produtos com o mesmo compareGroup dentro de uma lista; só retorna grupos com 2+ itens. */
+export function getCompareGroups(products: Product[]): Record<string, Product[]> {
+  const groups: Record<string, Product[]> = {};
+  for (const p of products) {
+    if (!p.compareGroup) continue;
+    (groups[p.compareGroup] ??= []).push(p);
+  }
+  for (const key of Object.keys(groups)) {
+    if (groups[key].length < 2) delete groups[key];
+  }
+  return groups;
+}

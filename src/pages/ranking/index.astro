@@ -1,0 +1,142 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getRanking, slugifyProduct } from '../../consts';
+
+const ranking = getRanking();
+---
+<Layout
+  title="Ranking Geral"
+  description="Todos os produtos indicados no resolvesimples, ordenados do melhor pro pior, em todas as categorias."
+>
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <nav class="crumbs" aria-label="Você está em">
+        <a href="/">Início</a>
+        <span aria-hidden="true">/</span>
+        <span>Ranking Geral</span>
+      </nav>
+      <p class="eyebrow eyebrow-on-dark">Todas as categorias, um só lugar</p>
+      <h1>Ranking Geral do resolvesimples.</h1>
+      <p class="hero-lede">
+        Todo produto que passou no filtro de alguma categoria, ordenado do melhor pro pior
+        considerando nota, volume de avaliações e quão bem resolve o problema. Ofertas
+        ("só oferta boa") ficam fora daqui de propósito — este ranking é só de recomendação.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <ol class="ranking-list">
+        {ranking.map((p, i) => (
+          <li class="ranking-item">
+            <span class="pos">{i + 1}º</span>
+            <div class="info">
+              <p class="cat">{p.offerNiche}</p>
+              <h3><a href={`/${p.offerSlug}/#${slugifyProduct(p.name)}`}>{p.name}</a></h3>
+              {p.rating && (
+                <p class="rating">
+                  ★ {p.rating.toFixed(1).replace('.', ',')}
+                  {p.reviews && <span> · {p.reviews.toLocaleString('pt-BR')} avaliações</span>}
+                </p>
+              )}
+            </div>
+            <span class="price">{p.price}</span>
+            <a class="btn btn-primary btn-sm" href={p.href} target="_blank" rel="sponsored noopener">
+              Ver oferta
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--command);
+    color: #fff;
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 4.5rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 70% 55% at 12% 0%, rgba(13, 138, 99, 0.28), transparent 65%),
+      radial-gradient(ellipse 55% 50% at 95% 15%, rgba(240, 135, 44, 0.20), transparent 62%),
+      linear-gradient(180deg, var(--command-2) 0%, var(--command) 70%);
+  }
+  .hero-inner { max-width: 48rem; position: relative; }
+  .hero h1 { color: #fff; }
+  .hero-lede {
+    font-size: clamp(1.02rem, 1.6vw, 1.16rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.76);
+    max-width: 40rem;
+    margin: 1.2rem 0 0;
+  }
+  .crumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 1.6rem;
+  }
+  .crumbs a { color: rgba(255, 255, 255, 0.72); text-decoration: none; }
+  .crumbs a:hover { color: var(--accent-lt); }
+
+  .ranking-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .ranking-item {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto auto;
+    align-items: center;
+    gap: 1rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+  }
+  .pos {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--brand-dk);
+    text-align: center;
+  }
+  .info h3 { margin: 0.1rem 0 0.15rem; font-size: 1rem; }
+  .info h3 a { color: inherit; text-decoration: none; }
+  .info h3 a:hover { text-decoration: underline; }
+  .cat {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--ink-soft);
+  }
+  .rating { margin: 0; font-size: 0.85rem; color: var(--brand-dk); }
+  .rating span { color: var(--ink-soft); }
+  .price {
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .ranking-item {
+      grid-template-columns: 2rem 1fr;
+      grid-template-areas: "pos info" ". price" ". cta";
+    }
+    .pos { grid-area: pos; }
+    .info { grid-area: info; }
+    .price { grid-area: price; }
+    .ranking-item .btn { grid-area: cta; width: 100%; margin-top: 0.4rem; }
+  }
+</style>
