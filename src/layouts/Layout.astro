@@ -31,6 +31,17 @@ const canonical = new URL(Astro.url.pathname, SITE.url).toString();
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap"
     />
+
+    {/* Google Analytics 4 */}
+    {SITE.gaMeasurementId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`}></script>}
+    {SITE.gaMeasurementId && (
+      <script define:vars={{ gaMeasurementId: SITE.gaMeasurementId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', gaMeasurementId);
+      </script>
+    )}
   </head>
   <body>
     <Header />
