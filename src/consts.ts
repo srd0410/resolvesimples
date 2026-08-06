@@ -3,7 +3,7 @@ export const SITE = {
   url: 'https://www.resolvesimples.com.br',
   tagline: 'Soluções testadas para dores reais do dia a dia',
   email: 'contato@resolvesimples.com.br',
-  gaMeasurementId: 'G-U4380M7V39',
+  gaMeasurementId: 'G-W4380N7VJ9',
 };
 
 // ---------------------------------------------------------------------------
