@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 
 const allArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).sort(
@@ -27,14 +28,13 @@ const allArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).s
       {allArtigos.length > 0 ? (
         <div class="posts-grid">
           {allArtigos.map((post) => (
-            <a class="post-card" href={`/artigos/${post.slug}/`}>
-              <p class="post-date">
-                {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' })}
-              </p>
-              <h2>{post.data.title}</h2>
-              <p class="post-desc">{post.data.description}</p>
-              <span class="post-link">Ler artigo &rarr;</span>
-            </a>
+            <ArticleCard
+              href={`/artigos/${post.slug}/`}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              niches={post.data.niches}
+            />
           ))}
         </div>
       ) : (
@@ -76,30 +76,6 @@ const allArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).s
     grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
     gap: 1.25rem;
   }
-  .post-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 1.75rem;
-    box-shadow: var(--shadow-sm);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.16s ease, box-shadow 0.16s ease;
-  }
-  .post-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); color: inherit; }
-  .post-date {
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin: 0 0 0.6rem;
-  }
-  .post-card h2 { font-size: 1.25rem; margin: 0 0 0.5rem; }
-  .post-desc { color: var(--ink-soft); font-size: 0.95rem; margin: 0 0 1.1rem; flex: 1; }
-  .post-link { font-weight: 700; color: var(--brand-dk); font-size: 0.9rem; }
 
   .empty { color: var(--ink-soft); }
 </style>
