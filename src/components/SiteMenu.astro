@@ -1,14 +1,5 @@
 ---
-import { OFFERS, getAllProducts, slugifyProduct } from '../consts';
-
-const searchIndex = getAllProducts()
-  .filter((p) => p.kind !== 'deal')
-  .map((p) => ({
-    name: p.name,
-    price: p.price,
-    cat: p.offerNiche,
-    href: `/${p.offerSlug}/#${slugifyProduct(p.name)}`,
-  }));
+import { OFFERS, slugifyProduct } from '../consts';
 ---
 <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Abrir menu">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
@@ -26,7 +17,7 @@ const searchIndex = getAllProducts()
   </div>
 
   <div class="menu-search">
-    <input id="menu-search-input" type="search" placeholder="Buscar produto (ex: air fryer)..." autocomplete="off" />
+    <input id="menu-search-input" type="search" placeholder="Buscar no site (ex: air fryer)..." autocomplete="off" />
     <ul id="menu-search-results" class="search-results" hidden></ul>
   </div>
 
@@ -59,7 +50,7 @@ const searchIndex = getAllProducts()
   </nav>
 </aside>
 
-<script define:vars={{ searchIndex }}>
+<script>
   const toggle = document.getElementById('menu-toggle');
   const close = document.getElementById('menu-close');
   const backdrop = document.getElementById('menu-backdrop');
@@ -88,23 +79,64 @@ const searchIndex = getAllProducts()
   backdrop.addEventListener('click', closeMenu);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 
-  input.addEventListener('input', () => {
-    const q = input.value.trim().toLowerCase();
-    results.innerHTML = '';
-    if (q.length < 2) { results.hidden = true; return; }
-    const matches = searchIndex.filter((p) => p.name.toLowerCase().includes(q)).slice(0, 8);
-    if (matches.length === 0) {
-      results.innerHTML = '<li class="no-match">Nada encontrado.</li>';
+  // Busca full-text via Pagefind (índice gerado no build, cobre produtos,
+  // texto de categoria e artigos comparativos). Carregado sob demanda, só
+  // quando o usuário interage com o campo — sem custo no carregamento inicial.
+  let pagefindMod = null;
+  let pagefindLoading = null;
+  function loadPagefind() {
+    if (pagefindMod) return Promise.resolve(pagefindMod);
+    if (!pagefindLoading) {
+      pagefindLoading = import(/* @vite-ignore */ '/pagefind/pagefind.js')
+        .then(async (mod) => {
+          await mod.options?.({ excerptLength: 16 });
+          await mod.init?.();
+          pagefindMod = mod;
+          return mod;
+        })
+        .catch(() => null);
+    }
+    return pagefindLoading;
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+  }
+
+  let debounce;
+  async function runSearch(query) {
+    const q = query.trim();
+    if (q.length < 2) { results.hidden = true; results.innerHTML = ''; return; }
+
+    const pf = await loadPagefind();
+    if (!pf) {
+      results.innerHTML = '<li class="no-match">A busca ainda não está disponível.</li>';
       results.hidden = false;
       return;
     }
-    for (const p of matches) {
-      const li = document.createElement('li');
-      li.innerHTML = `<a href="${p.href}"><span class="r-name">${p.name}</span><span class="r-meta">${p.cat} · ${p.price}</span></a>`;
-      results.appendChild(li);
+
+    const search = await pf.search(q);
+    if (!search || search.results.length === 0) {
+      results.innerHTML = `<li class="no-match">Nada encontrado para "${escapeHtml(q)}".</li>`;
+      results.hidden = false;
+      return;
     }
+
+    const top = await Promise.all(search.results.slice(0, 8).map((r) => r.data()));
+    results.innerHTML = top
+      .map((it) => {
+        const title = escapeHtml(it.meta?.title || 'Página');
+        return `<li><a href="${it.url}"><span class="r-name">${title}</span><span class="r-meta">${it.excerpt}</span></a></li>`;
+      })
+      .join('');
     results.hidden = false;
+  }
+
+  input.addEventListener('input', () => {
+    window.clearTimeout(debounce);
+    debounce = window.setTimeout(() => runSearch(input.value), 180);
   });
+  input.addEventListener('focus', () => loadPagefind());
 </script>
 
 <style>

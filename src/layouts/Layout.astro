@@ -46,7 +46,7 @@ const canonical = new URL(Astro.url.pathname, SITE.url).toString();
   </head>
   <body>
     <Header />
-    <main>
+    <main data-pagefind-body>
       <slot />
     </main>
     <Footer />

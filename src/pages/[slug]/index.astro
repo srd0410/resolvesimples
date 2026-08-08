@@ -28,8 +28,41 @@ const deals = page.products.filter((p) => p.kind === 'deal');
 const hasProducts = page.products.length > 0;
 const compareGroups = getCompareGroups(picks);
 const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
+
+// JSON-LD Product por item da página — só dados reais já exibidos na tela
+// (preço, nota, nº de avaliações). Sem `availability`/imagem: não temos
+// como confirmar estoque em tempo real nem temos URL de imagem própria.
+function toPriceNumber(price: string): number {
+  return parseFloat(price.replace(/[^\d,.]/g, '').replace(/\./g, '').replace(',', '.'));
+}
+const productsJsonLd = page.products.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@graph': page.products.map((p) => {
+        const node: Record<string, unknown> = {
+          '@type': 'Product',
+          name: p.name,
+          offers: {
+            '@type': 'Offer',
+            price: toPriceNumber(p.price),
+            priceCurrency: 'BRL',
+            url: p.href,
+          },
+        };
+        if (p.rating && p.reviews) {
+          node.aggregateRating = {
+            '@type': 'AggregateRating',
+            ratingValue: p.rating,
+            reviewCount: p.reviews,
+          };
+        }
+        return node;
+      }),
+    }
+  : null;
 ---
 <Layout title={offer.title} description={offer.painPoint}>
+  {productsJsonLd && <script type="application/ld+json" set:html={JSON.stringify(productsJsonLd)} />}
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
