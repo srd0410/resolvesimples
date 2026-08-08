@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<Layout
+  title="Artigos e comparativos"
+  description="Comparativos objetivos e guias práticos para escolher o produto certo, sem enrolação e sem ficha técnica que não importa."
+>
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <p class="eyebrow eyebrow-on-dark">Artigos</p>
+      <h1>Comparativos e guias, sem enrolação.</h1>
+      <p class="hero-lede">
+        Antes de qualquer indicação, a gente explica o porquê. Aqui você encontra os
+        comparativos completos por trás da seleção de cada área do site.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      {allArtigos.length > 0 ? (
+        <div class="posts-grid">
+          {allArtigos.map((post) => (
+            <a class="post-card" href={`/artigos/${post.slug}/`}>
+              <p class="post-date">
+                {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' })}
+              </p>
+              <h2>{post.data.title}</h2>
+              <p class="post-desc">{post.data.description}</p>
+              <span class="post-link">Ler artigo &rarr;</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="empty">Ainda não publicamos nenhum artigo. Volte em breve.</p>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--command);
+    color: #fff;
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 4.5rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 70% 55% at 12% 0%, rgba(13, 138, 99, 0.28), transparent 65%),
+      radial-gradient(ellipse 55% 50% at 95% 15%, rgba(240, 135, 44, 0.20), transparent 62%),
+      linear-gradient(180deg, var(--command-2) 0%, var(--command) 70%);
+  }
+  .hero-inner { max-width: 44rem; position: relative; }
+  .hero h1 { color: #fff; }
+  .hero-lede {
+    font-size: clamp(1.02rem, 1.6vw, 1.16rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.76);
+    margin: 1.2rem 0 0;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    gap: 1.25rem;
+  }
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+  }
+  .post-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); color: inherit; }
+  .post-date {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 0.6rem;
+  }
+  .post-card h2 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+  .post-desc { color: var(--ink-soft); font-size: 0.95rem; margin: 0 0 1.1rem; flex: 1; }
+  .post-link { font-weight: 700; color: var(--brand-dk); font-size: 0.9rem; }
+
+  .empty { color: var(--ink-soft); }
+</style>

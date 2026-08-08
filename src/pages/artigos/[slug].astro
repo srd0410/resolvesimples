@@ -1,0 +1,170 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import OfferCard from '../../components/OfferCard.astro';
+import { getCollection } from 'astro:content';
+import { getOffer } from '../../consts';
+
+export async function getStaticPaths() {
+  const allArtigos = await getCollection('artigos', ({ data }) => !data.draft);
+  return allArtigos.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const relatedOffers = post.data.niches.map(getOffer).filter(Boolean);
+const formattedDate = post.data.pubDate.toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+<Layout title={post.data.title} description={post.data.description}>
+  <article>
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap-narrow hero-inner">
+        <nav class="crumbs" aria-label="Você está em">
+          <a href="/">Início</a>
+          <span aria-hidden="true">/</span>
+          <a href="/artigos/">Artigos</a>
+        </nav>
+        <p class="eyebrow eyebrow-on-dark">Comparativo</p>
+        <h1>{post.data.title}</h1>
+        <p class="hero-lede">{post.data.description}</p>
+        <p class="byline">Publicado em {formattedDate}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap-narrow prose">
+        <Content />
+      </div>
+    </section>
+
+    {relatedOffers.length > 0 && (
+      <section class="section section-tint">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Continue por aqui</p>
+            <h2>Veja a seleção completa da área.</h2>
+          </div>
+          <div class="offers-grid">
+            {relatedOffers.map((offer) => offer && <OfferCard offer={offer} />)}
+          </div>
+        </div>
+      </section>
+    )}
+  </article>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--command);
+    color: #fff;
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0 clamp(2.75rem, 5.5vw, 4rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 70% 55% at 12% 0%, rgba(13, 138, 99, 0.28), transparent 65%),
+      radial-gradient(ellipse 55% 50% at 95% 15%, rgba(240, 135, 44, 0.20), transparent 62%),
+      linear-gradient(180deg, var(--command-2) 0%, var(--command) 70%);
+  }
+  .hero-inner { position: relative; }
+  .hero h1 { color: #fff; font-size: clamp(1.9rem, 4.2vw, 2.75rem); }
+  .hero-lede {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.76);
+    margin: 1rem 0 0;
+  }
+  .byline { font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); margin: 1.4rem 0 0; }
+
+  .crumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 1.4rem;
+  }
+  .crumbs a { color: rgba(255, 255, 255, 0.72); text-decoration: none; }
+  .crumbs a:hover { color: var(--accent-lt); }
+
+  .prose :global(h2) {
+    margin-top: 2.2em;
+    font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+  }
+  .prose :global(h3) {
+    margin-top: 1.8em;
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+  }
+  .prose :global(p) {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.3em;
+    color: var(--ink-2);
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+  .prose :global(li) { margin-bottom: 0.4em; }
+  .prose :global(strong) { color: var(--ink); }
+  .prose :global(blockquote) {
+    margin: 1.6em 0;
+    padding: 0.2em 1.2em;
+    border-left: 3px solid var(--brand);
+    background: var(--paper-2);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    color: var(--ink-soft);
+  }
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 2.2em 0;
+  }
+  .prose :global(a) { font-weight: 600; }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.6em 0;
+    font-size: 0.95rem;
+  }
+  .prose :global(th),
+  .prose :global(td) {
+    text-align: left;
+    padding: 0.65em 0.8em;
+    border-bottom: 1px solid var(--line);
+  }
+  .prose :global(thead th) {
+    color: var(--ink-soft);
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .offers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 1000px) {
+    .offers-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .offers-grid { grid-template-columns: 1fr; }
+  }
+</style>
