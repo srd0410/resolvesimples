@@ -1,0 +1,60 @@
+---
+// Box de destaque dentro do corpo do artigo. Uso no MDX:
+//   import Callout from '../../components/Callout.astro';
+//   <Callout type="nota">Texto em Markdown/MDX.</Callout>
+export type CalloutType = 'nota' | 'atencao' | 'importante' | 'dica';
+
+interface Props {
+  type?: CalloutType;
+  title?: string;
+}
+const { type = 'nota', title } = Astro.props;
+
+const LABELS: Record<CalloutType, string> = {
+  nota: 'Nota',
+  atencao: 'Atenção',
+  importante: 'Importante',
+  dica: 'Dica',
+};
+const label = title ?? LABELS[type];
+---
+<aside class={`callout callout-${type}`} role="note" aria-label={LABELS[type]}>
+  <p class="callout-label">{label}</p>
+  <div class="callout-body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout {
+    margin: 1.8rem 0;
+    padding: 1rem 1.3rem;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--brand);
+    border-radius: var(--radius-sm);
+    background: var(--paper-2);
+  }
+  .callout-label {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-dk);
+    margin: 0 0 0.4rem;
+  }
+  .callout-body { color: var(--ink-soft); font-size: 0.95rem; }
+  .callout-body :global(p:last-child) { margin-bottom: 0; }
+
+  .callout-nota { border-left-color: var(--brand); }
+  .callout-nota .callout-label { color: var(--brand-dk); }
+
+  .callout-atencao { border-left-color: var(--danger); background: #fbeeec; }
+  .callout-atencao .callout-label { color: var(--danger); }
+
+  .callout-importante { border-left-color: var(--accent); }
+  .callout-importante .callout-label { color: var(--accent-dk); }
+
+  .callout-dica { border-left-color: var(--ink-mute); }
+  .callout-dica .callout-label { color: var(--ink-soft); }
+</style>

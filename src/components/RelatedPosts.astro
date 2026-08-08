@@ -1,0 +1,56 @@
+---
+// Relacionados automáticos por nicho em comum — sem curadoria manual.
+// Pontuação: cada nicho compartilhado = +1; empate desfeito pelo mais recente.
+// Não renderiza nada se nenhum outro artigo tiver nicho em comum.
+import type { CollectionEntry } from 'astro:content';
+import ArticleCard from './ArticleCard.astro';
+
+interface Props {
+  current: CollectionEntry<'artigos'>;
+  allArticles: CollectionEntry<'artigos'>[];
+}
+const { current, allArticles } = Astro.props;
+
+const scored = allArticles
+  .filter((post) => post.slug !== current.slug)
+  .map((post) => {
+    const shared = post.data.niches.filter((n) => current.data.niches.includes(n)).length;
+    return { post, score: shared };
+  })
+  .filter((entry) => entry.score > 0)
+  .sort((a, b) => b.score - a.score || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
+  .slice(0, 3)
+  .map((entry) => entry.post);
+---
+{scored.length > 0 && (
+  <section class="related" aria-label="Artigos relacionados">
+    <p class="related-label">Continue lendo</p>
+    <div class="related-grid">
+      {scored.map((post) => (
+        <ArticleCard
+          href={`/artigos/${post.slug}/`}
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          niches={post.data.niches}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related { margin-top: 3rem; }
+  .related-label {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 0 0 1.1rem;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.1rem;
+  }
+</style>

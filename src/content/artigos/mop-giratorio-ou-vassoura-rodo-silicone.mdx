@@ -8,6 +8,7 @@ draft: false
 
 import ProductCard from '../../components/ProductCard.astro';
 import CompareTable from '../../components/CompareTable.astro';
+import Callout from '../../components/Callout.astro';
 import { OFFERS } from '../../consts';
 
 export const casa = OFFERS.find((o) => o.slug === 'casa');
@@ -21,6 +22,11 @@ Limpar o chão toda semana devia ser rápido — na prática, vira torcer pano c
 <CompareTable products={[mop, vassoura]} label="limpeza de chão" />
 
 A diferença central está no mecanismo: o mop tem uma centrífuga integrada ao balde que tira o excesso de água do rodo sem você precisar torcer nada na mão. Já a vassoura de silicone varre e seca num movimento só, mas depende da sua força para escorrer a água.
+
+<Callout type="nota">
+  Preço e nota mudam com frequência no Mercado Livre — os valores acima refletem a
+  última checagem. Confira o preço atual na página do produto antes de decidir.
+</Callout>
 
 ## O que quem já comprou está dizendo
 

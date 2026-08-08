@@ -2,17 +2,25 @@
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import OfferCard from '../../components/OfferCard.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import CompareTable from '../../components/CompareTable.astro';
+import { getCollection } from 'astro:content';
 import { OFFERS, SITE, getCompareGroups } from '../../consts';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const allArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
   return OFFERS.map((offer) => ({
     params: { slug: offer.slug },
-    props: { offer },
+    props: {
+      offer,
+      relatedArticles: allArtigos.filter((post) => post.data.niches.includes(offer.slug)),
+    },
   }));
 }
 
-const { offer } = Astro.props;
+const { offer, relatedArticles } = Astro.props;
 const { page } = offer;
 const others = OFFERS.filter((o) => o.slug !== offer.slug).slice(0, 3);
 const picks = page.products.filter((p) => p.kind !== 'deal');
@@ -70,6 +78,33 @@ const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
       </ul>
     </div>
   </section>
+
+  <!-- ============ COMPARATIVOS DA ÁREA ============ -->
+  {relatedArticles.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Antes de escolher</p>
+          <h2>Comparativos desta área.</h2>
+          <p class="lede">
+            Comparamos as opções lado a lado antes de qualquer indicação — veja o
+            raciocínio completo antes de decidir.
+          </p>
+        </div>
+        <div class="articles-grid">
+          {relatedArticles.map((post) => (
+            <ArticleCard
+              href={`/artigos/${post.slug}/`}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              niches={post.data.niches}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- ============ SELEÇÃO ============ -->
   <section id="selecao" class="section">
@@ -214,6 +249,18 @@ const mailSubject = encodeURIComponent(`Avisar sobre: ${offer.niche}`);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
     gap: 1.25rem;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 1000px) {
+    .articles-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .articles-grid { grid-template-columns: 1fr; }
   }
 
   .waiting {

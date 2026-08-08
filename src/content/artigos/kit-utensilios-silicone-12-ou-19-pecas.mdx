@@ -8,6 +8,7 @@ draft: false
 
 import ProductCard from '../../components/ProductCard.astro';
 import CompareTable from '../../components/CompareTable.astro';
+import Callout from '../../components/Callout.astro';
 import { OFFERS } from '../../consts';
 
 export const cozinha = OFFERS.find((o) => o.slug === 'cozinha');
@@ -21,6 +22,11 @@ Trocar a gaveta inteira de utensílio de plástico gasto por um kit de silicone 
 <CompareTable products={[kit12, kit19]} label="kit de utensílios de silicone" />
 
 O kit de 12 peças é focado no essencial: espátulas, colheres, pegador e concha, todos em silicone que aguenta até 220°C sem derreter ou soltar sabor de plástico queimado na comida. O kit de 19 peças adiciona tábua de corte e facas — itens que, se você já tem, viram peso duplicado na gaveta.
+
+<Callout type="nota">
+  Preço e nota mudam com frequência no Mercado Livre — os valores acima refletem a
+  última checagem. Confira o preço atual na página do produto antes de decidir.
+</Callout>
 
 ## Avaliação de quem já comprou
 

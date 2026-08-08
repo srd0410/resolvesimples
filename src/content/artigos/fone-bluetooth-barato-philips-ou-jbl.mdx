@@ -8,6 +8,7 @@ draft: false
 
 import ProductCard from '../../components/ProductCard.astro';
 import CompareTable from '../../components/CompareTable.astro';
+import Callout from '../../components/Callout.astro';
 import { OFFERS } from '../../consts';
 
 export const eletronicos = OFFERS.find((o) => o.slug === 'eletronicos');
@@ -21,6 +22,11 @@ Abaixo está a comparação completa, item por item.
 ## Ficha rápida dos dois modelos
 
 <CompareTable products={[philips, jbl]} label="fone bluetooth barato" />
+
+<Callout type="nota">
+  Preço e nota mudam com frequência na Amazon — os valores acima refletem a última
+  checagem. Confira o preço atual na página do produto antes de decidir.
+</Callout>
 
 ## Bateria: a diferença que mais pesa no bolso
 

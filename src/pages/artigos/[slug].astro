@@ -1,18 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import OfferCard from '../../components/OfferCard.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
 import { getCollection } from 'astro:content';
-import { getOffer } from '../../consts';
+import { getOffer, SITE } from '../../consts';
 
 export async function getStaticPaths() {
   const allArtigos = await getCollection('artigos', ({ data }) => !data.draft);
   return allArtigos.map((post) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: { post, allArtigos },
   }));
 }
 
-const { post } = Astro.props;
+const { post, allArtigos } = Astro.props;
 const { Content } = await post.render();
 const relatedOffers = post.data.niches.map(getOffer).filter(Boolean);
 const formattedDate = post.data.pubDate.toLocaleDateString('pt-BR', {
@@ -21,8 +22,22 @@ const formattedDate = post.data.pubDate.toLocaleDateString('pt-BR', {
   year: 'numeric',
   timeZone: 'UTC',
 });
+
+const canonicalUrl = new URL(`/artigos/${post.slug}/`, SITE.url).toString();
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  mainEntityOfPage: canonicalUrl,
+};
 ---
 <Layout title={post.data.title} description={post.data.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <article>
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
@@ -42,6 +57,9 @@ const formattedDate = post.data.pubDate.toLocaleDateString('pt-BR', {
     <section class="section">
       <div class="wrap-narrow prose">
         <Content />
+      </div>
+      <div class="wrap-narrow">
+        <RelatedPosts current={post} allArticles={allArtigos} />
       </div>
     </section>
 
