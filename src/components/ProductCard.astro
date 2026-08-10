@@ -4,12 +4,20 @@ import { slugifyProduct } from '../consts';
 interface Props { product: Product; rank?: number }
 const { product, rank } = Astro.props;
 const isDeal = product.kind === 'deal';
+const isOwn = product.own === true;
 const id = slugifyProduct(product.name);
+// Produto próprio é link interno e sem comissão de terceiro: não leva rel="sponsored"
+// nem abre em nova aba.
+const linkAttrs = isOwn
+  ? {}
+  : { target: '_blank', rel: 'sponsored noopener' };
 ---
-<article id={id} class={isDeal ? 'product product-deal' : 'product'}>
+<article id={id} class={`product${isDeal ? ' product-deal' : ''}${isOwn ? ' product-own' : ''}`}>
   <div class="product-head">
     <span class="badges">
-      <span class={isDeal ? 'badge badge-deal' : 'badge badge-accent'}>{isDeal ? 'Oferta' : product.platform}</span>
+      <span class={isOwn ? 'badge badge-own' : isDeal ? 'badge badge-deal' : 'badge badge-accent'}>
+        {isOwn ? 'Produto nosso' : isDeal ? 'Oferta' : product.platform}
+      </span>
       {rank && <span class="rank-badge">{rank}º</span>}
     </span>
     <span class="price">{product.price}</span>
@@ -24,17 +32,12 @@ const id = slugifyProduct(product.name);
   )}
   <p class="pitch">{product.pitch}</p>
 
-  <p class={isDeal ? 'take take-deal' : 'take'}>
-    <strong>{isDeal ? 'Por que é só oferta:' : 'Por que indicamos:'}</strong> {product.take}
+  <p class={`take${isDeal ? ' take-deal' : ''}${isOwn ? ' take-own' : ''}`}>
+    <strong>{isOwn ? 'Por que fizemos:' : isDeal ? 'Por que é só oferta:' : 'Por que indicamos:'}</strong> {product.take}
   </p>
 
-  <a
-    class="btn btn-primary"
-    href={product.href}
-    target="_blank"
-    rel="sponsored noopener"
-  >
-    Ver oferta
+  <a class="btn btn-primary" href={product.href} {...linkAttrs}>
+    {isOwn ? `Conhecer o ${product.name}` : 'Ver oferta'}
   </a>
 
   {product.alt && (
@@ -95,6 +98,19 @@ const id = slugifyProduct(product.name);
   }
   .take strong { color: var(--ink); }
   .product .btn { width: 100%; }
+
+  /* Produto próprio: mesma estrutura do card de indicação, com destaque de borda
+     e selo próprio para deixar claro que a relação comercial é outra. */
+  .product-own {
+    border-color: var(--brand);
+    box-shadow: var(--shadow-md, var(--shadow-sm));
+  }
+  .badge-own {
+    background: var(--brand);
+    color: #fff;
+    border: 1px solid var(--brand);
+  }
+  .take-own { border-left-color: var(--brand-dk, var(--brand)); }
 
   .product-deal { border-style: dashed; }
   .badge-deal {

@@ -1,0 +1,206 @@
+---
+// Política de privacidade. Mantida com a mesma identidade visual da landing do
+// Protocolo VAGA (Poppins + paleta do produto), fora do Layout.astro do portal,
+// para que quem chega pela calculadora não troque de mundo visual no meio do funil.
+import { SITE } from '../../consts';
+
+const title = 'Política de Privacidade | Resolve Simples';
+const description = 'Como a Resolve Simples coleta, usa, compartilha e protege os seus dados pessoais.';
+const canonical = new URL('/politica-de-privacidade/', SITE.url).toString();
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="robots" content="index,follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style is:global set:html={`
+:root{
+    --ink:#0D1B2A; --ink-soft:#2B3B4A; --ink-faint:#5A6B7C;
+    --paper:#F2F4F7; --paper-raised:#FFFFFF; --line:#DDE3EA;
+    --teal:#00A78E; --blue:#1565C0; --radius:14px; --maxw:680px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;padding:0 20px 80px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  .masthead{padding:26px 0 0;display:flex;align-items:center;gap:9px}
+  .mark{width:9px;height:9px;background:var(--teal);border-radius:2px;transform:rotate(45deg)}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
+
+  header.hero{padding:42px 0 8px}
+  h1{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(30px,7.5vw,44px);line-height:1.06;letter-spacing:-.025em;margin-bottom:14px}
+  .deck{font-size:17.5px;color:var(--ink-soft);max-width:34em}
+  .atualizado{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;
+    color:var(--ink-faint);margin-top:18px;
+  }
+
+  .aviso{
+    background:var(--paper-raised);border:1px solid var(--line);border-left:4px solid var(--teal);
+    border-radius:0 var(--radius) var(--radius) 0;padding:20px 20px;margin:28px 0 8px;
+  }
+  .aviso p{font-size:15.5px;color:var(--ink-soft);margin:0}
+
+  h2{
+    font-family:"Poppins",sans-serif;font-weight:700;
+    font-size:clamp(21px,5.2vw,26px);line-height:1.2;letter-spacing:-.02em;
+    margin:44px 0 12px;padding-top:22px;border-top:1px solid var(--line);
+  }
+  h3{font-family:"Poppins",sans-serif;font-weight:600;font-size:18px;margin:24px 0 8px}
+  p{margin-bottom:15px;color:var(--ink-soft)}
+  strong{color:var(--ink);font-weight:600}
+
+  ul{list-style:none;margin:0 0 18px;padding:0}
+  li{position:relative;padding-left:24px;margin-bottom:9px;color:var(--ink-soft)}
+  li::before{content:"";position:absolute;left:3px;top:11px;width:7px;height:7px;background:var(--teal);border-radius:2px}
+
+  table{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:15.5px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:600;color:var(--ink);background:var(--paper);font-size:14px}
+  td{color:var(--ink-soft)}
+
+  .campo{
+    background:#FFF8E1;border:1px dashed #E0B94A;border-radius:6px;
+    padding:1px 7px;font-family:"IBM Plex Mono",monospace;font-size:14px;color:#7A5C00;
+  }
+
+  a{color:var(--blue)}
+
+  footer{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-faint)}
+`}></style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="mark" aria-hidden="true"></div>
+    <a class="brand" href="/">Resolve Simples</a>
+  </header>
+
+  <header class="hero">
+    <h1>Política de Privacidade</h1>
+    <p class="deck">Esta página explica quais dados a Resolve Simples coleta, para que usa, com quem compartilha e como você pode pedir para ver, corrigir ou apagar tudo.</p>
+    <p class="atualizado">Última atualização: 10/08/2026</p>
+  </header>
+
+  <div class="aviso">
+    <p>Escrevemos em linguagem simples de propósito. Se alguma parte não estiver clara, escreva para <a href="mailto:contato@resolvesimples.com.br">contato@resolvesimples.com.br</a> e respondemos.</p>
+  </div>
+
+  <h2>1. Quem é responsável pelos seus dados</h2>
+  <p>O controlador dos dados tratados neste site Felipe Arrais Serodio, inscrito sob CPF 833.715.400-49, com endereço em Rua Voluntário Benedito Sérgio, 1085, F27, responsável pelo site resolvesimples.com.br.</p>
+  <p>Contato para assuntos de privacidade: <a href="mailto:contato@resolvesimples.com.br">contato@resolvesimples.com.br</a>.</p>
+
+  <h2>2. Quais dados coletamos</h2>
+
+  <h3>Dados que você nos fornece</h3>
+  <ul>
+    <li><strong>Nome e e-mail</strong>, quando você pede o diagnóstico da Calculadora do Buraco da Agenda ou se inscreve para receber conteúdos.</li>
+    <li><strong>Informações sobre o seu negócio</strong> que você digita na calculadora: valor médio por atendimento, número de atendimentos, faltas e desmarcações, horários recuperados, duração média, tipo de negócio, ferramenta de agenda que usa e sua principal dificuldade.</li>
+    <li><strong>O conteúdo das mensagens</strong> que você nos envia por e-mail.</li>
+  </ul>
+  <p>Os números da calculadora são guardados junto ao seu cadastro para que possamos enviar o diagnóstico com os seus próprios resultados e entender melhor as dificuldades de quem nos procura. Eles não identificam seus clientes: a calculadora não pede nome, telefone nem qualquer dado de terceiros.</p>
+
+  <h3>Dados coletados automaticamente</h3>
+  <ul>
+    <li><strong>Dados de navegação</strong>: endereço IP, tipo de navegador e dispositivo, páginas visitadas, tempo de permanência e a origem do acesso (inclusive parâmetros de campanha como <em>utm_source</em>).</li>
+    <li><strong>Cookies e tecnologias semelhantes</strong>, conforme a seção 6.</li>
+  </ul>
+
+  <h2>3. Para que usamos e com qual base legal</h2>
+  <table>
+    <thead>
+      <tr><th>Para quê</th><th>Base legal</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Enviar o diagnóstico que você pediu, com os seus números</td><td>Consentimento e execução do que foi solicitado</td></tr>
+      <tr><td>Enviar conteúdos e comunicações comerciais sobre gestão de agenda</td><td>Consentimento, que você pode retirar a qualquer momento</td></tr>
+      <tr><td>Responder às suas mensagens</td><td>Execução de solicitação sua</td></tr>
+      <tr><td>Processar a compra de produtos digitais e dar acesso a eles</td><td>Execução de contrato</td></tr>
+      <tr><td>Entender como o site é usado e melhorá-lo</td><td>Legítimo interesse</td></tr>
+      <tr><td>Cumprir obrigações legais, fiscais e regulatórias</td><td>Obrigação legal</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Consentimentos separados</h2>
+  <p>Quando você pede o diagnóstico, o envio desse material é o que você solicitou. Receber <strong>outros conteúdos e ofertas</strong> é uma autorização separada, com caixa própria e desmarcada por padrão.</p>
+  <p>Você recebe um e-mail para confirmar o cadastro antes de qualquer envio. Sem essa confirmação, nada é enviado.</p>
+  <p>Para sair da lista, use o link de descadastro que aparece no rodapé de todas as nossas mensagens, ou escreva para <a href="mailto:contato@resolvesimples.com.br">contato@resolvesimples.com.br</a>. O pedido é atendido sem custo e sem que você precise justificar.</p>
+
+  <h2>5. Com quem compartilhamos</h2>
+  <p>Não vendemos seus dados e não os cedemos para terceiros usarem em campanhas próprias. Compartilhamos apenas com prestadores necessários à operação do site:</p>
+  <table>
+    <thead>
+      <tr><th>Quem</th><th>Para quê</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Brevo</td><td>Armazenar o cadastro e enviar os e-mails</td></tr>
+      <tr><td>Kiwify</td><td>Processar pagamentos e entregar os produtos digitais comprados</td></tr>
+      <tr><td>Google (Analytics e AdSense)</td><td>Medir audiência e exibir anúncios</td></tr>
+      <tr><td>Provedor de hospedagem do site</td><td>Manter o site no ar</td></tr>
+    </tbody>
+  </table>
+  <p>Também podemos compartilhar dados quando houver obrigação legal ou requisição de autoridade competente.</p>
+  <p>Alguns desses prestadores mantêm servidores fora do Brasil. Nesses casos, a transferência internacional acontece com as garantias previstas na Lei Geral de Proteção de Dados.</p>
+
+  <h2>6. Cookies, anúncios e links de afiliado</h2>
+  <p>Cookies são pequenos arquivos que o site guarda no seu navegador. Usamos:</p>
+  <ul>
+    <li><strong>Cookies necessários</strong>, para o site funcionar.</li>
+    <li><strong>Cookies de medição</strong>, para saber quantas pessoas visitam cada página e de onde vêm.</li>
+    <li><strong>Cookies de publicidade</strong>, usados pelo Google e seus parceiros para exibir anúncios, inclusive personalizados de acordo com sua navegação.</li>
+  </ul>
+  <p>Você pode bloquear ou apagar cookies nas configurações do seu navegador. Para controlar especificamente os anúncios do Google, acesse as <a href="https://adssettings.google.com" target="_blank" rel="noopener">configurações de anúncios da sua conta Google</a>.</p>
+  <p><strong>Links de afiliado.</strong> Algumas páginas deste site contêm links pelos quais podemos receber comissão se você comprar o produto indicado. Isso não altera o preço que você paga.</p>
+
+  <h2>7. Por quanto tempo guardamos</h2>
+  <ul>
+    <li><strong>Cadastro na lista de e-mails</strong>: enquanto você quiser continuar recebendo. Ao pedir descadastro, mantemos apenas o registro mínimo necessário para não voltar a te enviar mensagens.</li>
+    <li><strong>Dados de compra</strong>: pelo prazo exigido pela legislação fiscal e civil.</li>
+    <li><strong>Dados de navegação</strong>: pelo período definido nas ferramentas de medição utilizadas.</li>
+  </ul>
+
+  <h2>8. Seus direitos</h2>
+  <p>A Lei Geral de Proteção de Dados garante que você possa, a qualquer momento:</p>
+  <ul>
+    <li>Confirmar se tratamos dados seus e ter acesso a eles</li>
+    <li>Corrigir dados incompletos, desatualizados ou incorretos</li>
+    <li>Pedir a eliminação dos dados tratados com base no seu consentimento</li>
+    <li>Pedir a portabilidade dos dados a outro fornecedor</li>
+    <li>Saber com quem compartilhamos seus dados</li>
+    <li>Revogar o consentimento e ser informado sobre as consequências disso</li>
+    <li>Opor-se a tratamentos que você considere irregulares</li>
+  </ul>
+  <p>Para exercer qualquer um desses direitos, escreva para <a href="mailto:contato@resolvesimples.com.br">contato@resolvesimples.com.br</a>. Respondemos em até 15 dias. Podemos pedir alguma informação adicional apenas para confirmar que é você mesmo quem está solicitando.</p>
+
+  <h2>9. Segurança</h2>
+  <p>Adotamos medidas razoáveis para proteger os dados sob nossa responsabilidade, incluindo acesso restrito e uso de prestadores que oferecem proteção adequada. Nenhum sistema é totalmente imune, e por isso mantemos apenas os dados necessários para as finalidades descritas aqui.</p>
+  <p>Em caso de incidente de segurança com risco relevante, comunicaremos você e a Autoridade Nacional de Proteção de Dados nos termos da lei.</p>
+
+  <h2>10. Crianças e adolescentes</h2>
+  <p>Este site é dirigido a profissionais e empresas. Não coletamos intencionalmente dados de menores de 18 anos. Se identificarmos um cadastro nessas condições, ele será removido.</p>
+
+  <h2>11. Alterações desta política</h2>
+  <p>Podemos atualizar este texto para refletir mudanças no site ou na legislação. A data no topo da página indica a última versão. Mudanças relevantes são comunicadas por e-mail a quem estiver cadastrado.</p>
+
+  <footer>
+    <p>Resolve Simples &middot; <a href="/">resolvesimples.com.br</a><br>
+    Felipe Arrais Serodio &middot; CPF 833.715.400-49 &middot; <a href="mailto:contato@resolvesimples.com.br">contato@resolvesimples.com.br</a></p>
+  </footer>
+
+</div>
+</body>
+</html>

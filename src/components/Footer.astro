@@ -34,11 +34,16 @@ const year = new Date().getFullYear();
         adicional para você. Isso não muda o critério de seleção: só indicamos o que
         avaliamos como solução real para o problema descrito.
       </p>
+      <p>
+        Alguns itens são produtos nossos, criados pela Resolve Simples. Eles aparecem
+        marcados como <strong>Produto nosso</strong> e ficam fora do Ranking Geral —
+        não faria sentido ranquear a própria mercadoria contra as indicações.
+      </p>
     </div>
   </div>
 
   <div class="wrap bottom">
-    <span>&copy; {year} {SITE.name}</span>
+    <span>&copy; {year} {SITE.name} · <a href="/politica-de-privacidade/">Política de privacidade</a></span>
     <span class="bottom-note">Resultados variam conforme a aplicação de cada negócio.</span>
   </div>
 </footer>
@@ -120,5 +125,13 @@ const year = new Date().getFullYear();
     padding-top: 1.75rem;
     font-size: 0.84rem;
     color: rgba(255, 255, 255, 0.42);
+  }
+  .bottom a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .bottom a:hover {
+    color: rgba(255, 255, 255, 0.75);
   }
 </style>

@@ -22,6 +22,12 @@ export interface Product {
   href: string;
   /** 'deal' = preço bom mas sem vantagem clara sobre concorrentes; fica fora d'"A seleção". Default: pick. */
   kind?: 'pick' | 'deal';
+  /**
+   * true = produto próprio da Resolve Simples, não indicação de afiliado.
+   * Muda o selo, o texto do card e o link (que deixa de ser rel="sponsored",
+   * porque não há comissão de terceiro envolvida). Ver aviso no rodapé.
+   */
+  own?: boolean;
   /** Link secundário opcional (ex: variante de voltagem, produto complementar). */
   alt?: { label: string; href: string };
   /** Nota da Amazon (0-5), quando conhecida — usada no comparativo e na busca. */
@@ -108,7 +114,20 @@ export const OFFERS: Offer[] = [
         'Não exige trocar de sistema de agendamento nem contratar ninguém',
         'Custo pequeno perto do que uma única falta evitada já devolve',
       ],
-      products: [],
+      products: [
+        {
+          name: 'Protocolo VAGA',
+          platform: 'Kiwify',
+          price: 'R$ 197',
+          own: true,
+          pitch:
+            'Sistema em quatro etapas para medir a perda, reduzir a falta e reocupar o horário que vagou em até 15 minutos. Inclui duas planilhas prontas, 40 mensagens de WhatsApp, kit de documentos editáveis e manual da recepção.',
+          take:
+            'É produto nosso, não indicação de terceiro. Construímos porque nenhuma das ferramentas que testamos atacava a parte que mais custa: o horário que abre e ninguém preenche.',
+          // Vai para a landing, não direto ao checkout: a página é que vende.
+          href: '/calculadora-agenda-vazia/#protocolo-vaga',
+        },
+      ],
     },
   },
   {
@@ -594,10 +613,14 @@ export function getAllProducts(): RankedProduct[] {
   );
 }
 
-/** Ranking Geral: só produtos 'pick' com globalRank definido, do menor pro maior (1 = melhor). */
+/**
+ * Ranking Geral: só produtos 'pick' com globalRank definido, do menor pro maior (1 = melhor).
+ * Produto próprio fica de fora — ranquear a própria mercadoria contra as indicações
+ * esvaziaria o sentido do ranking.
+ */
 export function getRanking(): RankedProduct[] {
   return getAllProducts()
-    .filter((p) => p.kind !== 'deal' && typeof p.globalRank === 'number')
+    .filter((p) => p.kind !== 'deal' && !p.own && typeof p.globalRank === 'number')
     .sort((a, b) => (a.globalRank as number) - (b.globalRank as number));
 }
 
