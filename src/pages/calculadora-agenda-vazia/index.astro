@@ -155,6 +155,14 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   .bridge{margin-top:30px}
   .bridge h2{margin-top:0}
 
+  .personas{margin-top:34px}
+  .personas h2{margin-top:0;margin-bottom:6px}
+  .personas .lede{font-size:16px;color:var(--ink-soft);margin-bottom:20px}
+  .persona-list{display:flex;flex-direction:column;gap:14px}
+  .persona{background:var(--paper-raised);border:1px solid var(--line);border-left:4px solid var(--lost);border-radius:10px;padding:16px 18px}
+  .persona .quem{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lost);margin-bottom:6px;font-weight:600}
+  .persona p:last-child{margin:0;font-size:15.5px;line-height:1.55;color:var(--ink-soft)}
+
   .final-push{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:32px 22px 28px;margin-top:44px;text-align:center}
   .final-push h2{color:#FFFFFF;margin-top:0;font-size:clamp(22px,6vw,27px)}
   .final-push p{color:#B9C4CF;max-width:30em;margin:0 auto 22px;font-size:15.5px;line-height:1.6}
@@ -433,10 +441,29 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     <input type="hidden" name="VERSAO_CALCULADORA" value="4.0-seo">
   </form>
 
+  <section class="personas">
+    <h2>Pra quem é o Protocolo VAGA</h2>
+    <p class="lede">Não importa quem aperta o "comprar" — o resultado aparece pra três pessoas diferentes.</p>
+    <div class="persona-list">
+      <div class="persona">
+        <p class="quem">Se você é dona e vai repassar pra equipe</p>
+        <p>Você não quer ficar lembrando, cobrando e repetindo a mesma instrução toda semana. O manual da recepção e o Cartão dos 15 Minutos fazem esse trabalho por você — sua equipe executa sozinha, mesmo nos dias em que você não está olhando.</p>
+      </div>
+      <div class="persona">
+        <p class="quem">Se você é dona e cuida da agenda sozinha</p>
+        <p>Você não tem fim de semana livre pra montar planilha, testar mensagem e pesquisar o que funciona. Por R$ 197, alguém já pesquisou, testou e organizou — inclusive pra quem está começando como MEI, onde cada real de custo pesa e cada horário recuperado conta em dobro.</p>
+      </div>
+      <div class="persona">
+        <p class="quem">Se você é quem cuida da agenda, mas não é a dona</p>
+        <p>Aplicar o Protocolo e mostrar o resultado em números — no Painel da Agenda, preto no branco — é argumento concreto pra levar pra sua gestora. Melhorou a reocupação, melhorou o caixa: é assim que se justifica um aumento.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="oferta" aria-labelledby="oferta-titulo" id="protocolo-vaga">
     <p class="selo">Recupere um atendimento este mês e o sistema já se pagou</p>
     <h2 id="oferta-titulo">Protocolo VAGA</h2>
-    <p class="lead">R$ 197 é menos do que a maioria dos negócios de agenda perde <strong>num único fim de semana</strong> de faltas. Você não está comprando conteúdo para estudar depois — está comprando o que falta para parar de sangrar dinheiro esta semana. Monte você mesma, com um fim de semana livre e a página que você já leu — <strong>ou use o que já vem pronto abaixo.</strong></p>
+    <p class="lead">R$ 197 é menos do que a maioria dos negócios de agenda perde <strong>num único fim de semana</strong> de faltas — e é muito menos do que vale o tempo que você gastaria pesquisando, testando mensagem e ajustando planilha até chegar num sistema que funciona. Alguém já pensou, testou e organizou isso por você. Monte você mesma, com um fim de semana livre e a página que você já leu — <strong>ou use o que já vem pronto abaixo.</strong></p>
     <ul>
       <li><b>Painel da Agenda</b> — chega de "acho que melhorou": a planilha calcula sua taxa de falta por profissional, por dia e por procedimento, converte em reais e mostra mês a mês se o buraco está fechando</li>
       <li><b>Lista de Encaixe</b> — chega de travar no WhatsApp quando o cancelamento chega: preenche três campos e ela devolve, em ordem, exatamente quem chamar</li>
