@@ -685,7 +685,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   }
 
   var form = $("form"), botao = $("enviar");
-  function emailValido(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  function emailValido(v){ return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(v); }
 
   form.addEventListener("submit", function(e){
     e.preventDefault();
