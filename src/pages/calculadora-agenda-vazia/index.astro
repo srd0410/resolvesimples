@@ -491,7 +491,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   <!-- ================= conteúdo SEO ================= -->
   <div class="prose">
 
-    <h2>Por que o horário vazio custa mais do que parece</h2>
+    <h2 id="como-funciona">Por que o horário vazio custa mais do que parece</h2>
     <p>Quem vende tempo agendado tem um problema que o comércio não tem: <strong>estoque que estraga na hora</strong>. Uma loja que não vendeu um produto hoje vende amanhã. Um salão que ficou com a cadeira parada das 14h às 15h não vende aquela hora nunca mais — ela simplesmente deixou de existir.</p>
     <p>Por isso a conta da falta não é só o valor do procedimento. Naquele intervalo o aluguel continuou correndo, a profissional continuou na cadeira e a luz continuou acesa. O custo fixo rodou sem nada entrar do outro lado.</p>
     <p>E a desmarcação de última hora é a pior de todas as versões do problema. Quem avisa com três dias de antecedência devolve um horário que ainda dá para vender. Quem avisa às nove da manhã de um horário das dez devolve um horário que ninguém vai conseguir ocupar a tempo.</p>
@@ -572,6 +572,8 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     <br><br>
     O resultado estima <strong>receita que deixou de entrar</strong>, não lucro: os custos variáveis do atendimento que não aconteceu não estão descontados. O conteúdo sobre cobrança e política de cancelamento é informativo e não constitui orientação jurídica.
   </section>
+
+  <iframe name="brevo-submit-frame" title="" style="display:none" aria-hidden="true" tabindex="-1"></iframe>
 
 </div>
 <script is:inline set:html={`
@@ -755,8 +757,21 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     }
     marcar("email_enviado");
     botao.disabled = true; botao.textContent = "Enviando...";
+    form.target = "brevo-submit-frame";
     form.action = BREVO_FORM_ACTION;
     form.submit();
+
+    var destino = new URLSearchParams();
+    destino.set("nome", $("nome").value.trim());
+    destino.set("perdaAnoTxt", $("h_perdaAnoTxt").value);
+    destino.set("perdaMesTxt", $("h_perdaMesTxt").value);
+    destino.set("horas", $("h_horas").value);
+    destino.set("perdidas", $("h_perdidas").value);
+    destino.set("agendados", $("h_agendados").value);
+    destino.set("taxa", $("h_taxa").value);
+    setTimeout(function(){
+      window.location.href = "/calculadora-agenda-vazia/obrigado/?" + destino.toString();
+    }, 350);
   });
 
   calcular();

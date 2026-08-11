@@ -1,0 +1,246 @@
+---
+// Página de resultado pós-diagnóstico do Protocolo VAGA.
+// Chega aqui via redirect JS depois do envio do formulário da calculadora
+// (F:\Sites\site-afiliados\src\pages\calculadora-agenda-vazia\index.astro),
+// com os números calculados na query string. O envio real do lead pra Brevo
+// acontece num iframe oculto na página anterior — esta página só lê os
+// parâmetros da URL e personaliza o texto, não depende de nenhum backend.
+//
+// Fora do Layout.astro de propósito, igual à calculadora: landing de
+// conversão, sem menu do portal. Não indexável (é conteúdo pessoal/duplicado
+// por natureza — cada visita gera números diferentes na URL).
+import { SITE } from '../../../consts';
+
+const title = 'Seu diagnóstico está pronto — Protocolo VAGA';
+const canonical = new URL('/calculadora-agenda-vazia/obrigado/', SITE.url).toString();
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>{title}</title>
+<link rel="canonical" href={canonical} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="robots" content="noindex,nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+{SITE.gaMeasurementId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`}></script>}
+{SITE.gaMeasurementId && (
+  <script is:inline define:vars={{ gaMeasurementId: SITE.gaMeasurementId }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', gaMeasurementId);
+    gtag('event', 'calc_diagnostico_entregue');
+  </script>
+)}
+
+<style is:global set:html={`
+:root{
+    --ink:#0D1B2A; --ink-soft:#2B3B4A; --ink-faint:#5A6B7C;
+    --paper:#F2F4F7; --paper-raised:#FFFFFF; --line:#DDE3EA;
+    --lost:#B0214E; --lost-wash:#FBEAF0;
+    --kept:#00A78E; --kept-wash:#E5F7F3; --idle:#E7EBF0;
+    --blue:#1565C0; --blue-wash:#EAF2FC;
+    --radius:14px; --maxw:640px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 20px 80px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  .masthead{padding:26px 0 0;display:flex;align-items:center;gap:9px}
+  .mark{width:9px;height:9px;background:var(--lost);border-radius:2px;transform:rotate(45deg)}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
+
+  .hero{padding:34px 0 6px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--kept);margin-bottom:16px}
+  h1{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(28px,7.4vw,38px);line-height:1.08;letter-spacing:-.026em;margin-bottom:14px}
+  .deck{font-size:17px;color:var(--ink-soft);max-width:32em}
+
+  h2{font-family:"Poppins",sans-serif;font-weight:700;font-size:clamp(23px,5.6vw,27px);line-height:1.16;letter-spacing:-.02em;margin:40px 0 12px}
+
+  .result{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:28px 22px 24px;margin-top:24px}
+  .result-label{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:#B9C4CF;margin-bottom:10px}
+  .big{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(42px,13vw,64px);line-height:.95;letter-spacing:-.035em;color:#FF8FB2;margin-bottom:6px;word-break:break-word}
+  .big-note{font-size:15px;color:#B9C4CF}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;padding-top:20px;border-top:1px solid #22364A}
+  .stat-k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#B9C4CF;margin-bottom:5px;line-height:1.3}
+  .stat-v{font-family:"Poppins",sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em}
+
+  .bridge{margin-top:30px}
+  .bridge h2{margin-top:0}
+  .bridge p{color:var(--ink-soft);font-size:16px;line-height:1.6}
+
+  .personas{margin-top:8px}
+  .personas h2{margin-top:0;margin-bottom:6px}
+  .personas .lede{font-size:16px;color:var(--ink-soft);margin-bottom:20px}
+  .persona-list{display:flex;flex-direction:column;gap:14px}
+  .persona{background:var(--paper-raised);border:1px solid var(--line);border-left:4px solid var(--lost);border-radius:10px;padding:16px 18px}
+  .persona .quem{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lost);margin-bottom:6px;font-weight:600}
+  .persona p:last-child{margin:0;font-size:15.5px;line-height:1.55;color:var(--ink-soft)}
+
+  .oferta{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:30px 22px 26px;margin-top:36px}
+  .oferta .selo{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--kept);margin-bottom:12px;font-weight:600}
+  .oferta h2{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(25px,6.6vw,32px);line-height:1.12;letter-spacing:-.02em;color:#FFFFFF;margin:0 0 14px}
+  .oferta .lead{font-size:16px;line-height:1.6;color:#B9C4CF;margin:0 0 22px}
+  .oferta .lead strong{color:#FFFFFF}
+  .oferta ul{list-style:none;margin:0 0 22px;padding:0}
+  .oferta li{position:relative;padding-left:24px;margin-bottom:11px;font-size:15.5px;line-height:1.55;color:#D6DEE6}
+  .oferta li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;background:var(--kept);border-radius:2px}
+  .oferta li b{color:#FFFFFF;font-weight:600}
+  .oferta .preco{border-top:1px solid #22364A;padding-top:22px}
+  .oferta .de{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#B9C4CF;margin-bottom:6px}
+  .oferta .valor{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(38px,11vw,52px);line-height:1;letter-spacing:-.03em;color:#FFFFFF;margin-bottom:6px}
+  .oferta .cond{font-size:14.5px;color:#B9C4CF;margin-bottom:22px}
+  .oferta .btn{display:block;width:100%;box-sizing:border-box;text-align:center;background:var(--kept);color:#FFFFFF;text-decoration:none;font-family:"Poppins",sans-serif;font-weight:700;font-size:17.5px;padding:18px;border-radius:9px;transition:background .18s ease,transform .12s ease}
+  .oferta .btn:hover{background:#00C0A2}
+  .oferta .btn:active{transform:translateY(1px)}
+  .oferta .btn:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+  .oferta .garantia{display:flex;gap:12px;align-items:flex-start;margin-top:20px;padding-top:20px;border-top:1px solid #22364A}
+  .oferta .garantia .marca{flex:none;width:34px;height:34px;border-radius:8px;background:#12324A;color:var(--kept);font-family:"Poppins",sans-serif;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+  .oferta .garantia p{margin:0;font-size:14.5px;line-height:1.55;color:#B9C4CF}
+  .oferta .garantia strong{color:#FFFFFF}
+  .oferta .ps{margin:18px 0 0;font-size:13.5px;line-height:1.55;color:#8FA0B0}
+
+  .maissobre{margin-top:34px;text-align:center;padding:20px 0 4px}
+  .maissobre p{font-size:14.5px;color:var(--ink-faint);margin-bottom:8px}
+  .backlink{display:inline-block;font-weight:600;color:var(--lost);text-decoration:none;border-bottom:1.5px solid currentColor}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+`}></style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="mark" aria-hidden="true"></div>
+    <a class="brand" href="/">Resolve Simples</a>
+  </header>
+
+  <main>
+  <article>
+
+  <section class="hero">
+    <div class="eyebrow">Diagnóstico pronto</div>
+    <h1 id="titulo">Prontinho! Aqui está o tamanho do buraco.</h1>
+    <p class="deck" id="deck">Com base no que você preencheu na calculadora, é isso que está saindo da sua agenda sem voltar.</p>
+  </section>
+
+  <section class="result" aria-live="polite">
+    <div class="result-label">Deixou de entrar em 12 meses</div>
+    <div class="big" id="anual">—</div>
+    <div class="big-note" id="anualNote">Projeção anual a partir dos seus últimos 30 dias.</div>
+    <div class="split">
+      <div><div class="stat-k">Nos últimos 30 dias</div><div class="stat-v" id="mensal">—</div></div>
+      <div><div class="stat-k">Horas de cadeira parada por ano</div><div class="stat-v" id="horas">—</div></div>
+    </div>
+  </section>
+
+  <section class="bridge">
+    <h2>Isso não é um número pra assustar. É o tamanho do que dá pra recuperar.</h2>
+    <p>Esse valor não é hipotético — saiu direto dos números que você acabou de informar. E ele não pára de crescer sozinho: continua rodando todo mês até que alguém mude o que acontece nos <strong>15 minutos</strong> depois de cada cancelamento. É exatamente isso que o Protocolo VAGA ensina a fazer, em quatro etapas prontas pra aplicar hoje.</p>
+  </section>
+
+  <section class="personas">
+    <h2>Pra quem é o Protocolo VAGA</h2>
+    <p class="lede">Não importa quem aperta o "comprar" — o resultado aparece pra três pessoas diferentes.</p>
+    <div class="persona-list">
+      <div class="persona">
+        <p class="quem">Se você é dona e vai repassar pra equipe</p>
+        <p>Você não quer ficar lembrando, cobrando e repetindo a mesma instrução toda semana. O manual da recepção e o Cartão dos 15 Minutos fazem esse trabalho por você — sua equipe executa sozinha, mesmo nos dias em que você não está olhando.</p>
+      </div>
+      <div class="persona">
+        <p class="quem">Se você é dona e cuida da agenda sozinha</p>
+        <p>Você não tem fim de semana livre pra montar planilha, testar mensagem e pesquisar o que funciona. Por R$ 197, alguém já pesquisou, testou e organizou — inclusive pra quem está começando como MEI, onde cada real de custo pesa e cada horário recuperado conta em dobro.</p>
+      </div>
+      <div class="persona">
+        <p class="quem">Se você é quem cuida da agenda, mas não é a dona</p>
+        <p>Aplicar o Protocolo e mostrar o resultado em números — no Painel da Agenda, preto no branco — é argumento concreto pra levar pra sua gestora. Melhorou a reocupação, melhorou o caixa: é assim que se justifica um aumento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="oferta" aria-labelledby="oferta-titulo" id="protocolo-vaga">
+    <p class="selo">Recupere um atendimento este mês e o sistema já se pagou</p>
+    <h2 id="oferta-titulo">Protocolo VAGA</h2>
+    <p class="lead">R$ 197 é menos do que a maioria dos negócios de agenda perde <strong>num único fim de semana</strong> de faltas — e é muito menos do que vale o tempo que você gastaria pesquisando, testando mensagem e ajustando planilha até chegar num sistema que funciona. Alguém já pensou, testou e organizou isso por você.</p>
+    <ul>
+      <li><b>Painel da Agenda</b> — chega de "acho que melhorou": a planilha calcula sua taxa de falta por profissional, por dia e por procedimento, converte em reais e mostra mês a mês se o buraco está fechando</li>
+      <li><b>Lista de Encaixe</b> — chega de travar no WhatsApp quando o cancelamento chega: preenche três campos e ela devolve, em ordem, exatamente quem chamar</li>
+      <li><b>40 mensagens prontas</b> — chega de escrever mensagem de cobrança sob pressão: uma para cada situação, prontas para copiar e colar, com variações por tipo de negócio</li>
+      <li><b>Kit de documentos editáveis</b> — cobre sinal e aplica política de cancelamento sem parecer chata nem correr risco jurídico: três versões de política, termo de sinal e consentimento de mensagens</li>
+      <li><b>Guia do WhatsApp Business</b> — sua equipe roda o sistema inteiro dentro do app que já usa, sem curva de aprendizado: os oito atalhos e as seis etiquetas que fazem tudo funcionar</li>
+      <li><b>Cartão dos 15 Minutos</b> — quem atende o telefone sabe o que fazer mesmo sem você por perto: uma folha para imprimir e colar ao lado do computador da recepção</li>
+      <li><b>Manual da recepção</b> — o protocolo roda mesmo quando você não está olhando, porque quem atende o telefone quase nunca é quem comprou</li>
+      <li><b>Plano de 7 dias</b> — você começa hoje sem travar decidindo por onde: o que fazer em cada dia, e o que medir no fim do primeiro mês</li>
+    </ul>
+    <p class="lead">Duas planilhas, 40 mensagens, cinco documentos, um manual de equipe e um plano de implantação — tudo pronto para usar hoje, não para estudar depois. Nada aqui depende de software pago: o sistema roda com o WhatsApp Business que você já tem.</p>
+    <div class="preco">
+      <p class="de">Preço de lançamento</p>
+      <p class="valor">R$ 197</p>
+      <p class="cond">À vista ou parcelado. Acesso imediato — o link chega no seu e-mail assim que o pagamento é aprovado.</p>
+      <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Quero o Protocolo VAGA</a>
+    </div>
+    <div class="garantia">
+      <div class="marca" aria-hidden="true">30</div>
+      <p><strong>Garantia de 30 dias.</strong> Aplica, mede no Painel, e se não vir diferença nos seus números, devolvo tudo — sem justificativa. O risco fica todo do meu lado.</p>
+    </div>
+    <p class="ps">Guardamos o seu diagnóstico. Se preferir pensar com calma, pode voltar nesta página quando quiser.</p>
+  </section>
+
+  <section class="maissobre">
+    <p>Quer entender o método com mais detalhe antes de decidir?</p>
+    <a class="backlink" href="/calculadora-agenda-vazia/#como-funciona">Ver como o Protocolo VAGA funciona, passo a passo</a>
+  </section>
+
+  </article>
+  </main>
+
+</div>
+<script is:inline>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var p = new URLSearchParams(window.location.search);
+
+  var nome = (p.get("nome") || "").trim();
+  var perdaAnoTxt = p.get("perdaAnoTxt");
+  var perdaMesTxt = p.get("perdaMesTxt");
+  var horas = p.get("horas");
+  var perdidas = p.get("perdidas");
+  var agendados = p.get("agendados");
+  var taxa = p.get("taxa");
+
+  if (perdaAnoTxt) {
+    document.title = "Diagnóstico: " + perdaAnoTxt + " por ano — Protocolo VAGA";
+    $("titulo").textContent = nome
+      ? "Prontinho, " + nome + "! Aqui está o tamanho do buraco."
+      : "Prontinho! Aqui está o tamanho do buraco.";
+    $("anual").textContent = perdaAnoTxt;
+    $("mensal").textContent = perdaMesTxt || "—";
+    $("horas").textContent = horas ? (Number(horas).toLocaleString("pt-BR") + " h") : "—";
+    if (perdidas && agendados) {
+      $("anualNote").textContent = "Equivale a " + perdidas + " de " + agendados + " atendimentos marcados nos últimos 30 dias" + (taxa ? " (" + Number(taxa).toFixed(0) + "% vazios)" : "") + ".";
+    }
+  } else {
+    $("deck").textContent = "Não encontramos os números da sua calculadora nesta página — pode ter vindo de um link direto. Sem problema: o Protocolo VAGA continua valendo a pena de qualquer jeito.";
+    document.querySelector(".result").style.display = "none";
+    $("titulo").textContent = "Vamos direto ao Protocolo VAGA?";
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: "pagina_obrigado_vista" });
+})();
+</script>
+</body>
+</html>
