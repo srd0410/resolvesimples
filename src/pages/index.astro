@@ -85,6 +85,38 @@ const steps = [
     </div>
   </section>
 
+  <!-- ================= PRODUTO PRÓPRIO EM DESTAQUE ================= -->
+  <section class="flagship">
+    <div class="wrap flagship-inner">
+      <div class="flagship-copy">
+        <p class="eyebrow flagship-eyebrow">Produto nosso · não é indicação de terceiro</p>
+        <h2 class="flagship-title">
+          Toda falta que ninguém repõe
+          <span class="hl">vira dinheiro que some do seu caixa.</span>
+        </h2>
+        <p class="flagship-lede">
+          Criamos o <strong>Protocolo VAGA</strong>: o sistema que reduz as faltas e desmarcações
+          de última hora em negócios de agenda — estética, salão, barbearia, clínica — e ensina a
+          preencher o horário que vagou antes que ele vire prejuízo. Por <strong>R$ 197</strong>,
+          o preço de menos de dois atendimentos costuma se pagar com o primeiro horário recuperado.
+        </p>
+        <div class="flagship-cta">
+          <a href="/calculadora-agenda-vazia/#calculadora" class="btn btn-primary btn-lg">Calcular quanto eu perco</a>
+          <a href="/calculadora-agenda-vazia/#protocolo-vaga" class="btn btn-ghost-dark btn-lg">Já sei que quero, ver o Protocolo VAGA</a>
+        </div>
+      </div>
+      <div class="flagship-media">
+        <img
+          src="/images/vaga/mockup-protocolo-vaga.png"
+          alt="Protocolo VAGA — planilhas, mensagens prontas e guia de implantação, mostrados em notebook, celular e material impresso"
+          width="1600"
+          height="1200"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
   <!-- ================= BARRA DE NÚMEROS ================= -->
   <section class="stats-bar" aria-label="Números do portal">
     <div class="wrap stats-inner">
@@ -305,6 +337,59 @@ const steps = [
     color: var(--brand-lt);
     font-size: 0.72rem;
     flex: none;
+  }
+
+  /* ---------- PRODUTO PRÓPRIO EM DESTAQUE ---------- */
+  .flagship {
+    background: linear-gradient(150deg, #0D1B2A 0%, #12283C 55%, #0D1B2A 100%);
+    color: #fff;
+    padding: clamp(2.75rem, 6vw, 4.5rem) 0;
+    border-bottom: 1px solid var(--line-dk);
+  }
+  .flagship-inner {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .flagship-inner { grid-template-columns: 1fr; }
+    .flagship-media { order: -1; max-width: 22rem; margin: 0 auto; }
+  }
+  .flagship-eyebrow {
+    color: #34D39D;
+    margin-bottom: 0.9rem;
+  }
+  .flagship-title {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.7rem, 3.6vw, 2.35rem);
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.1rem;
+  }
+  .flagship-title .hl {
+    display: block;
+    background: linear-gradient(95deg, #FF8FB2, #34D39D);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .flagship-lede {
+    font-size: clamp(1rem, 1.6vw, 1.1rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 34rem;
+    margin: 0 0 1.75rem;
+  }
+  .flagship-lede strong { color: #fff; font-weight: 600; }
+  .flagship-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+  .flagship-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
   }
 
   /* ---------- BARRA DE NÚMEROS ---------- */

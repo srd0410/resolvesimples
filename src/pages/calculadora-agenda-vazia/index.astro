@@ -152,6 +152,16 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   select{width:100%;font-family:inherit;font-size:16.5px;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:9px;padding:13px;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%235A6B7C' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 14px center}
   select:focus{outline:none;border-color:var(--ink);background-color:var(--paper-raised)}
 
+  .bridge{margin-top:30px}
+  .bridge h2{margin-top:0}
+
+  .final-push{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:32px 22px 28px;margin-top:44px;text-align:center}
+  .final-push h2{color:#FFFFFF;margin-top:0;font-size:clamp(22px,6vw,27px)}
+  .final-push p{color:#B9C4CF;max-width:30em;margin:0 auto 22px;font-size:15.5px;line-height:1.6}
+  .final-push .btn{display:inline-block;background:var(--kept);color:#FFFFFF;text-decoration:none;font-family:"Poppins",sans-serif;font-weight:700;font-size:17px;padding:16px 26px;border-radius:9px;transition:background .18s ease,transform .12s ease}
+  .final-push .btn:hover{background:#00C0A2}
+  .final-push .btn:active{transform:translateY(1px)}
+
   .capture h2{margin-top:0;font-size:24px}
   .capture p.lead{font-size:15.5px;color:var(--ink-soft);margin-bottom:20px}
   .bullets{list-style:none;margin:0 0 24px}
@@ -271,9 +281,10 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   <article>
 
   <section class="hero">
-    <div class="eyebrow">Calculadora grátis · 1 minuto</div>
-    <h1>Quanto as faltas e desmarcações <span class="hollow">custam ao seu negócio?</span></h1>
-    <p class="deck">Todo horário que some em cima da hora e não é preenchido vira prejuízo definitivo — não dá para vender aquela hora de novo. Arraste os controles com os números dos seus últimos 30 dias e veja o tamanho do rombo.</p>
+    <div class="eyebrow">Protocolo VAGA · R$ 197</div>
+    <h1>Cada horário vazio <span class="hollow">não vira estoque parado. Vira dinheiro que já era.</span></h1>
+    <p class="deck">Você não vende produto, vende tempo marcado. Quando alguém falta e ninguém entra no lugar dela, aquela hora não fica esperando na prateleira — ela simplesmente deixou de existir, com o aluguel, a profissional e a luz já pagos do mesmo jeito. Em 1 minuto você vê o tamanho exato disso no seu negócio. Isso vale tanto pra quem é dono quanto pra quem cuida da agenda no dia a dia.</p>
+    <p><a class="backlink" href="https://pay.kiwify.com.br/qkgpS7Q">Já sei que quero → ver o Protocolo VAGA e comprar agora</a></p>
   </section>
 
   <section class="agenda" aria-labelledby="agenda-title" id="calculadora">
@@ -355,6 +366,11 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
       </div>
     </section>
 
+    <section class="bridge">
+      <h2>Isso não é falta. É reposição que não aconteceu.</h2>
+      <p class="deck">Duas empresas com a mesma taxa de cancelamento podem fechar o mês com resultados opostos — a diferença inteira está no que cada uma faz nos <strong>15 minutos</strong> depois que o cancelamento chega. O Protocolo VAGA é o sistema que ensina exatamente isso, em quatro etapas: medir a perda, reduzir a falta, ganhar antecedência no aviso e preencher a vaga antes que ela vire prejuízo. Feito pra quem é dona do negócio e pra quem toca a agenda todo dia.</p>
+    </section>
+
     <section class="panel">
       <div class="panel-title">Como sua agenda funciona hoje<span class="optional">opcional</span></div>
       <div class="panel-sub">Cinco toques. Serve para eu te mandar o diagnóstico certo, e não o genérico.</div>
@@ -418,29 +434,29 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   </form>
 
   <section class="oferta" aria-labelledby="oferta-titulo" id="protocolo-vaga">
-    <p class="selo">Para quem quer o sistema pronto</p>
+    <p class="selo">Recupere um atendimento este mês e o sistema já se pagou</p>
     <h2 id="oferta-titulo">Protocolo VAGA</h2>
-    <p class="lead">Tudo o que está explicado nesta página você consegue montar sozinha, com um fim de semana livre. <strong>Se você não tem esse fim de semana, está tudo montado aqui.</strong></p>
+    <p class="lead">R$ 197 é menos do que a maioria dos negócios de agenda perde <strong>num único fim de semana</strong> de faltas. Você não está comprando conteúdo para estudar depois — está comprando o que falta para parar de sangrar dinheiro esta semana. Monte você mesma, com um fim de semana livre e a página que você já leu — <strong>ou use o que já vem pronto abaixo.</strong></p>
     <ul>
-      <li><b>Painel da Agenda</b> — planilha que calcula sua taxa de falta por profissional, por dia e por procedimento, converte em reais e mostra mês a mês se você está melhorando</li>
-      <li><b>Lista de Encaixe</b> — você preenche três campos e ela devolve, em ordem, quem chamar quando a vaga abrir</li>
-      <li><b>40 mensagens prontas</b> — por situação, para copiar e colar, com variações por tipo de negócio</li>
-      <li><b>Kit de documentos editáveis</b> — política de cancelamento em três versões, termo de sinal e consentimento de mensagens</li>
-      <li><b>Guia do WhatsApp Business</b> — os oito atalhos e as seis etiquetas que fazem o sistema rodar no app que você já usa</li>
-      <li><b>Cartão dos 15 Minutos</b> — uma folha para imprimir e colar ao lado do computador da recepção</li>
-      <li><b>Manual da recepção</b> — porque quem atende o telefone quase nunca é quem comprou</li>
-      <li><b>Plano de 7 dias</b> — o que fazer em cada dia, e o que medir no fim do primeiro mês</li>
+      <li><b>Painel da Agenda</b> — chega de "acho que melhorou": a planilha calcula sua taxa de falta por profissional, por dia e por procedimento, converte em reais e mostra mês a mês se o buraco está fechando</li>
+      <li><b>Lista de Encaixe</b> — chega de travar no WhatsApp quando o cancelamento chega: preenche três campos e ela devolve, em ordem, exatamente quem chamar</li>
+      <li><b>40 mensagens prontas</b> — chega de escrever mensagem de cobrança sob pressão: uma para cada situação, prontas para copiar e colar, com variações por tipo de negócio</li>
+      <li><b>Kit de documentos editáveis</b> — cobre sinal e aplica política de cancelamento sem parecer chata nem correr risco jurídico: três versões de política, termo de sinal e consentimento de mensagens</li>
+      <li><b>Guia do WhatsApp Business</b> — sua equipe roda o sistema inteiro dentro do app que já usa, sem curva de aprendizado: os oito atalhos e as seis etiquetas que fazem tudo funcionar</li>
+      <li><b>Cartão dos 15 Minutos</b> — quem atende o telefone sabe o que fazer mesmo sem você por perto: uma folha para imprimir e colar ao lado do computador da recepção</li>
+      <li><b>Manual da recepção</b> — o protocolo roda mesmo quando você não está olhando, porque quem atende o telefone quase nunca é quem comprou</li>
+      <li><b>Plano de 7 dias</b> — você começa hoje sem travar decidindo por onde: o que fazer em cada dia, e o que medir no fim do primeiro mês</li>
     </ul>
-    <p class="lead">Nada aqui depende de software pago. O sistema roda com o WhatsApp Business e as planilhas.</p>
+    <p class="lead">Duas planilhas, 40 mensagens, cinco documentos, um manual de equipe e um plano de implantação — tudo pronto para usar hoje, não para estudar depois. Nada aqui depende de software pago: o sistema roda com o WhatsApp Business que você já tem.</p>
     <div class="preco">
       <p class="de">Preço de lançamento</p>
       <p class="valor">R$ 197</p>
-      <p class="cond">À vista ou parcelado. Acesso imediato.</p>
+      <p class="cond">À vista ou parcelado. Acesso imediato — o link chega no seu e-mail assim que o pagamento é aprovado.</p>
       <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Quero o Protocolo VAGA</a>
     </div>
     <div class="garantia">
       <div class="marca" aria-hidden="true">30</div>
-      <p><strong>Garantia de 30 dias.</strong> Aplica, mede no Painel, e se não vir diferença nos seus números, devolvo tudo — sem justificativa.</p>
+      <p><strong>Garantia de 30 dias.</strong> Aplica, mede no Painel, e se não vir diferença nos seus números, devolvo tudo — sem justificativa. O risco fica todo do meu lado.</p>
     </div>
     <p class="ps">Sem pressa: o diagnóstico gratuito acima continua seu, com ou sem compra.</p>
   </section>
@@ -511,6 +527,12 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     </details>
 
   </div>
+
+  <section class="final-push">
+    <h2>Você já viu o tamanho do buraco. A pergunta é só quando você tapa.</h2>
+    <p>Cada mês sem sistema é mais um mês pagando aluguel, luz e profissional por horários que ninguém repôs. O Protocolo VAGA custa menos que dois atendimentos, e você tem 30 dias de garantia para testar sem risco.</p>
+    <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Quero o Protocolo VAGA agora · R$ 197</a>
+  </section>
 
   </article>
   </main>
