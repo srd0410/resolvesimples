@@ -1,0 +1,235 @@
+---
+// Vitrine internacional do VAGA Protocol (Protocolo VAGA em inglês).
+// Deliberadamente FORA do Layout.astro do portal BR: aqui não existe o menu
+// de artigos/ranking multi-nicho (que é conteúdo só de afiliado ML, sem
+// sentido fora do Brasil) — é uma mini vitrine própria, um produto só.
+// Mesma identidade visual da landing PT (Poppins + paleta do produto), para
+// o funil inteiro (home -> calculadora -> compra) parecer uma coisa só.
+//
+// Pendências conhecidas (ver INVENTARIO.md):
+//   - Domínio resolvesimples.com ainda não apontado/roteado para esta rota.
+//   - Checkout Kiwify segue cobrando em BRL (R$197); preço em US$ exibido é
+//     aproximado, não é um checkout multi-moeda de verdade.
+import { SITE } from '../../consts';
+
+const title = 'VAGA Protocol — stop losing money to no-shows and cancellations';
+const description = 'A complete system to cut no-shows and last-minute cancellations and refill the slots that open up — for appointment-based businesses. $37, pays for itself with the first slot you recover.';
+const canonical = new URL('/en/', SITE.url).toString();
+const ptAlternate = new URL('/', SITE.url).toString();
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang="en" href={canonical} />
+<link rel="alternate" hreflang="pt-BR" href={ptAlternate} />
+<link rel="alternate" hreflang="x-default" href={ptAlternate} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="VAGA Protocol" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+{SITE.gaMeasurementId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`}></script>}
+{SITE.gaMeasurementId && (
+  <script is:inline define:vars={{ gaMeasurementId: SITE.gaMeasurementId }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', gaMeasurementId);
+  </script>
+)}
+
+<style is:global set:html={`
+:root{
+    --ink:#0D1B2A; --ink-soft:#2B3B4A; --ink-faint:#5A6B7C;
+    --paper:#F2F4F7; --paper-raised:#FFFFFF; --line:#DDE3EA;
+    --lost:#B0214E; --lost-wash:#FBEAF0;
+    --kept:#00A78E; --kept-wash:#E5F7F3;
+    --blue:#1565C0; --blue-wash:#EAF2FC;
+    --radius:14px; --maxw:640px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 20px 80px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  .masthead{padding:26px 0 0;display:flex;align-items:center;gap:9px}
+  .mark{width:9px;height:9px;background:var(--lost);border-radius:2px;transform:rotate(45deg)}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
+
+  .hero{padding:42px 0 28px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--lost);margin-bottom:18px}
+  h1{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(33px,8.4vw,50px);line-height:1.02;letter-spacing:-.028em;margin-bottom:20px}
+  h1 .hollow{color:var(--lost)}
+  .deck{font-size:18px;color:var(--ink-soft);max-width:32em}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .btn-primary{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-family:"Poppins",sans-serif;font-weight:700;font-size:16.5px;padding:15px 22px;border-radius:9px;transition:background .18s ease,transform .12s ease}
+  .btn-primary:hover{background:#16293B}
+  .btn-primary:active{transform:translateY(1px)}
+  .btn-ghost{display:inline-flex;align-items:center;color:var(--ink-soft);text-decoration:none;font-weight:600;font-size:15.5px;border-bottom:1.5px solid var(--line);padding:15px 2px}
+  .btn-ghost:hover{color:var(--ink);border-color:var(--ink-soft)}
+
+  .trust{display:flex;flex-wrap:wrap;gap:1.4rem;list-style:none;margin:2.4rem 0 0;padding:1.8rem 0 0;border-top:1px solid var(--line)}
+  .trust li{display:inline-flex;align-items:center;gap:.5em;font-size:.9rem;color:var(--ink-faint)}
+  .trust .tick{display:grid;place-items:center;width:1.3rem;height:1.3rem;border-radius:999px;background:var(--kept-wash);color:var(--kept);font-size:.68rem;flex:none}
+
+  h2{font-family:"Poppins",sans-serif;font-weight:700;font-size:clamp(24px,6vw,30px);line-height:1.15;letter-spacing:-.022em;margin:0 0 14px}
+  .section{margin-top:52px}
+  .section .lede{font-size:16px;color:var(--ink-soft);max-width:34em;margin-bottom:22px}
+
+  .math-card{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:26px 22px 24px;margin-top:8px}
+  .math-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:#B9C4CF;margin-bottom:16px}
+  .math-list{list-style:none}
+  .math-list li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;font-size:15.5px;color:#D6DEE6}
+  .math-op{color:#7E8FA0;font-weight:700}
+  .math-sub{border-top:1px solid #22364A;margin-top:4px;padding-top:13px !important;color:#FFF !important;font-weight:600}
+  .math-total{margin-top:18px;padding-top:18px;border-top:1px solid #22364A}
+  .math-total-label{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#B9C4CF;margin-bottom:5px}
+  .math-total-value{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(34px,9vw,44px);letter-spacing:-.025em;color:#FF8FB2}
+  .math-note{margin-top:16px;font-size:14px;color:#8FA0B0}
+
+  .personas{margin-top:8px}
+  .persona-list{display:flex;flex-direction:column;gap:14px}
+  .persona{background:var(--paper-raised);border:1px solid var(--line);border-left:4px solid var(--lost);border-radius:10px;padding:16px 18px}
+  .persona .quem{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lost);margin-bottom:6px;font-weight:600}
+  .persona p:last-child{margin:0;font-size:15.5px;line-height:1.55;color:var(--ink-soft)}
+
+  .oferta{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:30px 22px 26px;margin-top:8px}
+  .oferta .selo{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--kept);margin-bottom:12px;font-weight:600}
+  .oferta ul{list-style:none;margin:0 0 22px}
+  .oferta li{position:relative;padding-left:24px;margin-bottom:11px;font-size:15.5px;line-height:1.55;color:#D6DEE6}
+  .oferta li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;background:var(--kept);border-radius:2px}
+  .oferta li b{color:#FFF;font-weight:600}
+  .oferta .preco{border-top:1px solid #22364A;padding-top:22px}
+  .oferta .de{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#B9C4CF;margin-bottom:6px}
+  .oferta .valor{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(38px,11vw,52px);line-height:1;letter-spacing:-.03em;color:#FFF;margin-bottom:6px}
+  .oferta .cond{font-size:14px;color:#8FA0B0;margin-bottom:22px}
+  .oferta .btn{display:block;width:100%;box-sizing:border-box;text-align:center;background:var(--kept);color:#FFF;text-decoration:none;font-family:"Poppins",sans-serif;font-weight:700;font-size:17.5px;padding:18px;border-radius:9px;transition:background .18s ease,transform .12s ease}
+  .oferta .btn:hover{background:#00C0A2}
+  .oferta .btn:active{transform:translateY(1px)}
+  .oferta .more{display:block;text-align:center;margin-top:14px;color:#B9C4CF;text-decoration:underline;text-underline-offset:3px;font-size:14.5px}
+  .oferta .more:hover{color:#FFF}
+
+  .final-cta{margin-top:56px;text-align:center;padding:36px 0 4px;border-top:1px solid var(--line)}
+  .final-cta p{color:var(--ink-faint);font-size:14.5px;margin-top:14px}
+
+  footer.site{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13.5px;color:var(--ink-faint)}
+  footer.site a{color:var(--ink-soft)}
+`}></style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="mark" aria-hidden="true"></div>
+    <a class="brand" href="/en/">VAGA Protocol</a>
+  </header>
+
+  <main>
+  <section class="hero">
+    <div class="eyebrow">VAGA Protocol · $37</div>
+    <h1>Every empty slot <span class="hollow">doesn't wait on a shelf. It's just gone.</span></h1>
+    <p class="deck">You don't sell a product — you sell booked time. When a client no-shows and nobody takes that slot, the hour doesn't sit around waiting to be sold tomorrow. It's simply gone, while rent, staff and utilities got paid anyway. VAGA Protocol is the system that cuts no-shows, gets earlier warning when someone cancels, and fills the slot before it becomes a loss — built for appointment-based businesses: salons, spas, clinics, barbershops, and any service booked by the hour.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="/en/no-show-calculator/#calculator">Calculate what it's costing you</a>
+      <a class="btn-ghost" href="/en/no-show-calculator/#offer">I already know I want it →</a>
+    </div>
+    <ul class="trust">
+      <li><span class="tick" aria-hidden="true">✓</span> No software required</li>
+      <li><span class="tick" aria-hidden="true">✓</span> Runs on WhatsApp Business / SMS + a spreadsheet</li>
+      <li><span class="tick" aria-hidden="true">✓</span> 30-day money-back guarantee</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>The math almost nobody does</h2>
+    <p class="lede">A missed appointment isn't just one missed payment — it's a fixed cost that ran with nothing coming in against it.</p>
+    <div class="math-card">
+      <p class="math-label">Typical example: a small studio or clinic</p>
+      <ul class="math-list">
+        <li><span>3 no-shows a week</span><span class="math-op">×</span></li>
+        <li><span>$40 average ticket</span><span class="math-op">=</span></li>
+        <li class="math-sub"><span>$480 a month</span></li>
+      </ul>
+      <div class="math-total">
+        <span class="math-total-label">Lost over 12 months</span>
+        <strong class="math-total-value">$5,760</strong>
+      </div>
+      <p class="math-note">Rent, the lights and staff time get paid the same either way. See your own numbers, not this example — it takes one minute.</p>
+    </div>
+  </section>
+
+  <section class="section personas">
+    <h2>Built for three different buyers</h2>
+    <p class="lede">Whoever hits "buy," the result shows up for three different people.</p>
+    <div class="persona-list">
+      <div class="persona">
+        <p class="quem">You own the business and hand this to your team</p>
+        <p>You don't want to keep repeating the same instructions every week. The front-desk manual and the 15-minute action card do that job for you — your team runs it on its own, even on the days you're not watching.</p>
+      </div>
+      <div class="persona">
+        <p class="quem">You own the business and run the calendar yourself</p>
+        <p>You don't have a free weekend to build a spreadsheet, test messages and figure out what works. For $37, someone already researched it, tested it and packaged it — including for solo operators, where every dollar of cost matters and every recovered slot counts double.</p>
+      </div>
+      <div class="persona">
+        <p class="quem">You manage the calendar, but you're not the owner</p>
+        <p>Running the protocol and showing the result in numbers — in black and white, in the tracking sheet — is a concrete case to bring to your manager. Better fill rate, better cash flow: that's how you make the case for a raise.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section oferta" id="offer" aria-labelledby="offer-title">
+    <p class="selo">Recover one appointment this month and the system already paid for itself</p>
+    <h2 id="offer-title">VAGA Protocol</h2>
+    <ul>
+      <li><b>Tracking Sheet</b> — your no-show rate by staff member, day and service, converted to dollars, month over month</li>
+      <li><b>Waitlist Sheet</b> — fill three fields and it hands you back, in order, exactly who to call when a slot opens</li>
+      <li><b>40 ready-to-send messages</b> — one for every situation, copy-paste ready, with variations by business type</li>
+      <li><b>Editable policy kit</b> — deposit terms and a cancellation policy that doesn't feel heavy-handed</li>
+      <li><b>Messaging app playbook</b> — your team runs the whole system inside the app they already use</li>
+      <li><b>15-Minute Action Card</b> — whoever answers the phone knows what to do, even when you're not around</li>
+      <li><b>Front-desk manual</b> — the protocol keeps running even when you're not watching</li>
+      <li><b>7-day rollout plan</b> — start today without stalling on where to begin</li>
+    </ul>
+    <div class="preco">
+      <p class="de">Launch price</p>
+      <p class="valor">$37</p>
+      <p class="cond">Instant access — the link lands in your inbox as soon as payment clears.</p>
+      <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol</a>
+      <a class="more" href="/en/no-show-calculator/">See the full breakdown + calculate your own numbers →</a>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <h2>You already know the leak is there.</h2>
+    <p>Every month without a system is another month paying rent, staff and utilities for slots nobody refilled — with a 30-day guarantee to try it without risk.</p>
+  </section>
+  </main>
+
+  <footer class="site">
+    <span>&copy; {new Date().getFullYear()} VAGA Protocol · by Resolve Simples</span>
+    <span><a href={`mailto:${SITE.email}`}>{SITE.email}</a> · <a href="/en/privacy-policy/">Privacy policy</a></span>
+  </footer>
+
+</div>
+</body>
+</html>

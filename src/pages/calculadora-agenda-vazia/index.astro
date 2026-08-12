@@ -26,6 +26,9 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang="pt-BR" href={canonical} />
+<link rel="alternate" hreflang="en" href={new URL('/en/no-show-calculator/', SITE.url).toString()} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 <meta property="og:type" content="website" />

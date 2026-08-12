@@ -27,6 +27,13 @@ for (const file of readdirSync(artigosDir)) {
 export default defineConfig({
   site: 'https://www.resolvesimples.com.br',
   trailingSlash: 'always',
+  i18n: {
+    locales: ['pt', 'en'],
+    defaultLocale: 'pt',
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [
     mdx(),
     sitemap({

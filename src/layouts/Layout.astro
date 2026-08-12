@@ -7,8 +7,10 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  /** Caminho da página irmã em inglês (ex: '/en/'), só quando ela existir. */
+  hreflangEn?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, hreflangEn } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 ---
 <!doctype html>
@@ -18,6 +20,13 @@ const canonical = new URL(Astro.url.pathname, SITE.url).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
+    {hreflangEn && (
+      <>
+        <link rel="alternate" hreflang="pt-BR" href={canonical} />
+        <link rel="alternate" hreflang="en" href={new URL(hreflangEn, SITE.url).toString()} />
+        <link rel="alternate" hreflang="x-default" href={canonical} />
+      </>
+    )}
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name} — Feed RSS`} href="/rss.xml" />
     <title>{title} · {SITE.name}</title>
     <meta name="description" content={description} />
