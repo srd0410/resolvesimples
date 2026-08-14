@@ -6,14 +6,12 @@
 // Mesma identidade visual da landing PT (Poppins + paleta do produto), para
 // o funil inteiro (home -> calculadora -> compra) parecer uma coisa só.
 //
-// Pendências conhecidas (ver INVENTARIO.md):
-//   - Domínio resolvesimples.com ainda não apontado/roteado para esta rota.
-//   - Checkout Kiwify segue cobrando em BRL (R$47); preço em US$ exibido é
-//     uma aproximação arredondada, não um checkout multi-moeda de verdade.
+// O checkout da Kiwify localiza idioma, moeda e meios de pagamento conforme
+// o país selecionado pelo comprador.
 import { SITE } from '../../consts';
 
 const title = 'VAGA Protocol — stop losing money to no-shows and cancellations';
-const description = 'A complete system to cut no-shows and last-minute cancellations and refill the slots that open up — for appointment-based businesses. About $9; one recovered slot at that value can offset the investment.';
+const description = 'A ready-to-use system to turn last-minute cancellations into refill opportunities, with tracking sheets, message templates and a 7-day rollout plan. US$10 with a 30-day guarantee.';
 const canonical = new URL('/en/', SITE.url).toString();
 const ptAlternate = new URL('/', SITE.url).toString();
 ---
@@ -93,6 +91,9 @@ const ptAlternate = new URL('/', SITE.url).toString();
   .trust{display:flex;flex-wrap:wrap;gap:1.4rem;list-style:none;margin:2.4rem 0 0;padding:1.8rem 0 0;border-top:1px solid var(--line)}
   .trust li{display:inline-flex;align-items:center;gap:.5em;font-size:.9rem;color:var(--ink-faint)}
   .trust .tick{display:grid;place-items:center;width:1.3rem;height:1.3rem;border-radius:999px;background:var(--kept-wash);color:var(--kept);font-size:.68rem;flex:none}
+  .product-visual{margin:34px 0 0;background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .product-visual img{display:block;width:100%;height:auto}
+  .product-visual figcaption{padding:12px 16px;font-size:13.5px;line-height:1.5;color:var(--ink-faint)}
 
   h2{font-family:"Poppins",sans-serif;font-weight:700;font-size:clamp(24px,6vw,30px);line-height:1.15;letter-spacing:-.022em;margin:0 0 14px}
   .section{margin-top:52px}
@@ -118,11 +119,13 @@ const ptAlternate = new URL('/', SITE.url).toString();
 
   .oferta{background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:30px 22px 26px;margin-top:8px}
   .oferta .selo{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--kept);margin-bottom:12px;font-weight:600}
+  .oferta .lead{font-size:16px;line-height:1.6;color:#B9C4CF;margin:0 0 20px}
+  .oferta .lead strong{color:#FFF}
   .oferta ul{list-style:none;margin:0 0 22px}
   .oferta li{position:relative;padding-left:24px;margin-bottom:11px;font-size:15.5px;line-height:1.55;color:#D6DEE6}
   .oferta li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;background:var(--kept);border-radius:2px}
   .oferta li b{color:#FFF;font-weight:600}
-  .oferta .preco{border-top:1px solid #22364A;padding-top:22px}
+  .oferta .preco{border-top:1px solid #22364A;border-bottom:1px solid #22364A;padding:22px 0;margin-bottom:22px}
   .oferta .de{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#B9C4CF;margin-bottom:6px}
   .oferta .valor{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(38px,11vw,52px);line-height:1;letter-spacing:-.03em;color:#FFF;margin-bottom:6px}
   .oferta .cond{font-size:14px;color:#8FA0B0;margin-bottom:22px}
@@ -131,6 +134,7 @@ const ptAlternate = new URL('/', SITE.url).toString();
   .oferta .btn:active{transform:translateY(1px)}
   .oferta .more{display:block;text-align:center;margin-top:14px;color:#B9C4CF;text-decoration:underline;text-underline-offset:3px;font-size:14.5px}
   .oferta .more:hover{color:#FFF}
+  .delivery-note{font-size:13.5px;line-height:1.5;color:#8FA0B0;margin-top:14px;text-align:center}
 
   .final-cta{margin-top:56px;text-align:center;padding:36px 0 4px;border-top:1px solid var(--line)}
   .final-cta p{color:var(--ink-faint);font-size:14.5px;margin-top:14px}
@@ -150,12 +154,12 @@ const ptAlternate = new URL('/', SITE.url).toString();
 
   <main>
   <section class="hero">
-    <div class="eyebrow">VAGA Protocol · R$47 (about $9)</div>
-    <h1>Every empty slot <span class="hollow">doesn't wait on a shelf. It's just gone.</span></h1>
-    <p class="deck">You don't sell a product — you sell booked time. When a client no-shows and nobody takes that slot, the hour doesn't sit around waiting to be sold tomorrow. It's simply gone, while rent, staff and utilities got paid anyway. VAGA Protocol is the system that cuts no-shows, gets earlier warning when someone cancels, and fills the slot before it becomes a loss — built for appointment-based businesses: salons, spas, clinics, barbershops, and any service booked by the hour.</p>
+    <div class="eyebrow">VAGA Protocol · US$10</div>
+    <h1>Turn last-minute cancellations into <span class="hollow">refill opportunities.</span></h1>
+    <p class="deck">VAGA Protocol gives appointment-based businesses a ready-to-use process for spotting the loss, getting earlier notice and contacting the right client as soon as a slot opens — with tracking sheets, message templates and a 7-day rollout plan.</p>
     <div class="hero-cta">
       <a class="btn-primary" href="/en/no-show-calculator/#calculator">Calculate what it's costing you</a>
-      <a class="btn-ghost" href="/en/no-show-calculator/#offer">I already know I want it →</a>
+      <a class="btn-ghost" data-checkout data-cta-position="hero" href="https://pay.kiwify.com.br/qkgpS7Q">Get it now · US$10 →</a>
     </div>
     <ul class="trust">
       <li><span class="tick" aria-hidden="true">✓</span> No software required</li>
@@ -163,6 +167,11 @@ const ptAlternate = new URL('/', SITE.url).toString();
       <li><span class="tick" aria-hidden="true">✓</span> 30-day money-back guarantee</li>
     </ul>
   </section>
+
+  <figure class="product-visual">
+    <img src="/images/vaga/mockup-vaga-protocol-en.png" alt="VAGA Protocol digital toolkit shown as a guide, tracking sheet and ready-to-send message system" width="1456" height="1092" loading="eager" decoding="async" />
+    <figcaption>A practical digital toolkit: tracking sheets, waitlist workflow, ready-to-send messages, editable policies and a front-desk action plan.</figcaption>
+  </figure>
 
   <section class="section">
     <h2>The math almost nobody does</h2>
@@ -178,7 +187,7 @@ const ptAlternate = new URL('/', SITE.url).toString();
         <span class="math-total-label">Example revenue lost over 12 months</span>
         <strong class="math-total-value">$5.7K/year</strong>
       </div>
-      <p class="math-note"><strong>VAGA Protocol costs R$47 (about $9).</strong> The figure above illustrates revenue a business could lose to empty slots. See your own numbers — it takes one minute.</p>
+      <p class="math-note"><strong>VAGA Protocol costs US$10.</strong> The figure above illustrates revenue a business could lose to empty slots. See your own numbers — it takes one minute.</p>
     </div>
   </section>
 
@@ -192,7 +201,7 @@ const ptAlternate = new URL('/', SITE.url).toString();
       </div>
       <div class="persona">
         <p class="quem">You own the business and run the calendar yourself</p>
-        <p>You don't have a free weekend to build a spreadsheet, test messages and figure out what works. For about $9, someone already researched it, tested it and packaged it — including for solo operators, where every dollar of cost matters and every recovered slot counts double.</p>
+        <p>You don't have a free weekend to build a spreadsheet, test messages and figure out what works. For US$10, the research, templates and rollout sequence are already organized — including for solo operators, where every recovered slot matters.</p>
       </div>
       <div class="persona">
         <p class="quem">You manage the calendar, but you're not the owner</p>
@@ -202,25 +211,22 @@ const ptAlternate = new URL('/', SITE.url).toString();
   </section>
 
   <section class="section oferta" id="offer" aria-labelledby="offer-title">
-    <p class="selo">Recover one appointment this month and the system already paid for itself</p>
+    <p class="selo">One recovered US$10 slot offsets the purchase price</p>
     <h2 id="offer-title">VAGA Protocol</h2>
-    <ul>
-      <li><b>Tracking Sheet</b> — your no-show rate by staff member, day and service, converted to dollars, month over month</li>
-      <li><b>Waitlist Sheet</b> — fill three fields and it hands you back, in order, exactly who to call when a slot opens</li>
-      <li><b>40 ready-to-send messages</b> — one for every situation, copy-paste ready, with variations by business type</li>
-      <li><b>Editable policy kit</b> — deposit terms and a cancellation policy that doesn't feel heavy-handed</li>
-      <li><b>Messaging app playbook</b> — your team runs the whole system inside the app they already use</li>
-      <li><b>15-Minute Action Card</b> — whoever answers the phone knows what to do, even when you're not around</li>
-      <li><b>Front-desk manual</b> — the protocol keeps running even when you're not watching</li>
-      <li><b>7-day rollout plan</b> — start today without stalling on where to begin</li>
-    </ul>
+    <p class="lead">Stop improvising after every cancellation. Use one simple workflow to <strong>measure the leak, reduce avoidable no-shows and refill openings faster.</strong></p>
     <div class="preco">
-      <p class="de">Launch price</p>
-      <p class="valor">R$47 <small>(about $9)</small></p>
-      <p class="cond">Instant access — the link lands in your inbox as soon as payment clears.</p>
-      <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol</a>
-      <a class="more" href="/en/no-show-calculator/">See the full breakdown + calculate your own numbers →</a>
+      <p class="de">One-time payment</p>
+      <p class="valor">US$10</p>
+      <p class="cond">Instant digital access after payment. No subscription and no paid booking software required.</p>
+      <a class="btn" data-checkout data-cta-position="offer" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol for US$10</a>
+      <p class="delivery-note">Secure checkout by Kiwify · Card or Apple Pay · 30-day money-back guarantee</p>
     </div>
+    <ul>
+      <li><b>Measure:</b> Tracking Sheet shows no-shows, recovered slots and revenue at risk by staff member, day and service.</li>
+      <li><b>Prevent:</b> 40 message templates, editable cancellation policies and a messaging-app setup guide help clients confirm or warn you sooner.</li>
+      <li><b>Refill:</b> Waitlist Sheet, 15-Minute Action Card, front-desk manual and 7-day rollout plan tell your team exactly what to do when a slot opens.</li>
+    </ul>
+    <a class="more" href="/en/no-show-calculator/">See the full breakdown + calculate your own numbers →</a>
   </section>
 
   <section class="final-cta">
@@ -235,5 +241,30 @@ const ptAlternate = new URL('/', SITE.url).toString();
   </footer>
 
 </div>
+<script is:inline>
+(function(){
+  var keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+  var incoming = new URLSearchParams(window.location.search);
+  document.querySelectorAll("a[data-checkout]").forEach(function(link){
+    var url = new URL(link.href);
+    keys.forEach(function(key){ if (incoming.get(key)) url.searchParams.set(key, incoming.get(key)); });
+    link.href = url.toString();
+    link.addEventListener("click", function(){
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event:"begin_checkout",language:"en",cta_position:link.dataset.ctaPosition || "unknown",value:10,currency:"USD"});
+    });
+  });
+  var offer = document.getElementById("offer");
+  if (offer && "IntersectionObserver" in window) {
+    var seen = false;
+    new IntersectionObserver(function(entries){
+      if (!seen && entries.some(function(entry){ return entry.isIntersecting; })) {
+        seen = true; window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({event:"view_offer",language:"en",value:10,currency:"USD"});
+      }
+    },{threshold:.3}).observe(offer);
+  }
+})();
+</script>
 </body>
 </html>

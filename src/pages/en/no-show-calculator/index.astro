@@ -16,7 +16,7 @@ const ogTitle = title;
 const ogDescription = 'Enter your last 30 days and see the real size of the hole empty slots are opening in your revenue.';
 const canonical = new URL('/en/no-show-calculator/', SITE.url).toString();
 const ptAlternate = new URL('/calculadora-agenda-vazia/', SITE.url).toString();
-const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {\n      \"@type\":\"WebApplication\",\n      \"name\":\"No-Show Cost Calculator\",\n      \"url\":\"https://www.resolvesimples.com.br/en/no-show-calculator/\",\n      \"applicationCategory\":\"BusinessApplication\",\n      \"operatingSystem\":\"Web\",\n      \"inLanguage\":\"en\",\n      \"description\":\"Calculates how much no-shows and last-minute cancellations cost a business over the last 30 days, from numbers entered by the user.\",\n      \"offers\":{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"USD\"},\n      \"publisher\":{\"@type\":\"Organization\",\"name\":\"Resolve Simples\",\"url\":\"https://www.resolvesimples.com.br/\"}\n    },\n    {\n      \"@type\":\"FAQPage\",\n      \"mainEntity\":[\n        {\"@type\":\"Question\",\"name\":\"How do I calculate how much I'm losing to no-shows?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Add up last-minute cancellations and no-shows over the past 30 days, subtract the slots you managed to refill with someone else, and multiply the result by your average ticket per appointment. That's the revenue that never came in that month. Multiply by 12 for the yearly projection.\"}},\n        {\"@type\":\"Question\",\"name\":\"Can I charge a cancellation fee to a client who no-showed?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"In most places, a cancellation fee is only enforceable if it was clearly disclosed and agreed to before booking. A surprise charge applied only after the fact tends to be disputed and can hurt your reputation. In practice, many businesses get better results offering a small discount for prepayment than penalizing people who no-show. This is general information, not legal advice for your jurisdiction.\"}},\n        {\"@type\":\"Question\",\"name\":\"What's the best appointment confirmation message?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"One that asks for an active reply instead of just reminding. A message that only states the date gets little response; a message that asks for a short confirmation creates a small commitment and reveals earlier who isn't going to show up, which gives you time to offer the slot to someone else.\"}},\n        {\"@type\":\"Question\",\"name\":\"How do I fill a slot that opened up at the last minute?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"With a waitlist organized before the slot opens, sorted by service and by who's available on short notice. When a cancellation comes in, you offer the slot to someone who already showed interest in that specific service, instead of posting to everyone and waiting.\"}},\n        {\"@type\":\"Question\",\"name\":\"What's a normal no-show rate for salons and clinics?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"There's no single reliable published average across salons, barbershops and aesthetic clinics worldwide. The strongest data comes from healthcare: a review of 105 studies published in Health Policy found an average no-show rate of 23%, with large variation between countries and specialties. Treat it as an order of magnitude, not a benchmark for your specific business.\"}},\n        {\"@type\":\"Question\",\"name\":\"Do I need paid software to reduce no-shows?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. The essentials — active confirmation, a clear policy, an organized waitlist and a simple log of what happened — run on a messaging app and a spreadsheet. Paid software speeds things up, but it isn't what makes the initial difference.\"}}\n      ]\n    }\n    ,{\n      \"@type\":\"Product\",\n      \"name\":\"VAGA Protocol\",\n      \"description\":\"A complete system to reduce no-shows and last-minute cancellations and refill open slots in appointment-based businesses, with tracking sheets, a message bank, editable documents and a rollout plan.\",\n      \"brand\":{\"@type\":\"Brand\",\"name\":\"Resolve Simples\"},\n      \"offers\":{\n        \"@type\":\"Offer\",\n        \"price\":\"47.00\",\n        \"priceCurrency\":\"BRL\",\n        \"availability\":\"https://schema.org/InStock\",\n        \"url\":\"https://www.resolvesimples.com.br/en/no-show-calculator/#offer\"\n      }\n    }\n  ]\n}";
+const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {\n      \"@type\":\"WebApplication\",\n      \"name\":\"No-Show Cost Calculator\",\n      \"url\":\"https://www.resolvesimples.com.br/en/no-show-calculator/\",\n      \"applicationCategory\":\"BusinessApplication\",\n      \"operatingSystem\":\"Web\",\n      \"inLanguage\":\"en\",\n      \"description\":\"Calculates how much no-shows and last-minute cancellations cost a business over the last 30 days, from numbers entered by the user.\",\n      \"offers\":{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"USD\"},\n      \"publisher\":{\"@type\":\"Organization\",\"name\":\"Resolve Simples\",\"url\":\"https://www.resolvesimples.com.br/\"}\n    },\n    {\n      \"@type\":\"FAQPage\",\n      \"mainEntity\":[\n        {\"@type\":\"Question\",\"name\":\"How do I calculate how much I'm losing to no-shows?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Add up last-minute cancellations and no-shows over the past 30 days, subtract the slots you managed to refill with someone else, and multiply the result by your average ticket per appointment. That's the revenue that never came in that month. Multiply by 12 for the yearly projection.\"}},\n        {\"@type\":\"Question\",\"name\":\"Can I charge a cancellation fee to a client who no-showed?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"In most places, a cancellation fee is only enforceable if it was clearly disclosed and agreed to before booking. A surprise charge applied only after the fact tends to be disputed and can hurt your reputation. In practice, many businesses get better results offering a small discount for prepayment than penalizing people who no-show. This is general information, not legal advice for your jurisdiction.\"}},\n        {\"@type\":\"Question\",\"name\":\"What's the best appointment confirmation message?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"One that asks for an active reply instead of just reminding. A message that only states the date gets little response; a message that asks for a short confirmation creates a small commitment and reveals earlier who isn't going to show up, which gives you time to offer the slot to someone else.\"}},\n        {\"@type\":\"Question\",\"name\":\"How do I fill a slot that opened up at the last minute?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"With a waitlist organized before the slot opens, sorted by service and by who's available on short notice. When a cancellation comes in, you offer the slot to someone who already showed interest in that specific service, instead of posting to everyone and waiting.\"}},\n        {\"@type\":\"Question\",\"name\":\"What's a normal no-show rate for salons and clinics?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"There's no single reliable published average across salons, barbershops and aesthetic clinics worldwide. The strongest data comes from healthcare: a review of 105 studies published in Health Policy found an average no-show rate of 23%, with large variation between countries and specialties. Treat it as an order of magnitude, not a benchmark for your specific business.\"}},\n        {\"@type\":\"Question\",\"name\":\"Do I need paid software to reduce no-shows?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. The essentials — active confirmation, a clear policy, an organized waitlist and a simple log of what happened — run on a messaging app and a spreadsheet. Paid software speeds things up, but it isn't what makes the initial difference.\"}}\n      ]\n    }\n    ,{\n      \"@type\":\"Product\",\n      \"name\":\"VAGA Protocol\",\n      \"description\":\"A complete system to reduce no-shows and last-minute cancellations and refill open slots in appointment-based businesses, with tracking sheets, a message bank, editable documents and a rollout plan.\",\n      \"brand\":{\"@type\":\"Brand\",\"name\":\"Resolve Simples\"},\n      \"offers\":{\n        \"@type\":\"Offer\",\n        \"price\":\"10.00\",\n        \"priceCurrency\":\"USD\",\n        \"availability\":\"https://schema.org/InStock\",\n        \"url\":\"https://www.resolvesimples.com.br/en/no-show-calculator/#offer\"\n      }\n    }\n  ]\n}";
 ---
 <!doctype html>
 <html lang="en">
@@ -152,6 +152,10 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;padding-top:22px;border-top:1px solid #22364A}
   .stat-k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#B9C4CF;margin-bottom:5px;line-height:1.3}
   .stat-v{font-family:"Poppins",sans-serif;font-weight:700;font-size:23px;letter-spacing:-.02em}
+  .quick-offer{background:var(--kept-wash);border:1px solid #BFE6DD;border-radius:var(--radius);padding:20px;margin-top:18px}
+  .quick-offer strong{display:block;font-family:"Poppins",sans-serif;font-size:19px;margin-bottom:6px}
+  .quick-offer p{margin:0 0 14px;color:var(--ink-soft);font-size:15px}
+  .quick-offer .backlink{margin:0}
 
   .bridge{margin-top:30px}
   .bridge h2{margin-top:0}
@@ -207,6 +211,9 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   }
   .oferta .lead{font-size:16px;line-height:1.6;color:#B9C4CF;margin:0 0 22px}
   .oferta .lead strong{color:#FFFFFF}
+  .oferta .product-shot{margin:0 0 20px;background:#FFFFFF;border-radius:10px;overflow:hidden}
+  .oferta .product-shot img{display:block;width:100%;height:auto}
+  .oferta .product-shot figcaption{padding:10px 14px;color:#5A6B7C;font-size:12.5px;line-height:1.45}
   .oferta ul{list-style:none;margin:0 0 22px;padding:0}
   .oferta li{
     position:relative;padding-left:24px;margin-bottom:11px;
@@ -217,7 +224,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     background:var(--kept);border-radius:2px;
   }
   .oferta li b{color:#FFFFFF;font-weight:600}
-  .oferta .preco{border-top:1px solid #22364A;padding-top:22px}
+  .oferta .preco{border-top:1px solid #22364A;border-bottom:1px solid #22364A;padding:22px 0;margin-bottom:22px}
   .oferta .de{
     font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;
     text-transform:uppercase;color:#B9C4CF;margin-bottom:6px;
@@ -250,6 +257,13 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   .oferta .garantia p{margin:0;font-size:14.5px;line-height:1.55;color:#B9C4CF}
   .oferta .garantia strong{color:#FFFFFF}
   .oferta .ps{margin:18px 0 0;font-size:13.5px;line-height:1.55;color:#8FA0B0}
+  .delivery-note{font-size:13px;line-height:1.5;color:#8FA0B0;margin:13px 0 0;text-align:center}
+  .sticky-buy{display:none}
+
+  @media (max-width:720px){
+    body{padding-bottom:104px}
+    .sticky-buy{display:block;position:fixed;z-index:50;left:14px;right:14px;bottom:12px;text-align:center;background:var(--kept);color:#FFFFFF;text-decoration:none;font-weight:700;font-size:16px;padding:15px 18px;border-radius:10px;box-shadow:0 10px 30px rgba(13,27,42,.28)}
+  }
 
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
 `}></style>
@@ -267,10 +281,10 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   <article>
 
   <section class="hero">
-    <div class="eyebrow">VAGA Protocol · R$47 (about $9)</div>
-    <h1>Every empty slot <span class="hollow">doesn't sit on a shelf. It's just gone.</span></h1>
-    <p class="deck">You don't sell a product, you sell booked time. When someone no-shows and nobody takes that slot, the hour doesn't wait around to be sold later — it simply stopped existing, while rent, staff and utilities got paid the same either way. In one minute you'll see the exact size of that hole in your own numbers. This applies whether you own the business or you're the one running the calendar day to day.</p>
-    <p><a class="backlink" href="https://pay.kiwify.com.br/qkgpS7Q">I already know I want it → get VAGA Protocol now</a></p>
+    <div class="eyebrow">VAGA Protocol · US$10</div>
+    <h1>See what empty slots cost — then <span class="hollow">build a process to refill them.</span></h1>
+    <p class="deck">Enter your last 30 days below. You will see the revenue that never came in and the opportunity a repeatable refill process could protect.</p>
+    <p><a class="backlink" data-checkout data-cta-position="hero" href="https://pay.kiwify.com.br/qkgpS7Q">Skip the calculator → get VAGA Protocol for US$10</a></p>
   </section>
 
   <section class="agenda" aria-labelledby="agenda-title" id="calculator">
@@ -350,6 +364,12 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     </div>
   </section>
 
+  <section class="quick-offer">
+    <strong>Ready to turn this number into an action plan?</strong>
+    <p>VAGA Protocol gives you the tracking sheets, messages and refill workflow for US$10, backed by a 30-day guarantee.</p>
+    <a class="backlink" data-checkout data-cta-position="after_result" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol for US$10 →</a>
+  </section>
+
   <section class="bridge">
     <h2>This isn't a no-show. It's a refill that didn't happen.</h2>
     <p class="deck">Two businesses with the exact same cancellation rate can close the month with opposite results — the entire difference is what each one does in the <strong>15 minutes</strong> after the cancellation lands. VAGA Protocol is the system that teaches exactly that, in four steps: measure the loss, reduce no-shows, get earlier warning, and fill the slot before it becomes a loss. Built for owners and for whoever runs the calendar every day.</p>
@@ -365,7 +385,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
       </div>
       <div class="persona">
         <p class="quem">You own the business and run the calendar yourself</p>
-        <p>You don't have a free weekend to build a spreadsheet, test messages and research what works. For about $9, someone already researched it, tested it and packaged it — including for solo operators just starting out, where every dollar of cost matters and every recovered slot counts double.</p>
+        <p>You don't have a free weekend to build a spreadsheet, test messages and research what works. For US$10, the research, templates and workflow are already organized — useful even for solo operators, where every recovered slot matters.</p>
       </div>
       <div class="persona">
         <p class="quem">You manage the calendar, but you're not the owner</p>
@@ -375,26 +395,26 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   </section>
 
   <section class="oferta" aria-labelledby="oferta-titulo" id="offer">
-    <p class="selo">Recover one R$47 slot and you've offset the investment</p>
+    <p class="selo">One recovered US$10 slot offsets the purchase price</p>
     <h2 id="oferta-titulo">VAGA Protocol</h2>
-    <p class="lead">About $9 is less than many appointment-based businesses charge for <strong>a single appointment</strong> — and far less than the time you'd spend researching, testing messages and tweaking a spreadsheet until you land on a system that works. Someone already thought it through, tested it and packaged it for you. Build it yourself with a free weekend and everything you just read — <strong>or use what's already done below.</strong></p>
-    <ul>
-      <li><b>Tracking Sheet</b> — no more "I think it's getting better": the sheet calculates your no-show rate by staff member, by day and by service, converts it to dollars, and shows month over month whether the leak is closing</li>
-      <li><b>Waitlist Sheet</b> — no more scrambling in your messaging app when a cancellation lands: fill in three fields and it hands you back, in order, exactly who to call</li>
-      <li><b>40 ready-to-send messages</b> — no more writing a collection message under pressure: one for every situation, copy-paste ready, with variations by business type</li>
-      <li><b>Editable policy kit</b> — collect deposits and enforce a cancellation policy without sounding harsh or risking a dispute: three policy versions, a deposit agreement and message-consent language</li>
-      <li><b>Messaging app playbook</b> — your team runs the whole system inside the app they already use, no learning curve: the eight shortcuts and six labels that make it all work</li>
-      <li><b>15-Minute Action Card</b> — whoever answers the phone knows what to do even when you're not around: one printable sheet to tape next to the front-desk computer</li>
-      <li><b>Front-desk manual</b> — the protocol keeps running even when you're not watching, because whoever answers the phone is almost never the one who bought this</li>
-      <li><b>7-day rollout plan</b> — start today without stalling on where to begin: what to do each day, and what to measure at the end of the first month</li>
-    </ul>
-    <p class="lead">Two tracking sheets, 40 messages, five documents, a team manual and a rollout plan — all ready to use today, not to study later. Nothing here depends on paid software: the system runs on the messaging app you already have.</p>
+    <p class="lead">Stop improvising after every cancellation. Use one simple workflow to <strong>measure the leak, reduce avoidable no-shows and refill openings faster.</strong></p>
+    <figure class="product-shot">
+      <img src="/images/vaga/mockup-vaga-protocol-en.png" alt="VAGA Protocol digital toolkit with tracking sheet, message workflow and action guide" width="1456" height="1092" loading="lazy" decoding="async" />
+      <figcaption>A digital toolkit for the person who owns the business and the person who runs the calendar every day.</figcaption>
+    </figure>
     <div class="preco">
-      <p class="de">Launch price</p>
-      <p class="valor">R$47 <small>(about $9)</small></p>
-      <p class="cond">One-time payment. Instant access — the link lands in your inbox as soon as payment is approved.</p>
-      <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol</a>
+      <p class="de">One-time payment</p>
+      <p class="valor">US$10</p>
+      <p class="cond">Instant digital access after payment. No subscription and no paid booking software required.</p>
+      <a class="btn" data-checkout data-cta-position="offer" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol for US$10</a>
+      <p class="delivery-note">Secure checkout by Kiwify · Card or Apple Pay · 30-day money-back guarantee</p>
     </div>
+    <ul>
+      <li><b>Measure:</b> Tracking Sheet shows no-shows, recovered slots and revenue at risk by staff member, day and service.</li>
+      <li><b>Prevent:</b> 40 message templates, editable cancellation policies and a messaging-app setup guide help clients confirm or warn you sooner.</li>
+      <li><b>Refill:</b> Waitlist Sheet, 15-Minute Action Card, front-desk manual and 7-day rollout plan tell your team what to do when a slot opens.</li>
+    </ul>
+    <p class="lead">Two tracking sheets, 40 messages, five editable documents, a team manual and a rollout plan — ready to use, not another course to finish.</p>
     <div class="garantia">
       <div class="marca" aria-hidden="true">30</div>
       <p><strong>30-day guarantee.</strong> Apply it, measure it in the Tracking Sheet, and if you don't see a difference in your numbers, you get every cent back — no questions asked. All the risk is on us.</p>
@@ -472,7 +492,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   <section class="final-push">
     <h2>You've already seen the size of the hole. The only question is when you fix it.</h2>
     <p>Every month without a system is another month paying rent, staff and utilities for slots nobody refilled. For many businesses, VAGA Protocol costs less than a single appointment, and you get 30 days to try it risk-free.</p>
-    <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol now · R$47 (about $9)</a>
+    <a class="btn" data-checkout data-cta-position="final" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol now · US$10</a>
   </section>
 
   </article>
@@ -488,6 +508,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   </section>
 
 </div>
+<a class="sticky-buy" data-checkout data-cta-position="sticky" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol · US$10</a>
 <script is:inline set:html={`
 (function(){
   "use strict";
@@ -626,5 +647,27 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   calcular();
 })();
 `}></script>
+<script is:inline>
+(function(){
+  var keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+  var incoming = new URLSearchParams(window.location.search);
+  document.querySelectorAll("a[data-checkout]").forEach(function(link){
+    var url = new URL(link.href);
+    keys.forEach(function(key){ if (incoming.get(key)) url.searchParams.set(key, incoming.get(key)); });
+    link.href = url.toString();
+    link.addEventListener("click", function(){
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event:"begin_checkout",language:"en",cta_position:link.dataset.ctaPosition || "unknown",value:10,currency:"USD"});
+    });
+  });
+  var offer = document.getElementById("offer"), seen = false;
+  if (offer && "IntersectionObserver" in window) new IntersectionObserver(function(entries){
+    if (!seen && entries.some(function(entry){ return entry.isIntersecting; })) {
+      seen = true; window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event:"view_offer",language:"en",value:10,currency:"USD"});
+    }
+  },{threshold:.3}).observe(offer);
+})();
+</script>
 </body>
 </html>

@@ -152,6 +152,10 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;padding-top:22px;border-top:1px solid #22364A}
   .stat-k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#B9C4CF;margin-bottom:5px;line-height:1.3}
   .stat-v{font-family:"Poppins",sans-serif;font-weight:700;font-size:23px;letter-spacing:-.02em}
+  .quick-offer{background:var(--kept-wash);border:1px solid #BFE6DD;border-radius:var(--radius);padding:20px;margin-top:18px}
+  .quick-offer strong{display:block;font-family:"Poppins",sans-serif;font-size:19px;margin-bottom:6px}
+  .quick-offer p{margin:0 0 14px;color:var(--ink-soft);font-size:15px}
+  .quick-offer .backlink{margin:0}
 
   .optional{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:99px;padding:2px 8px;margin-left:8px;vertical-align:middle;font-weight:500}
   select{width:100%;font-family:inherit;font-size:16.5px;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:9px;padding:13px;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%235A6B7C' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 14px center}
@@ -235,6 +239,9 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   }
   .oferta .lead{font-size:16px;line-height:1.6;color:#B9C4CF;margin:0 0 22px}
   .oferta .lead strong{color:#FFFFFF}
+  .oferta .product-shot{margin:0 0 22px}
+  .oferta .product-shot img{display:block;width:100%;height:auto;border-radius:10px;background:#FFFFFF}
+  .oferta .product-shot figcaption{font-size:12.5px;line-height:1.45;color:#8FA0B0;margin-top:8px}
   .oferta ul{list-style:none;margin:0 0 22px;padding:0}
   .oferta li{
     position:relative;padding-left:24px;margin-bottom:11px;
@@ -245,7 +252,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     background:var(--kept);border-radius:2px;
   }
   .oferta li b{color:#FFFFFF;font-weight:600}
-  .oferta .preco{border-top:1px solid #22364A;padding-top:22px}
+  .oferta .preco{border-top:1px solid #22364A;border-bottom:1px solid #22364A;padding:22px 0;margin-bottom:22px}
   .oferta .de{
     font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;
     text-transform:uppercase;color:#B9C4CF;margin-bottom:6px;
@@ -266,6 +273,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   .oferta .btn:hover{background:#00C0A2}
   .oferta .btn:active{transform:translateY(1px)}
   .oferta .btn:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+  .oferta .delivery-note{font-size:12.5px;line-height:1.45;color:#8FA0B0;text-align:center;margin:12px 0 0}
   .oferta .garantia{
     display:flex;gap:12px;align-items:flex-start;
     margin-top:20px;padding-top:20px;border-top:1px solid #22364A;
@@ -278,6 +286,12 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   .oferta .garantia p{margin:0;font-size:14.5px;line-height:1.55;color:#B9C4CF}
   .oferta .garantia strong{color:#FFFFFF}
   .oferta .ps{margin:18px 0 0;font-size:13.5px;line-height:1.55;color:#8FA0B0}
+
+  .sticky-buy{display:none}
+  @media(max-width:720px){
+    body{padding-bottom:74px}
+    .sticky-buy{display:block;position:fixed;z-index:20;left:12px;right:12px;bottom:10px;text-align:center;background:var(--kept);color:#FFFFFF;text-decoration:none;font-family:"Poppins",sans-serif;font-weight:700;font-size:15px;padding:14px 12px;border-radius:9px;box-shadow:0 8px 24px rgba(8,25,41,.3)}
+  }
 
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
 `}></style>
@@ -296,9 +310,9 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
 
   <section class="hero">
     <div class="eyebrow">Protocolo VAGA · R$ 47</div>
-    <h1>Cada horário vazio <span class="hollow">não vira estoque parado. Vira dinheiro que já era.</span></h1>
-    <p class="deck">Você não vende produto, vende tempo marcado. Quando alguém falta e ninguém entra no lugar dela, aquela hora não fica esperando na prateleira — ela simplesmente deixou de existir, com o aluguel, a profissional e a luz já pagos do mesmo jeito. Em 1 minuto você vê o tamanho exato disso no seu negócio. Isso vale tanto pra quem é dono quanto pra quem cuida da agenda no dia a dia.</p>
-    <p><a class="backlink" href="https://pay.kiwify.com.br/qkgpS7Q">Já sei que quero → ver o Protocolo VAGA e comprar agora</a></p>
+    <h1>Veja quanto os horários vazios custam — e <span class="hollow">crie um processo para reocupá-los.</span></h1>
+    <p class="deck">Coloque os números dos últimos 30 dias. Você verá a receita que deixou de entrar e o tamanho da oportunidade que um processo de reposição pode proteger.</p>
+    <p><a class="backlink" data-checkout data-cta-position="hero" href="https://pay.kiwify.com.br/qkgpS7Q">Já conheço o problema → comprar o Protocolo VAGA por R$ 47</a></p>
   </section>
 
   <section class="agenda" aria-labelledby="agenda-title" id="calculadora">
@@ -370,7 +384,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
       </div>
     </section>
 
-    <section class="result" aria-live="polite">
+  <section class="result" aria-live="polite">
       <div class="result-label">Deixou de entrar em 12 meses</div>
       <div class="big idle" id="anual">—</div>
       <div class="big-note" id="anualNote">Projeção anual a partir dos seus últimos 30 dias.</div>
@@ -378,6 +392,12 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
         <div><div class="stat-k">Nos últimos 30 dias</div><div class="stat-v" id="mensal">—</div></div>
         <div><div class="stat-k">Horas de cadeira parada por ano</div><div class="stat-v" id="horas">—</div></div>
       </div>
+    </section>
+
+    <section class="quick-offer">
+      <strong>Quer transformar esse número em um plano de ação?</strong>
+      <p>O Protocolo VAGA entrega planilhas, mensagens e o fluxo de reposição por R$ 47, com garantia de 30 dias.</p>
+      <a class="backlink" data-checkout data-cta-position="after_result" href="https://pay.kiwify.com.br/qkgpS7Q">Quero o Protocolo VAGA por R$ 47 →</a>
     </section>
 
     <section class="bridge">
@@ -469,24 +489,24 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   <section class="oferta" aria-labelledby="oferta-titulo" id="protocolo-vaga">
     <p class="selo">Uma vaga de R$ 47 recuperada já compensa o investimento</p>
     <h2 id="oferta-titulo">Protocolo VAGA</h2>
-    <p class="lead">R$ 47 é menos do que muitos negócios de agenda cobram por <strong>um único atendimento</strong> — e é muito menos do que vale o tempo que você gastaria pesquisando, testando mensagem e ajustando planilha até chegar num sistema que funciona. Alguém já pensou, testou e organizou isso por você. Monte você mesma, com um fim de semana livre e a página que você já leu — <strong>ou use o que já vem pronto abaixo.</strong></p>
-    <ul>
-      <li><b>Painel da Agenda</b> — chega de "acho que melhorou": a planilha calcula sua taxa de falta por profissional, por dia e por procedimento, converte em reais e mostra mês a mês se o buraco está fechando</li>
-      <li><b>Lista de Encaixe</b> — chega de travar no WhatsApp quando o cancelamento chega: preenche três campos e ela devolve, em ordem, exatamente quem chamar</li>
-      <li><b>40 mensagens prontas</b> — chega de escrever mensagem de cobrança sob pressão: uma para cada situação, prontas para copiar e colar, com variações por tipo de negócio</li>
-      <li><b>Kit de documentos editáveis</b> — cobre sinal e aplica política de cancelamento sem parecer chata nem correr risco jurídico: três versões de política, termo de sinal e consentimento de mensagens</li>
-      <li><b>Guia do WhatsApp Business</b> — sua equipe roda o sistema inteiro dentro do app que já usa, sem curva de aprendizado: os oito atalhos e as seis etiquetas que fazem tudo funcionar</li>
-      <li><b>Cartão dos 15 Minutos</b> — quem atende o telefone sabe o que fazer mesmo sem você por perto: uma folha para imprimir e colar ao lado do computador da recepção</li>
-      <li><b>Manual da recepção</b> — o protocolo roda mesmo quando você não está olhando, porque quem atende o telefone quase nunca é quem comprou</li>
-      <li><b>Plano de 7 dias</b> — você começa hoje sem travar decidindo por onde: o que fazer em cada dia, e o que medir no fim do primeiro mês</li>
-    </ul>
-    <p class="lead">Duas planilhas, 40 mensagens, cinco documentos, um manual de equipe e um plano de implantação — tudo pronto para usar hoje, não para estudar depois. Nada aqui depende de software pago: o sistema roda com o WhatsApp Business que você já tem.</p>
+    <p class="lead">Pare de improvisar a cada cancelamento. Use um fluxo simples para <strong>medir a perda, reduzir faltas evitáveis e reocupar vagas com mais rapidez.</strong></p>
+    <figure class="product-shot">
+      <img src="/images/vaga/mockup-protocolo-vaga.png" alt="Materiais digitais do Protocolo VAGA, com planilha, mensagens e guia de ação" width="1456" height="1092" loading="lazy" decoding="async" />
+      <figcaption>Kit digital para quem administra o negócio e para quem cuida da agenda no dia a dia.</figcaption>
+    </figure>
     <div class="preco">
-      <p class="de">Preço de lançamento</p>
+      <p class="de">Pagamento único</p>
       <p class="valor">R$ 47</p>
-      <p class="cond">À vista ou parcelado. Acesso imediato — o link chega no seu e-mail assim que o pagamento é aprovado.</p>
-      <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Quero o Protocolo VAGA</a>
+      <p class="cond">Acesso digital imediato após a aprovação. Sem mensalidade e sem depender de software pago.</p>
+      <a class="btn" data-checkout data-cta-position="offer" href="https://pay.kiwify.com.br/qkgpS7Q">Quero o Protocolo VAGA por R$ 47</a>
+      <p class="delivery-note">Checkout seguro pela Kiwify · Cartão, Pix ou boleto · Garantia de 30 dias</p>
     </div>
+    <ul>
+      <li><b>Medir:</b> o Painel da Agenda mostra faltas, vagas recuperadas e receita em risco por profissional, dia e procedimento.</li>
+      <li><b>Evitar:</b> 40 mensagens, políticas editáveis e o guia do WhatsApp ajudam o cliente a confirmar ou avisar com antecedência.</li>
+      <li><b>Reocupar:</b> Lista de Encaixe, Cartão dos 15 Minutos, manual da recepção e plano de 7 dias mostram à equipe o que fazer quando uma vaga abre.</li>
+    </ul>
+    <p class="lead">Duas planilhas, 40 mensagens, cinco documentos editáveis, manual de equipe e plano de implantação — prontos para usar, não mais um curso para terminar.</p>
     <div class="garantia">
       <div class="marca" aria-hidden="true">30</div>
       <p><strong>Garantia de 30 dias.</strong> Aplica, mede no Painel, e se não vir diferença nos seus números, devolvo tudo — sem justificativa. O risco fica todo do meu lado.</p>
@@ -564,7 +584,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   <section class="final-push">
     <h2>Você já viu o tamanho do buraco. A pergunta é só quando você tapa.</h2>
     <p>Cada mês sem sistema é mais um mês pagando aluguel, luz e profissional por horários que ninguém repôs. Em muitos negócios, o Protocolo VAGA custa menos que um único atendimento — e você tem 30 dias de garantia para testar sem risco.</p>
-    <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Quero o Protocolo VAGA agora · R$ 47</a>
+    <a class="btn" data-checkout data-cta-position="final" href="https://pay.kiwify.com.br/qkgpS7Q">Quero o Protocolo VAGA agora · R$ 47</a>
   </section>
 
   </article>
@@ -582,6 +602,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   <iframe name="brevo-submit-frame" title="" style="display:none" aria-hidden="true" tabindex="-1"></iframe>
 
 </div>
+<a class="sticky-buy" data-checkout data-cta-position="sticky" href="https://pay.kiwify.com.br/qkgpS7Q">Protocolo VAGA · R$ 47</a>
 <script is:inline set:html={`
 (function(){
   "use strict";
@@ -775,6 +796,10 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     destino.set("perdidas", $("h_perdidas").value);
     destino.set("agendados", $("h_agendados").value);
     destino.set("taxa", $("h_taxa").value);
+    var origem = new URLSearchParams(window.location.search);
+    ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(key){
+      if (origem.get(key)) destino.set(key, origem.get(key));
+    });
     setTimeout(function(){
       window.location.href = "/calculadora-agenda-vazia/obrigado/?" + destino.toString();
     }, 350);
@@ -783,5 +808,27 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   calcular();
 })();
 `}></script>
+<script is:inline>
+(function(){
+  var keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+  var incoming = new URLSearchParams(window.location.search);
+  document.querySelectorAll("a[data-checkout]").forEach(function(link){
+    var url = new URL(link.href);
+    keys.forEach(function(key){ if (incoming.get(key)) url.searchParams.set(key, incoming.get(key)); });
+    link.href = url.toString();
+    link.addEventListener("click", function(){
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event:"begin_checkout",language:"pt-BR",cta_position:link.dataset.ctaPosition || "unknown",value:47,currency:"BRL"});
+    });
+  });
+  var offer = document.getElementById("protocolo-vaga"), seen = false;
+  if (offer && "IntersectionObserver" in window) new IntersectionObserver(function(entries){
+    if (!seen && entries.some(function(entry){ return entry.isIntersecting; })) {
+      seen = true; window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event:"view_offer",language:"pt-BR",value:47,currency:"BRL"});
+    }
+  },{threshold:.3}).observe(offer);
+})();
+</script>
 </body>
 </html>
