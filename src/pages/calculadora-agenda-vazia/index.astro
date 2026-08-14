@@ -317,14 +317,14 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
 
     <section class="panel">
       <div class="panel-title">Os números do seu negócio</div>
-      <div class="panel-sub">Últimos 30 dias, somando todos os profissionais. Arraste até chegar perto — ou toque no número para digitar.</div>
+      <div class="panel-sub">Últimos 30 dias, somando todos os profissionais. As barras priorizam negócios pequenos; para valores maiores, toque no número e digite.</div>
 
       <div class="field">
         <div class="field-top">
           <label for="ticket">Quanto você recebe, em média, por atendimento<span class="hint">Some o que entrou e divida pelo número de atendimentos</span></label>
           <div class="readout" id="boxTicket"><span class="unit">R$</span><input type="number" id="numTicket" class="w5" min="1" max="20000" step="1" inputmode="numeric" placeholder="—" aria-label="Valor por atendimento em reais"></div>
         </div>
-        <input type="range" id="ticket" class="untouched" min="20" max="1200" step="10" value="20" aria-label="Ajustar valor por atendimento">
+        <input type="range" id="ticket" class="untouched" min="20" max="500" step="5" value="20" aria-label="Ajustar valor por atendimento">
       </div>
 
       <div class="field">
@@ -332,7 +332,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
           <label for="agendados">Atendimentos marcados nos últimos 30 dias<span class="hint">Tudo que entrou na agenda, tenha acontecido ou não</span></label>
           <div class="readout" id="boxAgendados"><input type="number" id="numAgendados" min="1" max="5000" step="1" inputmode="numeric" placeholder="—" aria-label="Atendimentos marcados"></div>
         </div>
-        <input type="range" id="agendados" class="untouched" min="10" max="600" step="2" value="10" aria-label="Ajustar atendimentos marcados">
+        <input type="range" id="agendados" class="untouched" min="10" max="300" step="1" value="10" aria-label="Ajustar atendimentos marcados">
       </div>
 
       <div class="field">
@@ -340,7 +340,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
           <label for="cancel">Desmarcações em cima da hora<span class="hint">Avisou, mas tarde demais para colocar outra pessoa</span></label>
           <div class="readout" id="boxCancel"><input type="number" id="numCancel" min="0" max="5000" step="1" inputmode="numeric" placeholder="—" aria-label="Desmarcações em cima da hora"></div>
         </div>
-        <input type="range" id="cancel" class="untouched" min="0" max="120" step="1" value="0" aria-label="Ajustar desmarcações em cima da hora">
+        <input type="range" id="cancel" class="untouched" min="0" max="60" step="1" value="0" aria-label="Ajustar desmarcações em cima da hora">
       </div>
 
       <div class="field">
@@ -348,7 +348,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
           <label for="noshow">Faltas sem aviso nenhum<span class="hint">Simplesmente não apareceu</span></label>
           <div class="readout" id="boxNoshow"><input type="number" id="numNoshow" min="0" max="5000" step="1" inputmode="numeric" placeholder="—" aria-label="Faltas sem aviso"></div>
         </div>
-        <input type="range" id="noshow" class="untouched" min="0" max="120" step="1" value="0" aria-label="Ajustar faltas sem aviso">
+        <input type="range" id="noshow" class="untouched" min="0" max="60" step="1" value="0" aria-label="Ajustar faltas sem aviso">
         <div class="err" id="errRisco" role="alert"></div>
       </div>
 
@@ -357,7 +357,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
           <label for="recuperadas">Desses horários, quantos você conseguiu preencher<span class="hint">Horário recuperado é quando outra pessoa foi atendida naquele espaço que ia ficar vazio</span></label>
           <div class="readout" id="boxRecuperadas"><input type="number" id="numRecuperadas" min="0" max="5000" step="1" inputmode="numeric" placeholder="—" aria-label="Horários recuperados"></div>
         </div>
-        <input type="range" id="recuperadas" class="untouched" min="0" max="120" step="1" value="0" aria-label="Ajustar horários recuperados">
+        <input type="range" id="recuperadas" class="untouched" min="0" max="60" step="1" value="0" aria-label="Ajustar horários recuperados">
         <div class="err" id="errRecuperadas" role="alert"></div>
       </div>
 
@@ -366,7 +366,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
           <label for="duracao">Duração média de um atendimento<span class="hint">Do momento em que a pessoa senta até sair</span></label>
           <div class="readout" id="boxDuracao"><input type="number" id="numDuracao" min="5" max="600" step="5" inputmode="numeric" placeholder="—" aria-label="Duração média em minutos"><span class="unit">min</span></div>
         </div>
-        <input type="range" id="duracao" class="untouched" min="10" max="240" step="5" value="10" aria-label="Ajustar duração média">
+        <input type="range" id="duracao" class="untouched" min="10" max="180" step="5" value="10" aria-label="Ajustar duração média">
       </div>
     </section>
 

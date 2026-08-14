@@ -287,14 +287,14 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
 
   <section class="panel">
     <div class="panel-title">Your business, in numbers</div>
-    <div class="panel-sub">Last 30 days, all staff combined. Drag to get close — or tap the number to type it in.</div>
+    <div class="panel-sub">Last 30 days, all staff combined. Sliders prioritize small businesses; for larger values, tap the number and type it in.</div>
 
     <div class="field">
       <div class="field-top">
         <label for="ticket">What you make, on average, per appointment<span class="hint">Add up what came in and divide by number of appointments</span></label>
         <div class="readout" id="boxTicket"><span class="unit">$</span><input type="number" id="numTicket" class="w5" min="1" max="20000" step="1" inputmode="numeric" placeholder="—" aria-label="Average ticket in dollars"></div>
       </div>
-      <input type="range" id="ticket" class="untouched" min="20" max="1200" step="10" value="20" aria-label="Adjust average ticket">
+      <input type="range" id="ticket" class="untouched" min="10" max="300" step="5" value="10" aria-label="Adjust average ticket">
     </div>
 
     <div class="field">
@@ -302,7 +302,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
         <label for="agendados">Appointments booked in the last 30 days<span class="hint">Everything on the calendar, whether it happened or not</span></label>
         <div class="readout" id="boxAgendados"><input type="number" id="numAgendados" min="1" max="5000" step="1" inputmode="numeric" placeholder="—" aria-label="Appointments booked"></div>
       </div>
-      <input type="range" id="agendados" class="untouched" min="10" max="600" step="2" value="10" aria-label="Adjust appointments booked">
+      <input type="range" id="agendados" class="untouched" min="10" max="300" step="1" value="10" aria-label="Adjust appointments booked">
     </div>
 
     <div class="field">
@@ -310,7 +310,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
         <label for="cancel">Last-minute cancellations<span class="hint">They told you, but too late to fill the slot</span></label>
         <div class="readout" id="boxCancel"><input type="number" id="numCancel" min="0" max="5000" step="1" inputmode="numeric" placeholder="—" aria-label="Last-minute cancellations"></div>
       </div>
-      <input type="range" id="cancel" class="untouched" min="0" max="120" step="1" value="0" aria-label="Adjust last-minute cancellations">
+      <input type="range" id="cancel" class="untouched" min="0" max="60" step="1" value="0" aria-label="Adjust last-minute cancellations">
     </div>
 
     <div class="field">
@@ -318,7 +318,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
         <label for="noshow">No-shows with zero warning<span class="hint">Simply didn't show up</span></label>
         <div class="readout" id="boxNoshow"><input type="number" id="numNoshow" min="0" max="5000" step="1" inputmode="numeric" placeholder="—" aria-label="No-shows"></div>
       </div>
-      <input type="range" id="noshow" class="untouched" min="0" max="120" step="1" value="0" aria-label="Adjust no-shows">
+      <input type="range" id="noshow" class="untouched" min="0" max="60" step="1" value="0" aria-label="Adjust no-shows">
       <div class="err" id="errRisco" role="alert"></div>
     </div>
 
@@ -327,7 +327,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
         <label for="recuperadas">Of those, how many did you manage to refill<span class="hint">A recovered slot is when someone else got booked into that opening</span></label>
         <div class="readout" id="boxRecuperadas"><input type="number" id="numRecuperadas" min="0" max="5000" step="1" inputmode="numeric" placeholder="—" aria-label="Slots recovered"></div>
       </div>
-      <input type="range" id="recuperadas" class="untouched" min="0" max="120" step="1" value="0" aria-label="Adjust slots recovered">
+      <input type="range" id="recuperadas" class="untouched" min="0" max="60" step="1" value="0" aria-label="Adjust slots recovered">
       <div class="err" id="errRecuperadas" role="alert"></div>
     </div>
 
@@ -336,7 +336,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
         <label for="duracao">Average length of an appointment<span class="hint">From the moment they sit down to when they leave</span></label>
         <div class="readout" id="boxDuracao"><input type="number" id="numDuracao" min="5" max="600" step="5" inputmode="numeric" placeholder="—" aria-label="Average duration in minutes"><span class="unit">min</span></div>
       </div>
-      <input type="range" id="duracao" class="untouched" min="10" max="240" step="5" value="10" aria-label="Adjust average duration">
+      <input type="range" id="duracao" class="untouched" min="10" max="180" step="5" value="10" aria-label="Adjust average duration">
     </div>
   </section>
 
