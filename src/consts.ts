@@ -118,7 +118,7 @@ export const OFFERS: Offer[] = [
         {
           name: 'Protocolo VAGA',
           platform: 'Kiwify',
-          price: 'R$ 97',
+          price: 'R$ 47',
           own: true,
           pitch:
             'Sistema em quatro etapas para medir a perda, reduzir a falta e reocupar o horário que vagou em até 15 minutos. Inclui duas planilhas prontas, 40 mensagens de WhatsApp, kit de documentos editáveis e manual da recepção.',

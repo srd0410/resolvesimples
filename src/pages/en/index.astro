@@ -8,12 +8,12 @@
 //
 // Pendências conhecidas (ver INVENTARIO.md):
 //   - Domínio resolvesimples.com ainda não apontado/roteado para esta rota.
-//   - Checkout Kiwify segue cobrando em BRL (R$97); preço em US$ exibido é
-//     aproximado, não é um checkout multi-moeda de verdade.
+//   - Checkout Kiwify segue cobrando em BRL (R$47); preço em US$ exibido é
+//     uma aproximação arredondada, não um checkout multi-moeda de verdade.
 import { SITE } from '../../consts';
 
 const title = 'VAGA Protocol — stop losing money to no-shows and cancellations';
-const description = 'A complete system to cut no-shows and last-minute cancellations and refill the slots that open up — for appointment-based businesses. $18, pays for itself with the first slot you recover.';
+const description = 'A complete system to cut no-shows and last-minute cancellations and refill the slots that open up — for appointment-based businesses. About $9; one recovered slot at that value can offset the investment.';
 const canonical = new URL('/en/', SITE.url).toString();
 const ptAlternate = new URL('/', SITE.url).toString();
 ---
@@ -75,6 +75,8 @@ const ptAlternate = new URL('/', SITE.url).toString();
   .masthead{padding:26px 0 0;display:flex;align-items:center;gap:9px}
   .mark{width:9px;height:9px;background:var(--lost);border-radius:2px;transform:rotate(45deg)}
   .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
+  .lang-switch{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 11px}
+  .lang-switch:hover{color:var(--ink);border-color:var(--ink-soft);background:var(--paper-raised)}
 
   .hero{padding:42px 0 28px}
   .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--lost);margin-bottom:18px}
@@ -142,11 +144,12 @@ const ptAlternate = new URL('/', SITE.url).toString();
   <header class="masthead">
     <div class="mark" aria-hidden="true"></div>
     <a class="brand" href="/en/">VAGA Protocol</a>
+    <a class="lang-switch" href="/" lang="pt-BR" hreflang="pt-BR" aria-label="Ver o site em português">Português</a>
   </header>
 
   <main>
   <section class="hero">
-    <div class="eyebrow">VAGA Protocol · $18</div>
+    <div class="eyebrow">VAGA Protocol · R$47 (about $9)</div>
     <h1>Every empty slot <span class="hollow">doesn't wait on a shelf. It's just gone.</span></h1>
     <p class="deck">You don't sell a product — you sell booked time. When a client no-shows and nobody takes that slot, the hour doesn't sit around waiting to be sold tomorrow. It's simply gone, while rent, staff and utilities got paid anyway. VAGA Protocol is the system that cuts no-shows, gets earlier warning when someone cancels, and fills the slot before it becomes a loss — built for appointment-based businesses: salons, spas, clinics, barbershops, and any service booked by the hour.</p>
     <div class="hero-cta">
@@ -188,7 +191,7 @@ const ptAlternate = new URL('/', SITE.url).toString();
       </div>
       <div class="persona">
         <p class="quem">You own the business and run the calendar yourself</p>
-        <p>You don't have a free weekend to build a spreadsheet, test messages and figure out what works. For $18, someone already researched it, tested it and packaged it — including for solo operators, where every dollar of cost matters and every recovered slot counts double.</p>
+        <p>You don't have a free weekend to build a spreadsheet, test messages and figure out what works. For about $9, someone already researched it, tested it and packaged it — including for solo operators, where every dollar of cost matters and every recovered slot counts double.</p>
       </div>
       <div class="persona">
         <p class="quem">You manage the calendar, but you're not the owner</p>
@@ -212,7 +215,7 @@ const ptAlternate = new URL('/', SITE.url).toString();
     </ul>
     <div class="preco">
       <p class="de">Launch price</p>
-      <p class="valor">$18</p>
+      <p class="valor">R$47 <small>(about $9)</small></p>
       <p class="cond">Instant access — the link lands in your inbox as soon as payment clears.</p>
       <a class="btn" href="https://pay.kiwify.com.br/qkgpS7Q">Get VAGA Protocol</a>
       <a class="more" href="/en/no-show-calculator/">See the full breakdown + calculate your own numbers →</a>
