@@ -104,6 +104,9 @@ const canonical = new URL('/calculadora-agenda-vazia/obrigado/', SITE.url).toStr
   .oferta li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;background:var(--kept);border-radius:2px}
   .oferta li b{color:#FFFFFF;font-weight:600}
   .oferta .preco{border-top:1px solid #22364A;border-bottom:1px solid #22364A;padding:22px 0;margin-bottom:22px}
+  .oferta .ancora{font-size:15px;line-height:1.5;color:#B9C4CF;margin:0 0 10px}
+  .oferta .ancora b{color:#FF8FB2;font-weight:700}
+  .oferta .ancora[hidden]{display:none}
   .oferta .de{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#B9C4CF;margin-bottom:6px}
   .oferta .valor{font-family:"Poppins",sans-serif;font-weight:800;font-size:clamp(38px,11vw,52px);line-height:1;letter-spacing:-.03em;color:#FFFFFF;margin-bottom:6px}
   .oferta .cond{font-size:14.5px;color:#B9C4CF;margin-bottom:22px}
@@ -186,6 +189,7 @@ const canonical = new URL('/calculadora-agenda-vazia/obrigado/', SITE.url).toStr
       <figcaption>Kit digital pronto para quem administra o negócio e para quem cuida da agenda.</figcaption>
     </figure>
     <div class="preco">
+      <p class="ancora" id="ancoraPreco" hidden></p>
       <p class="de">Pagamento único</p>
       <p class="valor">R$ 47</p>
       <p class="cond">Acesso digital imediato após a aprovação. Sem mensalidade e sem depender de software pago.</p>
@@ -197,7 +201,8 @@ const canonical = new URL('/calculadora-agenda-vazia/obrigado/', SITE.url).toStr
       <li><b>Evitar:</b> 40 mensagens, políticas editáveis e guia do WhatsApp para conseguir confirmação ou aviso mais cedo.</li>
       <li><b>Reocupar:</b> Lista de Encaixe, Cartão dos 15 Minutos, manual da recepção e plano de 7 dias.</li>
     </ul>
-    <p class="lead">Duas planilhas, 40 mensagens, cinco documentos editáveis, manual de equipe e plano de implantação — prontos para usar.</p>
+    <p class="lead">Duas planilhas, 40 mensagens, cinco documentos editáveis, manual de equipe e plano de implantação — prontos para usar. <strong>O primeiro passo você aplica no mesmo dia</strong>: o Cartão dos 15 Minutos é uma página só. O plano de 7 dias distribui o resto sem travar o atendimento.</p>
+    <p class="lead">Dúvida depois de comprar? Escreve para <a href="mailto:contato@resolvesimples.com.br">contato@resolvesimples.com.br</a>.</p>
     <div class="garantia">
       <div class="marca" aria-hidden="true">30</div>
       <p><strong>Garantia de 30 dias.</strong> Aplica, mede no Painel, e se não vir diferença nos seus números, devolvo tudo — sem justificativa. O risco fica todo do meu lado.</p>
@@ -239,6 +244,10 @@ const canonical = new URL('/calculadora-agenda-vazia/obrigado/', SITE.url).toStr
     if (perdidas && agendados) {
       $("anualNote").textContent = "Equivale a " + perdidas + " de " + agendados + " atendimentos marcados nos últimos 30 dias" + (taxa ? " (" + Number(taxa).toFixed(0) + "% vazios)" : "") + ".";
     }
+    // Mesma ancoragem da página da calculadora: o número da própria pessoa
+    // encostado no preço, em vez de preço riscado.
+    $("ancoraPreco").innerHTML = "Pelos seus números, a agenda vaza <b>" + perdaAnoTxt + "</b> por ano";
+    $("ancoraPreco").hidden = false;
   } else {
     $("deck").textContent = "Não encontramos os números da sua calculadora nesta página — pode ter vindo de um link direto. Sem problema: o Protocolo VAGA continua valendo a pena de qualquer jeito.";
     document.querySelector(".result").style.display = "none";

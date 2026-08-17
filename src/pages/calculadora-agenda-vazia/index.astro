@@ -15,7 +15,7 @@ const description = 'Calcule em 1 minuto quanto as faltas e desmarcações de ú
 const ogTitle = 'Quanto as faltas custam ao seu salão? Calculadora grátis';
 const ogDescription = 'Coloque os números dos seus últimos 30 dias e veja o tamanho real do rombo que os horários vazios abrem no seu caixa.';
 const canonical = new URL('/calculadora-agenda-vazia/', SITE.url).toString();
-const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {\n      \"@type\":\"WebApplication\",\n      \"name\":\"Calculadora do Buraco da Agenda\",\n      \"url\":\"https://www.resolvesimples.com.br/calculadora-agenda-vazia/\",\n      \"applicationCategory\":\"BusinessApplication\",\n      \"operatingSystem\":\"Web\",\n      \"inLanguage\":\"pt-BR\",\n      \"description\":\"Calcula quanto as faltas e desmarcações de última hora custaram ao negócio nos últimos 30 dias, a partir dos números informados pelo próprio usuário.\",\n      \"offers\":{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"BRL\"},\n      \"publisher\":{\"@type\":\"Organization\",\"name\":\"Resolve Simples\",\"url\":\"https://www.resolvesimples.com.br/\"}\n    },\n    {\n      \"@type\":\"FAQPage\",\n      \"mainEntity\":[\n        {\"@type\":\"Question\",\"name\":\"Como calcular quanto perco com faltas no salão?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Some as desmarcações de última hora e as faltas sem aviso dos últimos 30 dias, subtraia os horários que você conseguiu preencher com outra pessoa e multiplique o resultado pelo seu valor médio por atendimento. Isso dá a receita que deixou de entrar no mês. Multiplique por 12 para a projeção anual.\"}},\n        {\"@type\":\"Question\",\"name\":\"Posso cobrar taxa de cancelamento de um cliente que faltou?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No Brasil, a cobrança precisa ter sido informada com clareza antes do agendamento e aceita pelo cliente, sob as regras do Código de Defesa do Consumidor. Uma cobrança surpresa, aplicada só depois da falta, tende a ser questionável. Na prática, muitos negócios têm mais resultado oferecendo desconto para quem paga antecipado do que cobrando multa de quem faltou.\"}},\n        {\"@type\":\"Question\",\"name\":\"Qual é a melhor mensagem de confirmação de horário?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"A que pede uma resposta ativa em vez de apenas avisar. Mensagem que só lembra a data recebe pouca resposta; mensagem que pede uma confirmação curta cria um pequeno compromisso e revela mais cedo quem não vai aparecer, o que dá tempo de oferecer o horário a outra pessoa.\"}},\n        {\"@type\":\"Question\",\"name\":\"Como preencher um horário que vagou em cima da hora?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Com uma lista de espera organizada antes de a vaga abrir, separada por procedimento e por disponibilidade de horário. Quando o cancelamento chega, você oferece a vaga a quem já demonstrou interesse naquele serviço, em vez de anunciar para todo mundo e esperar.\"}},\n        {\"@type\":\"Question\",\"name\":\"Qual é a taxa normal de falta em salão e clínica de estética?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Não existe uma média brasileira confiável e publicada para salões, barbearias e estética. Os dados mais sólidos vêm da área de saúde: uma revisão de 105 estudos publicada na revista Health Policy encontrou média de 23% de não comparecimento, com variação grande entre países e especialidades. Serve como ordem de grandeza do problema, não como referência do seu setor.\"}},\n        {\"@type\":\"Question\",\"name\":\"Preciso de um sistema pago para reduzir faltas?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Não. O essencial — confirmação ativa, política clara, lista de espera e registro do que acontece — funciona com WhatsApp Business e uma planilha. Sistema pago acelera, mas não é o que faz a diferença inicial.\"}}\n      ]\n    }\n    ,{\n      \"@type\":\"Product\",\n      \"name\":\"Protocolo VAGA\",\n      \"description\":\"Sistema completo para reduzir faltas e desmarcações de última hora e reocupar horários vagos em negócios de agenda, com planilhas, banco de mensagens, documentos editáveis e plano de implantação.\",\n      \"brand\":{\"@type\":\"Brand\",\"name\":\"Resolve Simples\"},\n      \"offers\":{\n        \"@type\":\"Offer\",\n        \"price\":\"47.00\",\n        \"priceCurrency\":\"BRL\",\n        \"availability\":\"https://schema.org/InStock\",\n        \"url\":\"https://www.resolvesimples.com.br/calculadora-agenda-vazia/#protocolo-vaga\"\n      }\n    }\n  ]\n}";
+const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {\n      \"@type\":\"WebApplication\",\n      \"name\":\"Calculadora do Buraco da Agenda\",\n      \"url\":\"https://www.resolvesimples.com.br/calculadora-agenda-vazia/\",\n      \"applicationCategory\":\"BusinessApplication\",\n      \"operatingSystem\":\"Web\",\n      \"inLanguage\":\"pt-BR\",\n      \"description\":\"Calcula quanto as faltas e desmarcações de última hora custaram ao negócio nos últimos 30 dias, a partir dos números informados pelo próprio usuário.\",\n      \"offers\":{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"BRL\"},\n      \"publisher\":{\"@type\":\"Organization\",\"name\":\"Resolve Simples\",\"url\":\"https://www.resolvesimples.com.br/\"}\n    },\n    {\n      \"@type\":\"FAQPage\",\n      \"mainEntity\":[\n        {\"@type\":\"Question\",\"name\":\"Como calcular quanto perco com faltas no salão?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Some as desmarcações de última hora e as faltas sem aviso dos últimos 30 dias, subtraia os horários que você conseguiu preencher com outra pessoa e multiplique o resultado pelo seu valor médio por atendimento. Isso dá a receita que deixou de entrar no mês. Multiplique por 12 para a projeção anual.\"}},\n        {\"@type\":\"Question\",\"name\":\"Posso cobrar taxa de cancelamento de um cliente que faltou?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No Brasil, a cobrança precisa ter sido informada com clareza antes do agendamento e aceita pelo cliente, sob as regras do Código de Defesa do Consumidor. Uma cobrança surpresa, aplicada só depois da falta, tende a ser questionável. Na prática, muitos negócios têm mais resultado oferecendo desconto para quem paga antecipado do que cobrando multa de quem faltou.\"}},\n        {\"@type\":\"Question\",\"name\":\"Qual é a melhor mensagem de confirmação de horário?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"A que pede uma resposta ativa em vez de apenas avisar. Mensagem que só lembra a data recebe pouca resposta; mensagem que pede uma confirmação curta cria um pequeno compromisso e revela mais cedo quem não vai aparecer, o que dá tempo de oferecer o horário a outra pessoa.\"}},\n        {\"@type\":\"Question\",\"name\":\"Como preencher um horário que vagou em cima da hora?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Com uma lista de espera organizada antes de a vaga abrir, separada por procedimento e por disponibilidade de horário. Quando o cancelamento chega, você oferece a vaga a quem já demonstrou interesse naquele serviço, em vez de anunciar para todo mundo e esperar.\"}},\n        {\"@type\":\"Question\",\"name\":\"Qual é a taxa normal de falta em salão e clínica de estética?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Não existe uma média brasileira confiável e publicada para salões, barbearias e estética. Os dados mais sólidos vêm da área de saúde: uma revisão de 105 estudos publicada na revista Health Policy encontrou média de 23% de não comparecimento, com variação grande entre países e especialidades. Serve como ordem de grandeza do problema, não como referência do seu setor.\"}},\n        {\"@type\":\"Question\",\"name\":\"Preciso de um sistema pago para reduzir faltas?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Não. O essencial — confirmação ativa, política clara, lista de espera e registro do que acontece — funciona com WhatsApp Business e uma planilha. Sistema pago acelera, mas não é o que faz a diferença inicial.\"}},\n        {\"@type\":\"Question\",\"name\":\"Quanto tempo leva para começar a aplicar?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"O primeiro passo cabe no mesmo dia: o Cartão dos 15 Minutos é uma página só, que você imprime e cola na recepção para que a próxima desmarcação já seja tratada pelo fluxo. O restante segue um plano de 7 dias, com um passo por dia para não travar o atendimento: abrir o Painel da Agenda, ajustar as mensagens de confirmação, montar a Lista de Encaixe e passar o manual para a equipe. São planilhas e documentos prontos, preenchidos com os números do próprio negócio.\"}},\n        {\"@type\":\"Question\",\"name\":\"E se eu tiver dúvida depois de comprar?\",\n         \"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Sim. As dúvidas sobre como preencher as planilhas ou adaptar as mensagens ao tipo de atendimento são respondidas pelo e-mail contato@resolvesimples.com.br, o mesmo endereço publicado no rodapé do site. Além disso, a garantia de 30 dias continua valendo caso o material não sirva.\"}}\n      ]\n    }\n    ,{\n      \"@type\":\"Product\",\n      \"name\":\"Protocolo VAGA\",\n      \"description\":\"Sistema completo para reduzir faltas e desmarcações de última hora e reocupar horários vagos em negócios de agenda, com planilhas, banco de mensagens, documentos editáveis e plano de implantação.\",\n      \"brand\":{\"@type\":\"Brand\",\"name\":\"Resolve Simples\"},\n      \"offers\":{\n        \"@type\":\"Offer\",\n        \"price\":\"47.00\",\n        \"priceCurrency\":\"BRL\",\n        \"availability\":\"https://schema.org/InStock\",\n        \"url\":\"https://www.resolvesimples.com.br/calculadora-agenda-vazia/#protocolo-vaga\"\n      }\n    }\n  ]\n}";
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -253,6 +253,11 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   }
   .oferta li b{color:#FFFFFF;font-weight:600}
   .oferta .preco{border-top:1px solid #22364A;border-bottom:1px solid #22364A;padding:22px 0;margin-bottom:22px}
+  .oferta .ancora{
+    font-size:15px;line-height:1.5;color:#B9C4CF;margin:0 0 10px;
+  }
+  .oferta .ancora b{color:#FF8FB2;font-weight:700}
+  .oferta .ancora[hidden]{display:none}
   .oferta .de{
     font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;
     text-transform:uppercase;color:#B9C4CF;margin-bottom:6px;
@@ -274,6 +279,35 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   .oferta .btn:active{transform:translateY(1px)}
   .oferta .btn:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
   .oferta .delivery-note{font-size:12.5px;line-height:1.45;color:#8FA0B0;text-align:center;margin:12px 0 0}
+  /* grade dos 8 módulos: usa as artes já produzidas do pacote */
+  .oferta .modulos{margin:0 0 22px;padding-top:22px;border-top:1px solid #22364A}
+  .oferta .modulos-titulo{
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--kept);margin:0 0 16px;font-weight:600;
+  }
+  .oferta .modulo-grid{
+    list-style:none;margin:0;padding:0;
+    display:grid;gap:18px 16px;
+    grid-template-columns:repeat(2,1fr);
+  }
+  .oferta .modulo-grid li{padding:0;margin:0}
+  .oferta .modulo-grid li::before{content:none}
+  .oferta .modulo-grid img{
+    display:block;width:100%;height:auto;border-radius:8px;
+    border:1px solid #22364A;
+  }
+  .oferta .modulo-grid p{
+    margin:9px 0 0;font-size:13.5px;line-height:1.5;color:#B9C4CF;
+  }
+  /* No celular a arte fica pequena demais para o título ser lido: vira
+     miniatura ao lado do texto, o que também encurta muito a rolagem. */
+  @media(max-width:560px){
+    .oferta .modulo-grid{grid-template-columns:1fr;gap:14px}
+    .oferta .modulo-grid li{display:flex;gap:12px;align-items:center}
+    .oferta .modulo-grid img{flex:none;width:104px}
+    .oferta .modulo-grid p{margin:0;font-size:13px}
+  }
+
   .oferta .garantia{
     display:flex;gap:12px;align-items:flex-start;
     margin-top:20px;padding-top:20px;border-top:1px solid #22364A;
@@ -495,6 +529,7 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
       <figcaption>Kit digital para quem administra o negócio e para quem cuida da agenda no dia a dia.</figcaption>
     </figure>
     <div class="preco">
+      <p class="ancora" id="ancoraPreco" hidden></p>
       <p class="de">Pagamento único</p>
       <p class="valor">R$ 47</p>
       <p class="cond">Acesso digital imediato após a aprovação. Sem mensalidade e sem depender de software pago.</p>
@@ -506,7 +541,46 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
       <li><b>Evitar:</b> 40 mensagens, políticas editáveis e o guia do WhatsApp ajudam o cliente a confirmar ou avisar com antecedência.</li>
       <li><b>Reocupar:</b> Lista de Encaixe, Cartão dos 15 Minutos, manual da recepção e plano de 7 dias mostram à equipe o que fazer quando uma vaga abre.</li>
     </ul>
-    <p class="lead">Duas planilhas, 40 mensagens, cinco documentos editáveis, manual de equipe e plano de implantação — prontos para usar, não mais um curso para terminar.</p>
+    <p class="lead">Duas planilhas, 40 mensagens, cinco documentos editáveis, manual de equipe e plano de implantação — prontos para usar, não mais um curso para terminar. <strong>O primeiro passo você aplica no mesmo dia</strong>: o Cartão dos 15 Minutos é uma página só. O plano de 7 dias distribui o resto sem travar o atendimento.</p>
+
+    <div class="modulos">
+      <p class="modulos-titulo">Os 8 materiais que chegam junto</p>
+      <ul class="modulo-grid">
+        <li>
+          <img src="/images/vaga/modulos/modulo-01-protocolo-vaga-plano-7-dias.png" alt="Módulo 01 — Protocolo VAGA, plano de 7 dias" width="800" height="450" loading="lazy" decoding="async" />
+          <p>O método completo, dividido em sete dias de implantação — um passo por dia, sem parar o atendimento.</p>
+        </li>
+        <li>
+          <img src="/images/vaga/modulos/modulo-02-painel-da-agenda.png" alt="Módulo 02 — Painel da Agenda" width="800" height="450" loading="lazy" decoding="async" />
+          <p>Planilha que mostra faltas, vagas recuperadas e receita em risco por profissional, dia e procedimento.</p>
+        </li>
+        <li>
+          <img src="/images/vaga/modulos/modulo-03-kit-documentos-editaveis.png" alt="Módulo 03 — Kit de documentos editáveis" width="800" height="450" loading="lazy" decoding="async" />
+          <p>Cinco documentos prontos para editar: política de cancelamento, aviso de agendamento e termos de uso.</p>
+        </li>
+        <li>
+          <img src="/images/vaga/modulos/modulo-04-guia-whatsapp-business.png" alt="Módulo 04 — Guia do WhatsApp Business" width="800" height="450" loading="lazy" decoding="async" />
+          <p>Como configurar respostas rápidas, etiquetas e catálogo para confirmar horário sem digitar tudo de novo.</p>
+        </li>
+        <li>
+          <img src="/images/vaga/modulos/modulo-05-lista-de-encaixe.png" alt="Módulo 05 — Lista de Encaixe" width="800" height="450" loading="lazy" decoding="async" />
+          <p>Planilha da fila de espera, separada por procedimento e disponibilidade — pronta antes de a vaga abrir.</p>
+        </li>
+        <li>
+          <img src="/images/vaga/modulos/modulo-06-cartao-15-minutos.png" alt="Módulo 06 — Cartão dos 15 Minutos" width="800" height="450" loading="lazy" decoding="async" />
+          <p>A sequência exata do que fazer nos primeiros 15 minutos depois que alguém desmarca.</p>
+        </li>
+        <li>
+          <img src="/images/vaga/modulos/modulo-07-banco-de-mensagens.png" alt="Módulo 07 — Banco de mensagens" width="800" height="450" loading="lazy" decoding="async" />
+          <p>40 mensagens prontas para copiar e colar: confirmação, lembrete, encaixe e retorno de quem sumiu.</p>
+        </li>
+        <li>
+          <img src="/images/vaga/modulos/modulo-08-manual-da-recepcao.png" alt="Módulo 08 — Manual da Recepção" width="800" height="450" loading="lazy" decoding="async" />
+          <p>O passo a passo que você entrega na mão da recepção — inclusive a rotina de cinco minutos da manhã.</p>
+        </li>
+      </ul>
+    </div>
+
     <div class="garantia">
       <div class="marca" aria-hidden="true">30</div>
       <p><strong>Garantia de 30 dias.</strong> Aplica, mede no Painel, e se não vir diferença nos seus números, devolvo tudo — sem justificativa. O risco fica todo do meu lado.</p>
@@ -577,6 +651,16 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     <details>
       <summary>Preciso de um sistema pago para reduzir faltas?</summary>
       <p>Não. O essencial — confirmação ativa, política clara, lista de espera e registro do que acontece — funciona com WhatsApp Business e uma planilha. Sistema pago acelera, mas não é o que faz a diferença inicial.</p>
+    </details>
+
+    <details>
+      <summary>Quanto tempo leva para começar a aplicar?</summary>
+      <p>O primeiro passo cabe no mesmo dia: o Cartão dos 15 Minutos é uma página só — imprime, cola na recepção e a próxima desmarcação já é tratada pelo fluxo. O resto vem no plano de 7 dias, um passo por dia, para não travar o atendimento: abrir o Painel da Agenda, ajustar as mensagens de confirmação, montar a Lista de Encaixe e passar o manual para a equipe. Nada aqui é curso para terminar — são planilhas e documentos prontos, que você preenche com os seus números.</p>
+    </details>
+
+    <details>
+      <summary>E se eu tiver dúvida depois de comprar?</summary>
+      <p>É só escrever para <a href="mailto:contato@resolvesimples.com.br">contato@resolvesimples.com.br</a> — o mesmo endereço que aparece no rodapé do site. Dúvida sobre como preencher as planilhas ou adaptar as mensagens ao seu tipo de atendimento é respondida por lá. E se mesmo assim o material não servir para você, a garantia de 30 dias continua valendo.</p>
     </details>
 
   </div>
@@ -730,6 +814,16 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     $("agendaCount").classList.toggle("idle", perdidas === 0);
 
     grade(vAgend, perdidas, true);
+
+    // Ancoragem de preço com o número que a própria pessoa calculou — vale
+    // mais que preço riscado e não depende de promoção com prazo.
+    var anc = $("ancoraPreco");
+    if (perdaAno > 0) {
+      anc.innerHTML = "Pelos seus números, a agenda vaza <b>" + brl(perdaAno) + "</b> por ano";
+      anc.hidden = false;
+    } else {
+      anc.hidden = true;
+    }
 
     C.ticket.h.value = vTicket; C.agendados.h.value = vAgend;
     C.cancel.h.value = vCancel; C.noshow.h.value = vNoshow;
