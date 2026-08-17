@@ -7,7 +7,7 @@ import { OFFERS, getAllProducts } from '../consts';
 
 const allArticles = (await getCollection('artigos', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const latestArticles = allArticles.slice(0, 3);
+const latestArticles = allArticles.slice(0, 6);
 const articlesCount = allArticles.length;
 
 const picksCount = getAllProducts().filter((p) => p.kind !== 'deal').length;
@@ -51,8 +51,8 @@ const steps = [
 ];
 ---
 <Layout
-  title="Pare de perder dinheiro com horário vago na agenda"
-  description="Salão, clínica e barbearia perdem receita toda vez que alguém falta e ninguém entra no lugar. Conheça o Protocolo VAGA, o sistema para reduzir faltas e reocupar o horário que vagou — e faça o diagnóstico gratuito da sua agenda."
+  title="Comparativos e soluções simples para problemas que custam caro"
+  description="Comparamos produtos e ferramentas para problemas pequenos que saem caro todo mês — de faltas na agenda do salão a itens de casa, cozinha, carro e pet. Cada indicação vem de um comparativo publicado, com a conta feita e o critério explícito."
   hreflangEn="/en/"
 >
   <!-- ================= HERO ================= -->
@@ -60,20 +60,24 @@ const steps = [
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow eyebrow-on-dark">Salão · clínica · barbearia · quem vive de agenda</p>
+        <p class="eyebrow eyebrow-on-dark">Comparativos e soluções testadas</p>
 
         <h1>
-          O horário que vagou e ninguém preencheu
-          <span class="hl">não volta mais.</span>
+          Sempre tem um problema pequeno
+          <span class="hl">custando caro todo mês.</span>
         </h1>
 
         <p class="hero-lede">
-          Você não vende produto, vende tempo marcado. Quando alguém falta e ninguém entra no
-          lugar, aquela hora não fica na prateleira esperando — ela deixou de existir, com o
-          aluguel, a luz e a profissional já pagos do mesmo jeito.
-          <strong>Move os três controles ao lado e veja o tamanho disso no seu caso.</strong>
+          Faltas na agenda do salão, o cabo que você troca três vezes por ano, a bagunça que
+          faz recomprar o que já tinha. São gastos que passam despercebidos porque vêm em
+          parcelas pequenas. <strong>A gente encontra o problema, faz a conta e compara o que
+          resolve</strong> — começando pelo mais caro de todos: o horário que vaga e ninguém
+          preenche.
         </p>
 
+        <p class="hero-atalho">
+          Veio pelos comparativos? <a href="#comparativos">Pular direto para os produtos testados</a>
+        </p>
       </div>
 
       <!-- Mini-diagnóstico: mesma conta da calculadora completa, com três
@@ -152,13 +156,14 @@ const steps = [
   <!-- ================= DIVISOR: O RESTO DO PORTAL ================= -->
   <section class="section portal-intro">
     <div class="wrap-narrow">
-      <p class="eyebrow">Além do Protocolo VAGA</p>
-      <h2>A Resolve Simples também compara o que resolve problema pequeno e caro.</h2>
+      <p class="eyebrow">O mesmo método, em outras áreas</p>
+      <h2>Nem todo problema caro é de agenda.</h2>
       <p class="lede">
-        A mesma lógica da conta que você acabou de fazer vale para outras áreas: achar o
-        gasto que passa despercebido, mostrar quanto ele custa por ano e apontar a solução
-        mais simples. Abaixo está o resto do que publicamos — de eletrônicos a organização
-        de casa. <strong>Quando a indicação é de afiliado, está sempre sinalizada.</strong>
+        A conta que você acabou de fazer é o método da casa aplicado a um caso: achar o gasto
+        que passa despercebido, mostrar quanto ele custa por ano e apontar o que resolve. O
+        mesmo vale para cozinha, casa, carro, pet e eletrônicos — só que ali a solução costuma
+        ser um produto, e não um sistema. <strong>Quando a indicação é de afiliado, está
+        sempre sinalizada.</strong>
       </p>
     </div>
   </section>
@@ -183,14 +188,15 @@ const steps = [
 
   <!-- ================= COMECE PELOS COMPARATIVOS ================= -->
   {latestArticles.length > 0 && (
-    <section class="section section-tint" aria-label="Comparativos em destaque">
+    <section id="comparativos" class="section section-tint" aria-label="Comparativos em destaque">
       <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">Comparativos</p>
-          <h2>Leia o comparativo antes de decidir.</h2>
+          <p class="eyebrow">Comparativos publicados</p>
+          <h2>Produtos testados e comparados antes de virar indicação.</h2>
           <p class="lede">
-            Cada indicação do site vem de um comparativo publicado antes — o produto,
-            o motivo e o link ficam sempre no mesmo lugar.
+            Nenhum item entra aqui sem um comparativo publicado antes: qual problema ele
+            resolve, contra o que foi comparado, quanto custa e quando <em>não</em> vale a
+            pena. O produto, o motivo e o link ficam sempre no mesmo lugar.
           </p>
         </div>
 
@@ -339,6 +345,16 @@ const steps = [
     margin: 1.3rem 0 2.1rem;
   }
   .hero-lede strong { color: #fff; font-weight: 600; }
+  .hero-atalho {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+  }
+  .hero-atalho a {
+    color: var(--accent-lt);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
 
   /* ---------- MINI-DIAGNÓSTICO NO HERO ---------- */
   .hero-calc {
