@@ -223,6 +223,21 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
   .sources a{color:var(--ink-soft)}
 
 
+  /* autoria: quem assina o método, em nível de marca (sem dado pessoal) */
+  .autoria{
+    background:var(--paper-raised);border:1px solid var(--line);
+    border-left:3px solid var(--kept);
+    border-radius:var(--radius);padding:22px 20px;margin:18px 0 26px;
+  }
+  .autoria-marca{
+    font-family:"Poppins",sans-serif;font-weight:700;font-size:17px;
+    letter-spacing:-.02em;color:var(--ink);margin:0 0 12px;
+  }
+  .autoria-marca strong{font-weight:800;color:var(--kept)}
+  .autoria p{margin:0 0 12px;font-size:15.5px;line-height:1.62;color:var(--ink-soft)}
+  .autoria p:last-child{margin-bottom:0}
+  .autoria strong{color:var(--ink)}
+
   /* ---------- oferta ---------- */
   .oferta{
     background:var(--ink);color:var(--paper);
@@ -620,6 +635,15 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     <h2>Dá para fazer sem software pago?</h2>
     <p>Dá. O essencial funciona com o WhatsApp Business que você já tem e uma planilha: respostas rápidas configuradas, etiquetas para marcar quem já confirmou, lista de espera organizada e um registro simples do que aconteceu em cada horário.</p>
     <p>Sistema de gestão acelera e reduz trabalho manual, mas não é ele que resolve. O que resolve é ter um processo definido para as três frentes — e a maioria dos negócios que compra software continua sem processo, e continua com o mesmo buraco.</p>
+
+    <h2 id="quem-faz">Quem faz o Protocolo VAGA</h2>
+
+    <div class="autoria">
+      <p class="autoria-marca">Resolve <strong>Simples</strong></p>
+      <p>O Protocolo VAGA é <strong>produto próprio da Resolve Simples</strong> — não é indicação de terceiro e não existe comissão de afiliado envolvida aqui. Quando esta página recomenda o Protocolo, ela está recomendando o que a própria casa fez, e assume o resultado.</p>
+      <p>A Resolve Simples publica comparativos sobre problemas pequenos que custam caro todo mês em negócios e em casa. O critério é sempre o mesmo: o problema precisa ser real e recorrente, a solução precisa ser aplicável em dias e não em meses, e o custo precisa ser pequeno perto do que o problema já tira do caixa. Um desses comparativos trata exatamente deste assunto — <a href="/artigos/como-reduzir-faltas-agenda-clinica-estetica/">ligação, SMS ou WhatsApp automático: o que realmente reduz falta</a>.</p>
+      <p>É por isso também que a calculadora acima trabalha com <strong>os seus números, não com uma média inventada</strong>. Não existe estatística brasileira confiável de faltas para salão, barbearia e estética — e, em vez de fabricar uma, esta página diz isso na cara e cita o estudo que de fato existe, na área de saúde. Quem promete um número exato do seu setor está chutando.</p>
+    </div>
 
     <h2>Perguntas frequentes</h2>
 
