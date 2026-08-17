@@ -923,6 +923,25 @@ const jsonLd = "{\n  \"@context\":\"https://schema.org\",\n  \"@graph\":[\n    {
     }, 350);
   });
 
+  // Prefill vindo do mini-diagnóstico da home: a pessoa já informou esses
+  // números lá, não faz sentido pedir de novo. Só aceita chave conhecida e
+  // valor numérico dentro da faixa do próprio controle.
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    var aplicou = false;
+    chaves.forEach(function(k){
+      if (!params.has(k)) return;
+      var v = parseFloat(params.get(k));
+      if (!isFinite(v)) return;
+      var c = C[k];
+      v = Math.min(Math.max(v, +c.r.min), +c.r.max);
+      c.r.value = v; c.n.value = v;
+      ativar(k);
+      aplicou = true;
+    });
+    if (aplicou) calcular();
+  })();
+
   calcular();
 })();
 `}></script>
