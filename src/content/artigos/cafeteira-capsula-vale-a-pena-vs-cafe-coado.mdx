@@ -1,0 +1,72 @@
+---
+title: "Cafeteira de Cápsula Vale a Pena? A Conta Contra o Café Coado"
+description: "Cápsula ou café coado: descubra em três passos quanto a sua xícara custa por ano e em qual rotina a cafeteira de cápsula realmente compensa."
+pubDate: 2026-09-01
+niches: ["cozinha"]
+draft: false
+---
+
+import Callout from '../../components/Callout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { OFFERS } from '../../consts';
+
+export const cozinha = OFFERS.find((o) => o.slug === 'cozinha');
+export const maquina = cozinha.page.products.find((p) => p.name.includes('Dolce Gusto Genio'));
+export const capsulas = cozinha.page.products.find((p) => p.name.includes('10 Cápsulas'));
+
+A cafeteira de cápsula é barata na loja e cara na cozinha — o preço que pesa não é o da máquina, é o da cápsula, todo santo dia. Resposta direta: **até duas xícaras por dia**, e para quem toma sozinho, a cápsula compensa pela praticidade. **Três ou mais por dia, ou mais de uma pessoa tomando café em casa**, o coado ganha — e não ganha por pouco.
+
+## Você não está comparando duas cafeteiras
+
+Está comparando dois contratos. O coado cobra uma vez (a térmica, o coador) e barato para sempre. A cápsula cobra pouco na entrada e cobra de novo em toda xícara, pelo resto da vida da máquina.
+
+Por isso a promoção da máquina é a parte menos importante da decisão: o desconto é na entrada de um custo que é recorrente.
+
+## A conta: quanto custa a sua xícara por ano
+
+Não use média de internet. Use os seus números:
+
+1. **Quantas xícaras de café a sua casa toma por dia?** Conte todo mundo, incluindo a do fim da tarde.
+2. **Multiplique por 365.** Esse é o seu volume anual de xícaras.
+3. **Multiplique pelo preço de uma cápsula** — o valor unitário da caixa que você compraria. Depois refaça o mesmo cálculo com o pó: um pacote de café rende dezenas de xícaras, então divida o preço do pacote pelo número de xícaras que ele faz na sua casa.
+
+O número da primeira conta costuma assustar mais que o preço da máquina — e ele volta no ano seguinte, e no outro, enquanto a máquina existir.
+
+<Callout type="atencao">
+  Máquina de cápsula prende você a um sistema. Cada marca usa um formato próprio, e a
+  cápsula compatível de terceiros nem sempre é aceita pelo mecanismo. Antes de comprar,
+  confira o preço e a disponibilidade das cápsulas daquele sistema específico na sua
+  cidade — não do café em geral.
+</Callout>
+
+## A cápsula faz café melhor?
+
+Faz café **mais constante**, que não é a mesma coisa. Dose, moagem e pressão vêm prontas de fábrica, então a xícara ruim quase não acontece — e a excepcional também não. A cápsula não vence o coado bem-feito, com pó fresco e água na temperatura certa. Ela vence o coado mal-feito, que é o que a casa apressada produz de segunda a sexta.
+
+## Onde cada um decepciona
+
+**A cápsula decepciona** quando chega visita: seis xícaras viram seis cápsulas e uma fila na máquina, enquanto a térmica serve todo mundo de uma vez. Decepciona também no descarte — é lixo diário, e o programa de reciclagem da marca exige um esforço que quase ninguém mantém depois do segundo mês.
+
+**O coado decepciona** na xícara única. Passar café para uma pessoa às 6h, lavar o coador e guardar tudo é a fricção que faz gente desistir do café em casa e comprar na padaria — o cenário mais caro dos três.
+
+## Qual comprar
+
+- **Mora sozinho e toma uma ou duas xícaras:** cafeteira de cápsula. A conta anual ainda é pequena e a praticidade se paga em manhãs que você não desiste.
+- **Casal ou família que toma café o dia todo:** coado, sem hesitar. Passe uma vez, mantenha na térmica; o custo por xícara é uma fração.
+- **Quer as duas coisas:** máquina mais simples da linha, e a cápsula como café da correria — não como café da casa. Máquina cara não muda o custo da cápsula, e é ele que decide o total.
+- **Recebe gente com frequência:** térmica e coado. Máquina de cápsula em roda de visita é gargalo.
+
+## Se a cápsula for o seu caso
+
+<ProductCard product={maquina} />
+
+<ProductCard product={capsulas} />
+
+<Callout type="nota">
+  Preço e nota mudam com frequência — os valores acima refletem a última checagem. Confira
+  o preço atual na página do produto, e faça a conta da seção anterior com o valor do dia.
+</Callout>
+
+O erro caro é escolher pelo preço da máquina e descobrir o custo real três meses depois, quando a caixa de cápsulas já virou item fixo da lista do mercado — a mesma armadilha de tamanho que aparece em [air fryer 4L ou 8L](/artigos/air-fryer-4l-ou-8l-qual-tamanho-vale-a-pena/).
+
+[Veja a seleção completa de cozinha](/cozinha/).
