@@ -1,0 +1,71 @@
+---
+title: "Filtro de Linha Protege Contra Raio? O Que Ele Faz e o Que Não Faz"
+description: "Filtro de linha comum e protetor contra surto não são a mesma coisa. Veja qual dos dois salva seus aparelhos e faça a conta do que você tem ligado na tomada."
+pubDate: 2026-09-05
+niches: ["eletronicos"]
+draft: false
+---
+
+import Callout from '../../components/Callout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { OFFERS } from '../../consts';
+
+export const eletronicos = OFFERS.find((o) => o.slug === 'eletronicos');
+export const filtro = eletronicos.page.products.find((p) => p.name.includes('iClamper'));
+
+O filtro de linha de R$ 20 do mercado não protege nada — ele é uma régua de tomadas com um fusível dentro. Resposta direta: se o que você quer é **mais tomadas**, qualquer régua resolve. Se o que você quer é **não perder a TV num pico de energia**, você precisa de um produto com proteção contra surto (DPS), e isso é outra categoria de produto, com outro preço.
+
+## O que o filtro de linha comum realmente faz
+
+Ele divide uma tomada em várias e, na maioria dos modelos, desarma quando a corrente passa de um limite. Só isso.
+
+Esse fusível existe para o próprio filtro não pegar fogo com aparelho demais ligado — é proteção contra sobrecarga, não contra surto. São problemas diferentes: sobrecarga é corrente demais por tempo prolongado; surto é um pico de tensão que dura microssegundos. O fusível não é rápido o bastante para o segundo caso — quando ele reage, o pico já passou pelos seus aparelhos.
+
+## Então o que protege de verdade?
+
+Um DPS — dispositivo de proteção contra surtos —, que absorve o excesso de tensão e desvia para o terra antes de chegar ao aparelho.
+
+A palavra na embalagem é **surto**, não "filtro": produto que só promete "filtrar ruídos" ou "proteger contra sobrecarga" não é a mesma coisa. E um detalhe que quase ninguém checa — boa parte dos DPS depende de aterramento para desviar a energia. Em instalação antiga sem fio terra, a proteção fica parcial.
+
+<Callout type="atencao">
+  Raio que cai direto na rede não é o cenário comum, e nenhum produto de tomada garante
+  proteção contra descarga direta. O que queima aparelho no dia a dia é o pico de tensão
+  que vem depois — de religamento da rede, de queda de galho no poste, de oscilação
+  quando a energia volta. É contra isso que o DPS trabalha.
+</Callout>
+
+## A conta: quanto está ligado naquela régua?
+
+Não é sobre o preço do filtro. É sobre o que ele está segurando:
+
+1. **Liste o que está na régua atrás da TV** — televisor, console, decodificador, soundbar, roteador.
+2. **Some o preço de reposição de cada um.** Não o que você pagou: o que custaria repor hoje.
+3. **Compare com o preço de um DPS.**
+
+O número da linha 2 passa de mil reais com facilidade. Quem liga computador, monitor e HD externo na mesma régua chega lá mais rápido — e aí há um agravante sem preço de reposição, que é o arquivo perdido no HD.
+
+## Onde não vale a pena gastar
+
+Em proteção para o que não precisa. Abajur, ventilador e carregador de celular não justificam DPS — se queimarem, o prejuízo é o próprio aparelho, barato e substituível. Você não está comprando o dispositivo, está comprando a diferença entre perder o que está ligado nele e não perder; onde essa diferença é pequena, a régua comum resolve.
+
+## Precisa de um por tomada?
+
+Não. O critério é agrupar por valor: proteção onde estão os aparelhos caros, régua comum no resto da casa. Espalhar DPS por todos os cômodos é gastar em proteção que não protege nada relevante.
+
+## Qual comprar
+
+- **TV, console e home theater na mesma parede:** DPS. É o agrupamento mais caro da casa na maioria dos lares e o mais exposto a oscilação.
+- **Computador com trabalho dentro:** DPS, e considere nobreak se você perde trabalho quando a luz cai — o DPS protege contra pico, mas não mantém nada ligado.
+- **Só quer mais tomadas para itens baratos:** régua comum, sem culpa.
+- **Região com queda de energia frequente:** priorize DPS onde há aparelho caro. Toda religação da rede é uma oportunidade de pico.
+
+<ProductCard product={filtro} />
+
+<Callout type="nota">
+  Preço e nota mudam com frequência — o valor acima reflete a última checagem. Confira na
+  página do produto antes de decidir, e confirme se a sua instalação tem aterramento.
+</Callout>
+
+O erro caro aqui é comprar régua barata achando que ela protege e descobrir o contrário no dia do pico — a mesma lógica de checar o que o produto realmente entrega que aparece em [power bank de 20.000 ou 10.000 mAh](/artigos/power-bank-20000-ou-10000-mah-qual-comprar/).
+
+[Veja a seleção completa de eletrônicos](/eletronicos/).
