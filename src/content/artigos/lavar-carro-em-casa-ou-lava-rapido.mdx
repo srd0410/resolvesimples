@@ -1,0 +1,64 @@
+---
+title: "Lavar o Carro em Casa ou no Lava-Rápido? A Conta Que Ninguém Faz"
+description: "Comparamos lavar o carro em casa com kit próprio e pagar lava-rápido toda semana. A conta do ano inteiro muda a resposta pra quem lava com frequência."
+pubDate: 2026-09-16
+niches: ["carro"]
+draft: false
+---
+
+import ProductCard from '../../components/ProductCard.astro';
+import Callout from '../../components/Callout.astro';
+import { OFFERS } from '../../consts';
+
+export const carro = OFFERS.find((o) => o.slug === 'carro');
+export const kit = carro.page.products.find((p) => p.name.includes('Vonixx'));
+
+Lava-rápido parece mais prático até você somar quanto gasta no ano. Resposta direta: se você lava o carro **mais de uma vez por mês**, o kit próprio se paga em poucos meses; se lava **raramente**, o lava-rápido sai mais barato — você não amortiza o custo do kit.
+
+## A conta: quantas lavagens por ano?
+
+Faça com o seu carro, não com a média de internet:
+
+1. **Quantas vezes você lava o carro por mês?** Multiplique por 12.
+2. **Quanto custa cada lavagem no lava-rápido?** Multiplique pelo número de lavagens do ano.
+3. **Compare com o preço de um kit de shampoo e cera**, que rende dezenas de lavagens.
+
+Um kit de shampoo automotivo e cera custa menos que 3 ou 4 lavagens de lava-rápido, e rende o ano inteiro. A partir da quinta lavagem no ano, o kit já se pagou — o resto é economia líquida.
+
+## Lava-rápido lava melhor?
+
+Não necessariamente — lava **mais rápido**, que é diferente. Muitos usam a mesma esponja e o mesmo balde em vários carros, o que risca a pintura com o tempo (é a famosa "teia de aranha" nos micro-riscos visíveis sob sol forte). Lavando em casa, você controla: esponja própria, balde só seu, técnica de dois baldes para não voltar sujeira pro pano.
+
+<Callout type="atencao">
+  Shampoo neutro para automóvel não é a mesma coisa que detergente de louça. Detergente
+  comum remove a cera de proteção da pintura a cada lavagem — o carro fica limpo, mas
+  desprotegido, e a pintura oxida mais rápido com o sol.
+</Callout>
+
+## Onde cada um decepciona
+
+**Lavar em casa decepciona** quando falta tempo ou espaço — apartamento sem vaga própria com torneira é o cenário clássico onde o lava-rápido resolve um problema que o kit não resolve.
+
+**O lava-rápido decepciona** no resultado inconsistente: depende de quem lavou naquele dia, e a cera "de brinde" raramente é aplicada com o cuidado que o próprio motorista teria com o carro dele.
+
+## Dá pra misturar os dois?
+
+Sim, e faz sentido: lavagem de manutenção em casa a cada 1-2 semanas, e um lava-rápido completo (com aspiração interna e detalhamento) a cada 2-3 meses. Isso reduz a frequência do lava-rápido sem abrir mão da limpeza profunda ocasional.
+
+## Qual escolher
+
+- **Lava mais de uma vez por mês:** kit próprio. A economia aparece já nos primeiros meses.
+- **Lava raramente, sem rotina fixa:** lava-rápido. Não vale comprar kit para usar duas vezes por ano.
+- **Mora em apartamento sem vaga com torneira:** lava-rápido é a única opção prática, mesmo lavando com frequência.
+- **Se importa com a pintura a longo prazo:** kit próprio com técnica correta preserva mais que lavagem apressada de terceiros.
+
+<ProductCard product={kit} />
+
+<Callout type="nota">
+  Preço e nota mudam com frequência — o valor acima reflete a última checagem. Confira o
+  preço atual na página do produto antes de decidir.
+</Callout>
+
+O erro caro é pagar lava-rápido toda semana achando que sai mais barato que comprar o próprio kit — a mesma armadilha de "parece mais barato por vez, mas não é" que aparece em [filtro de linha protege contra raio](/artigos/filtro-de-linha-protege-contra-raio/).
+
+[Veja a seleção completa de carro](/carro/).
