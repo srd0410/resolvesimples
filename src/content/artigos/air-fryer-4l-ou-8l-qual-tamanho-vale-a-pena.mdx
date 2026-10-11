@@ -2,12 +2,17 @@
 title: "Air Fryer 4L ou 8L: Qual Tamanho Vale a Pena para a Sua Casa?"
 description: "Comparamos air fryer de 4L e de 8L para descobrir qual tamanho serve à sua rotina — e por que o modelo maior costuma sair caro duas vezes."
 pubDate: 2026-08-17
-updatedDate: 2026-10-07
+updatedDate: 2026-10-11
 niches: ["cozinha"]
 draft: false
 ---
 
+import ProductCard from '../../components/ProductCard.astro';
 import Callout from '../../components/Callout.astro';
+import { OFFERS } from '../../consts';
+
+export const cozinha = OFFERS.find((o) => o.slug === 'cozinha');
+export const mondial = cozinha.page.products.find((p) => p.name.includes('Mondial Oven 12L'));
 
 Air fryer parada no armário custa duas vezes: o preço pago e a bancada ocupada. Resposta direta: para **uma ou duas pessoas**, a de 4L resolve tudo e ainda esquenta mais rápido. Para **família de quatro ou mais**, a 8L compensa — abaixo disso, você paga por litros que não usa.
 
@@ -52,8 +57,11 @@ Não, e quem compra esperando isso se frustra. Assado grande, bolo alto e volume
 
 Só sem cobrir os furos. Bloquear a passagem de ar anula o princípio de funcionamento do aparelho — e é o erro mais comum de quem troca de forno para air fryer sem se informar.
 
-{/* PRODUTOS: quando os links de afiliado estiverem definidos, adicionar aqui o
-    bloco de comparação (CompareTable + ProductCard), como nos demais artigos. */}
+## E se a família é grande ou você quer um modelo tipo forno?
+
+Acima de 8L entra outra categoria: a air fryer tipo forno, com assadeiras e porta frontal, que faz o trabalho de um forno pequeno. É o caso da Mondial de 12L abaixo, que o autor usa há um ano.
+
+<ProductCard product={mondial} />
 
 Mesma lógica de tamanho vale para outro aparelho que ocupa espaço fixo na bancada: veja se [cafeteira de cápsula compensa contra o café coado](/artigos/cafeteira-capsula-vale-a-pena-vs-cafe-coado/) antes de decidir qual comprar. E se o problema na sua cozinha é mais frequente do que espaço — carne esquecida no freezer na hora de cozinhar —, veja se [a tábua de descongelar rápido](/artigos/tabua-de-descongelar-rapido-vale-a-pena/) resolve.
 

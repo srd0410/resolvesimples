@@ -2,11 +2,17 @@
 title: "Comedouro Automático para Pet Vale a Pena ou é Só Comodidade?"
 description: "Comparamos o comedouro automático com deixar ração à vontade para ver o que realmente muda no peso do pet, na rotina e no gasto com ração."
 pubDate: 2026-08-17
+updatedDate: 2026-10-11
 niches: ["pet"]
 draft: false
 ---
 
+import ProductCard from '../../components/ProductCard.astro';
 import Callout from '../../components/Callout.astro';
+import { OFFERS } from '../../consts';
+
+export const pet = OFFERS.find((o) => o.slug === 'pet');
+export const comedouro = pet.page.products.find((p) => p.name.includes('Comedouro'));
 
 Deixar a vasilha cheia parece resolver — até o pet engordar ou a ração acabar num dia em que você não estava em casa. Resposta direta: o **comedouro automático** compensa para quem tem horário irregular ou pet que come rápido demais; **deixar à vontade** só funciona bem com animal que se autorregula, o que é comum em gato e raro em cachorro.
 
@@ -57,7 +63,10 @@ Para cachorro, o ganho maior é o controle de porção e o fim da mendicância d
 
 Comedouro não resolve isso — é outro produto, e para gato costuma importar até mais que a ração. Veja o [comparativo de bebedouro fonte para gato](/artigos/bebedouro-fonte-gato-vale-a-pena-vs-tigela-comum/).
 
-{/* PRODUTOS: quando os links de afiliado estiverem definidos, adicionar aqui o
-    bloco de comparação (CompareTable + ProductCard), como nos demais artigos. */}
+## Qual comedouro automático escolher?
+
+Se a conta acima fez sentido para o seu caso, este é o modelo que indicamos hoje: porção programada pelo app, no mesmo horário todo dia.
+
+<ProductCard product={comedouro} />
 
 Quer ver o resto da seleção? [Veja a seleção completa de pet](/pet/).
