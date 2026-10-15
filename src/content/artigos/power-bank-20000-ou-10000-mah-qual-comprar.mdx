@@ -2,12 +2,19 @@
 title: "Power Bank de 10.000 ou 20.000 mAh: Qual Realmente Vale o Peso?"
 description: "Comparamos power bank de 10.000 e de 20.000 mAh para ver quantas cargas cada um realmente entrega — e por que o número da caixa engana."
 pubDate: 2026-08-17
-updatedDate: 2026-09-05
+updatedDate: 2026-10-14
 niches: ["eletronicos"]
 draft: false
 ---
 
+import ProductCard from '../../components/ProductCard.astro';
+import CompareTable from '../../components/CompareTable.astro';
 import Callout from '../../components/Callout.astro';
+import { OFFERS } from '../../consts';
+
+export const eletronicos = OFFERS.find((o) => o.slug === 'eletronicos');
+export const pb10 = eletronicos.page.products.find((p) => p.name.includes('Audiophile 10.000'));
+export const pb20 = eletronicos.page.products.find((p) => p.name.includes('i2GO Turbo 20.000'));
 
 Power bank parado na bolsa, pesado, é tão inútil quanto um sem carga. Resposta direta: **10.000 mAh** é o ponto certo para uso diário — cabe no bolso e dá uma carga cheia de celular; **20.000 mAh** só compensa para viagem longa ou quem carrega mais de um aparelho, porque o peso dobra.
 
@@ -56,8 +63,18 @@ Sim, com uma trava: a Anac segue o limite de **100 Wh** por unidade sem necessid
 
 Faz. Bateria de lítio se desgasta mais rápido em ciclos completos de descarga — o ideal é recarregar antes de chegar a zero, sempre que der.
 
-{/* PRODUTOS: quando os links de afiliado estiverem definidos, adicionar aqui o
-    bloco de comparação (CompareTable + ProductCard), como nos demais artigos. */}
+## Os dois modelos que indicamos
+
+<CompareTable products={[pb10, pb20]} label="power bank" />
+
+<ProductCard product={pb10} />
+
+<ProductCard product={pb20} />
+
+<Callout type="nota">
+  Preço e nota mudam com frequência no Mercado Livre — confira o valor atual na página
+  do produto antes de decidir.
+</Callout>
 
 Outro item de energia que quase todo mundo compra achando que faz uma coisa e faz outra: veja se o [filtro de linha realmente protege contra raio](/artigos/filtro-de-linha-protege-contra-raio/).
 
