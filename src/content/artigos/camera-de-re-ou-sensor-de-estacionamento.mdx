@@ -2,11 +2,17 @@
 title: "Câmera de Ré ou Sensor de Estacionamento: Qual Evita Mais Batida?"
 description: "Comparamos câmera de ré e sensor de estacionamento para ver qual realmente evita a batida de baliza — e por que instalar os dois costuma sair mais barato que um retoque."
 pubDate: 2026-08-17
+updatedDate: 2026-10-14
 niches: ["carro"]
 draft: false
 ---
 
+import ProductCard from '../../components/ProductCard.astro';
 import Callout from '../../components/Callout.astro';
+import { OFFERS } from '../../consts';
+
+export const carro = OFFERS.find((o) => o.slug === 'carro');
+export const camera = carro.page.products.find((p) => p.name.includes('Câmera de Ré'));
 
 Uma batida boba de ré custa mais que qualquer acessório do carro — e quase sempre acontece a menos de 5 km/h. Resposta direta: o **sensor** é melhor para não encostar em nada, porque avisa mesmo quando você não está olhando; a **câmera** é melhor para enxergar o que está atrás, principalmente criança e obstáculo baixo. Um alerta, o outro mostra.
 
@@ -54,7 +60,15 @@ Se for escolher pela ficha, olhe a abertura do diafragma e se o modelo cita vis�
 
 Acessório eletrônico instalado depois deve ser informado à seguradora. Não costuma impedir a contratação, mas omitir pode gerar discussão na hora do sinistro — vale o telefonema rápido antes de instalar.
 
-{/* PRODUTOS: quando os links de afiliado estiverem definidos, adicionar aqui o
-    bloco de comparação (CompareTable + ProductCard), como nos demais artigos. */}
+## A câmera que indicamos
+
+Para quem já tem multimídia com tela, este é o modelo de entrada que indicamos hoje.
+
+<ProductCard product={camera} />
+
+<Callout type="atencao">
+  Esta câmera usa cabo RCA e precisa de uma tela com entrada RCA. Se o seu carro não tem
+  multimídia, confira antes se precisa comprar um monitor à parte.
+</Callout>
 
 Quer ver o resto da seleção? [Veja a seleção completa de carro](/carro/).

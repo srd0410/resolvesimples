@@ -2,11 +2,19 @@
 title: "Escova Secadora ou Secador com Escova: Qual Compensa em Casa?"
 description: "Comparamos a escova secadora e a dupla secador mais escova para ver qual entrega escova em casa com menos tempo, menos dano ao fio e menos gasto no salão."
 pubDate: 2026-08-17
+updatedDate: 2026-10-14
 niches: ["estetica"]
 draft: false
 ---
 
+import ProductCard from '../../components/ProductCard.astro';
+import CompareTable from '../../components/CompareTable.astro';
 import Callout from '../../components/Callout.astro';
+import { OFFERS } from '../../consts';
+
+export const eletronicos = OFFERS.find((o) => o.slug === 'eletronicos');
+export const barata = eletronicos.page.products.find((p) => p.name.includes('Escova Secadora 3 em 1'));
+export const mondial = eletronicos.page.products.find((p) => p.name.includes('Escova Rotativa Mondial'));
 
 Escova no salão é o gasto que ninguém soma: parece pequeno por semana e vira um valor alto no ano. Resposta direta: a **escova secadora** ganha para quem faz escova em si mesma, porque seca e modela com uma mão só. A dupla **secador + escova** ganha em cabelo longo e volumoso — mas exige as duas mãos e técnica.
 
@@ -52,7 +60,17 @@ Duas consequências práticas: a escova secadora aplica calor **em contato diret
 
 Quase nunca. Não selar com ar frio no fim de cada mecha, dormir com o cabelo solto e a umidade do ambiente derrubam o resultado feito com qualquer equipamento. O botão de ar frio é gratuito e é o que mais aumenta a durabilidade da escova.
 
-{/* PRODUTOS: quando os links de afiliado estiverem definidos, adicionar aqui o
-    bloco de comparação (CompareTable + ProductCard), como nos demais artigos. */}
+## As duas escovas que indicamos
+
+<CompareTable products={[barata, mondial]} label="escova secadora" />
+
+<ProductCard product={barata} />
+
+<ProductCard product={mondial} />
+
+<Callout type="atencao">
+  A escova mais barata é só 127V. Confira a voltagem da tomada de casa antes de comprar:
+  em 220V, escolha a versão bivolt.
+</Callout>
 
 Quer ver o resto da seleção? [Veja a seleção completa de estética](/estetica/).

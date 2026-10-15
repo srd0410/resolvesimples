@@ -2,11 +2,19 @@
 title: "Robô Aspirador ou Aspirador Vertical: Qual Economiza Mais Tempo?"
 description: "Comparamos robô aspirador e aspirador vertical sem fio para ver qual resolve a limpeza da casa — e por que os dois costumam acabar convivendo."
 pubDate: 2026-08-17
+updatedDate: 2026-10-14
 niches: ["casa"]
 draft: false
 ---
 
+import ProductCard from '../../components/ProductCard.astro';
+import CompareTable from '../../components/CompareTable.astro';
 import Callout from '../../components/Callout.astro';
+import { OFFERS } from '../../consts';
+
+export const casa = OFFERS.find((o) => o.slug === 'casa');
+export const robo = casa.page.products.find((p) => p.name.includes('Robô Aspirador'));
+export const vertical = casa.page.products.find((p) => p.name.includes('Aspirador de Pó Vertical'));
 
 Limpar o chão é a tarefa que mais se repete e a que menos dá sensação de progresso. Resposta direta: o **robô** ganha quando o problema é o pó e o pelo do dia a dia; o **vertical sem fio** ganha quando é sujeira pontual e limpeza a fundo. São problemas diferentes — por isso tanta gente termina com os dois.
 
@@ -60,7 +68,12 @@ A autonomia anunciada é quase sempre no modo mínimo, sem escova motorizada. No
 
 É a combinação mais comum entre quem usa robô há tempo: um sustenta o dia a dia, o outro resolve o que sobra. Só não compre os dois de uma vez — resolva a queixa de hoje e veja se a outra ainda incomoda em um mês.
 
-{/* PRODUTOS: quando os links de afiliado estiverem definidos, adicionar aqui o
-    bloco de comparação (CompareTable + ProductCard), como nos demais artigos. */}
+## Os dois modelos que indicamos
+
+<CompareTable products={[robo, vertical]} label="aspirador" />
+
+<ProductCard product={vertical} />
+
+<ProductCard product={robo} />
 
 Quer ver o resto da seleção? [Veja a seleção completa de casa](/casa/).
