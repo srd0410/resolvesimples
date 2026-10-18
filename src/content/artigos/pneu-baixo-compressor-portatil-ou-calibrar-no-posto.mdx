@@ -12,6 +12,7 @@ import { OFFERS } from '../../consts';
 
 export const carro = OFFERS.find((o) => o.slug === 'carro');
 export const compressor = carro.page.products.find((p) => p.name.includes('Compressor'));
+export const kitReparo = carro.page.products.find((p) => p.name.includes('Reparo de Pneu'));
 
 Se você calibra os pneus toda semana ou a cada 15 dias, como os fabricantes de pneu orientam, um compressor portátil compensa: você calibra em casa, com o pneu frio, sem fila. Se você só lembra do pneu quando ele já está baixo e passa pelo posto com frequência, o calibrador do posto continua resolvendo de graça.
 
@@ -36,6 +37,12 @@ Ele leva a calibragem para a garagem. Liga no carro ou na tomada, conforme o mod
 ## Quando o calibrador do posto ainda basta?
 
 Para quem passa no posto toda semana e espera o pneu esfriar antes de calibrar, ou mora perto de um posto e roda pouco até ele, o calibrador gratuito resolve. O compressor também não substitui a borracharia: se o pneu perde pressão com frequência, pode haver furo, válvula com defeito ou vazamento, e isso precisa de conserto, não de mais ar.
+
+## E se o pneu estiver furado, o compressor resolve?
+
+Só por um tempo. Se o pneu perde pressão com frequência, pode haver furo, válvula com defeito ou vazamento, e isso precisa de conserto, não de mais ar. Para um furo pequeno na banda de rodagem de um pneu sem câmara, um kit de reparo com tiras permite chegar à borracharia; ele não substitui o conserto definitivo, e furo na lateral ou pneu rasgado exigem borracheiro.
+
+<ProductCard product={kitReparo} />
 
 ## Como saber a pressão certa do seu carro?
 
