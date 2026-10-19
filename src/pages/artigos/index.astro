@@ -1,7 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import BannerHero from '../../components/BannerHero.astro';
 import { getCollection } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+
+// Banner do acervo: src/assets/banners/acervo-artigos-banner.jpg (opcional).
+const found = import.meta.glob<{ default: ImageMetadata }>('../../assets/banners/acervo-artigos-banner.jpg', { eager: true });
+const banner = Object.values(found)[0]?.default;
+const bannerAlt = "Caderno aberto, caneta, xícara, pote, fone e pano verde organizados sobre mesa.";
 
 const allArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -11,17 +18,14 @@ const allArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).s
   title="Artigos e comparativos"
   description="Comparativos objetivos e guias práticos para escolher o produto certo, sem enrolação e sem ficha técnica que não importa."
 >
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="wrap hero-inner">
-      <p class="eyebrow eyebrow-on-dark">Artigos</p>
-      <h1>Comparativos e guias, sem enrolação.</h1>
-      <p class="hero-lede">
-        Antes de qualquer indicação, a gente explica o porquê. Aqui você encontra os
-        comparativos completos por trás da seleção de cada área do site.
-      </p>
-    </div>
-  </section>
+  <BannerHero image={banner} alt={bannerAlt} width="44rem">
+    <p slot="top" class="eyebrow eyebrow-on-dark">Artigos</p>
+    <h1>Comparativos e guias, sem enrolação.</h1>
+    <p slot="detail" class="hero-lede">
+      Antes de qualquer indicação, a gente explica o porquê. Aqui você encontra os
+      comparativos completos por trás da seleção de cada área do site.
+    </p>
+  </BannerHero>
 
   <section class="section">
     <div class="wrap">
@@ -45,25 +49,7 @@ const allArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).s
 </Layout>
 
 <style>
-  .hero {
-    position: relative;
-    background: var(--command);
-    color: #fff;
-    padding: clamp(2.5rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 4.5rem);
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-      radial-gradient(ellipse 70% 55% at 12% 0%, rgba(13, 138, 99, 0.28), transparent 65%),
-      radial-gradient(ellipse 55% 50% at 95% 15%, rgba(240, 135, 44, 0.20), transparent 62%),
-      linear-gradient(180deg, var(--command-2) 0%, var(--command) 70%);
-  }
-  .hero-inner { max-width: 44rem; position: relative; }
-  .hero h1 { color: #fff; }
+  :global(.hero) h1 { color: #fff; }
   .hero-lede {
     font-size: clamp(1.02rem, 1.6vw, 1.16rem);
     line-height: 1.62;
