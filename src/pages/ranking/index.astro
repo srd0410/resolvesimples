@@ -1,6 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import BannerHero from '../../components/BannerHero.astro';
 import { getRanking, slugifyProduct } from '../../consts';
+import type { ImageMetadata } from 'astro';
+
+// Banner do ranking: src/assets/banners/ranking-banner.jpg (opcional).
+const found = import.meta.glob<{ default: ImageMetadata }>('../../assets/banners/ranking-banner.jpg', { eager: true });
+const banner = Object.values(found)[0]?.default;
+const bannerAlt = "Pote hermético, fone sem fio e lanterna alinhados sobre prateleira clara.";
 
 const ranking = getRanking();
 ---
@@ -8,23 +15,20 @@ const ranking = getRanking();
   title="Ranking Geral"
   description="Todos os produtos indicados no resolvesimples, ordenados do melhor pro pior, em todas as categorias."
 >
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="wrap hero-inner">
-      <nav class="crumbs" aria-label="Você está em">
-        <a href="/">Início</a>
-        <span aria-hidden="true">/</span>
-        <span>Ranking Geral</span>
-      </nav>
-      <p class="eyebrow eyebrow-on-dark">Todas as categorias, um só lugar</p>
-      <h1>Ranking Geral do resolvesimples.</h1>
-      <p class="hero-lede">
-        Todo produto que passou no filtro de alguma categoria, ordenado do melhor pro pior
-        considerando nota, volume de avaliações e quão bem resolve o problema. Ofertas
-        ("só oferta boa") ficam fora daqui de propósito — este ranking é só de recomendação.
-      </p>
-    </div>
-  </section>
+  <BannerHero image={banner} alt={bannerAlt}>
+    <nav slot="top" class="crumbs" aria-label="Você está em">
+      <a href="/">Início</a>
+      <span aria-hidden="true">/</span>
+      <span>Ranking Geral</span>
+    </nav>
+    <p slot="top" class="eyebrow eyebrow-on-dark">Todas as categorias, um só lugar</p>
+    <h1>Ranking Geral do resolvesimples.</h1>
+    <p slot="detail" class="hero-lede">
+      Todo produto que passou no filtro de alguma categoria, ordenado do melhor pro pior
+      considerando nota, volume de avaliações e quão bem resolve o problema. Ofertas
+      ("só oferta boa") ficam fora daqui de propósito — este ranking é só de recomendação.
+    </p>
+  </BannerHero>
 
   <section class="section">
     <div class="wrap">
@@ -54,25 +58,7 @@ const ranking = getRanking();
 </Layout>
 
 <style>
-  .hero {
-    position: relative;
-    background: var(--command);
-    color: #fff;
-    padding: clamp(2.5rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 4.5rem);
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-      radial-gradient(ellipse 70% 55% at 12% 0%, rgba(13, 138, 99, 0.28), transparent 65%),
-      radial-gradient(ellipse 55% 50% at 95% 15%, rgba(240, 135, 44, 0.20), transparent 62%),
-      linear-gradient(180deg, var(--command-2) 0%, var(--command) 70%);
-  }
-  .hero-inner { max-width: 48rem; position: relative; }
-  .hero h1 { color: #fff; }
+  :global(.hero) h1 { color: #fff; }
   .hero-lede {
     font-size: clamp(1.02rem, 1.6vw, 1.16rem);
     line-height: 1.62;
