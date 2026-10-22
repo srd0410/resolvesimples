@@ -16,11 +16,11 @@ import SiteMenu from './SiteMenu.astro';
     </div>
 
     <nav class="nav" aria-label="Navegação principal">
-      <a href="/artigos/">Artigos</a>
+      <a href="/artigos/">Comparativos</a>
       <a href="/ranking/">Ranking</a>
       <a href="/#areas">Áreas</a>
       <a href="/#criterios">Critérios</a>
-      <a href="/#areas" class="btn btn-primary btn-sm">Ver soluções</a>
+      <a href="/#agenda" class="btn btn-primary btn-sm"><span class="label-wide">Para seu negócio</span><span class="label-mobile">Negócio</span></a>
     </nav>
   </div>
 </header>
@@ -83,7 +83,14 @@ import SiteMenu from './SiteMenu.astro';
   .nav a:hover { color: #fff; }
   .nav a.btn { color: #fff; }
 
+  .label-mobile { display: none; }
   @media (max-width: 640px) {
+    .label-wide, .logo-mark { display: none; }
+    .label-mobile { display: inline; }
+    .bar { gap: .5rem; padding-inline: 1rem; }
+    .bar-left { gap: .5rem; }
+    .logo-text { font-size: .95rem; }
+    .nav .btn { padding-inline: .7rem; white-space: nowrap; }
     .nav a:not(.btn) { display: none; }
   }
 </style>
