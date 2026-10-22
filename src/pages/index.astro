@@ -51,33 +51,109 @@ const steps = [
 ];
 ---
 <Layout
-  title="Comparativos e soluções simples para problemas que custam caro"
-  description="Comparamos produtos e ferramentas para problemas pequenos que saem caro todo mês — de faltas na agenda do salão a itens de casa, cozinha, carro e pet. Cada indicação vem de um comparativo publicado, com a conta feita e o critério explícito."
+  title="Comparativos de produtos e calculadora de faltas na agenda"
+  description="Compare produtos para casa, cozinha, eletrônicos, carro e pet. Para seu negócio, calcule o custo das faltas na agenda e conheça o Protocolo VAGA."
   hreflangEn="/en/"
 >
+  <section class="portal-hero" aria-labelledby="portal-title">
+    <div class="wrap">
+      <p class="eyebrow">Escolhas práticas. Critérios claros.</p>
+      <h1 id="portal-title">Compare antes de comprar.<br /><span>Resolva o que pesa no bolso.</span></h1>
+      <p class="portal-lede">Comparativos de produtos para o dia a dia e ferramentas para o seu negócio. Por onde você quer começar?</p>
+      <div class="entry-grid">
+        <a class="entry-card entry-products" href="#comparativos">
+          <span class="entry-label">Para sua casa e rotina</span>
+          <h2>Quero escolher um produto</h2>
+          <p>Compare opções para casa, cozinha, eletrônicos, carro e pet. Entenda os critérios antes de decidir.</p>
+          <span class="entry-action">Explorar comparativos <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="entry-card entry-business" href="#agenda">
+          <span class="entry-label">Para seu negócio</span>
+          <h2>Quero reduzir faltas na agenda</h2>
+          <p>Calcule o impacto dos horários vazios e conheça o Protocolo VAGA para organizar sua agenda.</p>
+          <span class="entry-action">Calcular minha perda <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+      <p class="portal-disclosure">Comparativos com critérios explicados · Indicações de afiliados sinalizadas · Calculadora gratuita</p>
+    </div>
+  </section>
+
+  <!-- ================= BARRA DE NÚMEROS ================= -->
+  <section class="stats-bar" aria-label="Números do portal">
+    <div class="wrap stats-inner">
+      <div class="stat">
+        <strong>{articlesCount}</strong>
+        <span>comparativo{articlesCount === 1 ? '' : 's'} publicado{articlesCount === 1 ? '' : 's'}</span>
+      </div>
+      <div class="stat">
+        <strong>{picksCount}</strong>
+        <span>produto{picksCount === 1 ? '' : 's'} indicado{picksCount === 1 ? '' : 's'}</span>
+      </div>
+      <div class="stat">
+        <strong>{areasCount}</strong>
+        <span>área{areasCount === 1 ? '' : 's'} cobertas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMECE PELOS COMPARATIVOS ================= -->
+  {latestArticles.length > 0 && (
+    <section id="comparativos" class="section section-tint" aria-label="Comparativos em destaque">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Comparativos publicados</p>
+          <h2>Encontre o comparativo para a sua próxima compra.</h2>
+          <p class="lede">
+            Nenhum item entra aqui sem um comparativo publicado antes: qual problema ele
+            resolve, contra o que foi comparado, quanto custa e quando <em>não</em> vale a
+            pena. O produto, o motivo e o link ficam sempre no mesmo lugar.
+          </p>
+        </div>
+
+        <div class="articles-grid">
+          {latestArticles.map((post) => (
+            <ArticleCard
+              href={`/artigos/${post.slug}/`}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              niches={post.data.niches}
+            />
+          ))}
+        </div>
+
+        <a href="/artigos/" class="see-all-articles">Ver todos os comparativos &rarr;</a>
+      </div>
+    </section>
+  )}
+
+  <!-- ================= ÁREAS ================= -->
+  <section id="areas" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Áreas que cobrimos</p>
+        <h2>Prefere explorar por categoria?</h2>
+        <p class="lede">
+          Um problema por vez, com a conta feita e a solução explicada. Escolha a área
+          que tem a ver com o seu caso.
+        </p>
+      </div>
+
+      <div class="offers-grid">
+        {OFFERS.map((offer) => <OfferCard offer={offer} />)}
+      </div>
+    </div>
+  </section>
+
   <!-- ================= HERO ================= -->
-  <section class="hero">
+  <section id="agenda" class="hero" aria-labelledby="agenda-title">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow eyebrow-on-dark">Comparativos e soluções testadas</p>
-
-        <h1>
-          Sempre tem um problema pequeno
-          <span class="hl">custando caro todo mês.</span>
-        </h1>
-
-        <p class="hero-lede">
-          Faltas na agenda do salão, o cabo que você troca três vezes por ano, a bagunça que
-          faz recomprar o que já tinha. São gastos que passam despercebidos porque vêm em
-          parcelas pequenas. <strong>A gente encontra o problema, faz a conta e compara o que
-          resolve</strong> — começando pelo mais caro de todos: o horário que vaga e ninguém
-          preenche.
-        </p>
-
-        <p class="hero-atalho">
-          Veio pelos comparativos? <a href="#comparativos">Pular direto para os produtos testados</a>
-        </p>
+        <p class="eyebrow eyebrow-on-dark">Para quem trabalha com hora marcada</p>
+        <h2 id="agenda-title">Quanto as faltas na agenda custam ao seu negócio?</h2>
+        <p class="hero-lede">Use seus números para estimar a receita que deixa de entrar. Depois, veja como organizar confirmações e tentar preencher os horários vagos.</p>
+        <p class="hero-atalho">Para salões, clínicas, barbearias e profissionais com agenda.</p>
       </div>
 
       <!-- Mini-diagnóstico: mesma conta da calculadora completa, com três
@@ -147,90 +223,8 @@ const steps = [
           alt="Protocolo VAGA — planilhas, mensagens prontas e guia de implantação, mostrados em notebook, celular e material impresso"
           width="1600"
           height="1200"
-          loading="eager"
+          loading="lazy"
         />
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= DIVISOR: O RESTO DO PORTAL ================= -->
-  <section class="section portal-intro">
-    <div class="wrap-narrow">
-      <p class="eyebrow">O mesmo método, em outras áreas</p>
-      <h2>Nem todo problema caro é de agenda.</h2>
-      <p class="lede">
-        A conta que você acabou de fazer é o método da casa aplicado a um caso: achar o gasto
-        que passa despercebido, mostrar quanto ele custa por ano e apontar o que resolve. O
-        mesmo vale para cozinha, casa, carro, pet e eletrônicos — só que ali a solução costuma
-        ser um produto, e não um sistema. <strong>Quando a indicação é de afiliado, está
-        sempre sinalizada.</strong>
-      </p>
-    </div>
-  </section>
-
-  <!-- ================= BARRA DE NÚMEROS ================= -->
-  <section class="stats-bar" aria-label="Números do portal">
-    <div class="wrap stats-inner">
-      <div class="stat">
-        <strong>{articlesCount}</strong>
-        <span>comparativo{articlesCount === 1 ? '' : 's'} publicado{articlesCount === 1 ? '' : 's'}</span>
-      </div>
-      <div class="stat">
-        <strong>{picksCount}</strong>
-        <span>produto{picksCount === 1 ? '' : 's'} indicado{picksCount === 1 ? '' : 's'}</span>
-      </div>
-      <div class="stat">
-        <strong>{areasCount}</strong>
-        <span>área{areasCount === 1 ? '' : 's'} cobertas</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= COMECE PELOS COMPARATIVOS ================= -->
-  {latestArticles.length > 0 && (
-    <section id="comparativos" class="section section-tint" aria-label="Comparativos em destaque">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Comparativos publicados</p>
-          <h2>Produtos testados e comparados antes de virar indicação.</h2>
-          <p class="lede">
-            Nenhum item entra aqui sem um comparativo publicado antes: qual problema ele
-            resolve, contra o que foi comparado, quanto custa e quando <em>não</em> vale a
-            pena. O produto, o motivo e o link ficam sempre no mesmo lugar.
-          </p>
-        </div>
-
-        <div class="articles-grid">
-          {latestArticles.map((post) => (
-            <ArticleCard
-              href={`/artigos/${post.slug}/`}
-              title={post.data.title}
-              description={post.data.description}
-              pubDate={post.data.pubDate}
-              niches={post.data.niches}
-            />
-          ))}
-        </div>
-
-        <a href="/artigos/" class="see-all-articles">Ver todos os comparativos &rarr;</a>
-      </div>
-    </section>
-  )}
-
-  <!-- ================= ÁREAS ================= -->
-  <section id="areas" class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Áreas que cobrimos</p>
-        <h2>Cada área tem sua própria página.</h2>
-        <p class="lede">
-          Um problema por vez, com a conta feita e a solução explicada. Escolha a área
-          que tem a ver com o seu caso.
-        </p>
-      </div>
-
-      <div class="offers-grid">
-        {OFFERS.map((offer) => <OfferCard offer={offer} />)}
       </div>
     </div>
   </section>
@@ -301,6 +295,26 @@ const steps = [
 </Layout>
 
 <style>
+  .portal-hero { background: var(--paper-2); padding: clamp(2.5rem, 5vw, 4rem) 0 2rem; border-bottom: 1px solid var(--line); }
+  .portal-hero h1 { max-width: 23ch; font-size: clamp(2rem, 4.5vw, 3.4rem); }
+  .portal-hero h1 span { color: var(--brand-dk); }
+  .portal-lede { max-width: 64ch; color: var(--ink-soft); margin: 1.2rem 0 1.8rem; }
+  .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .entry-card { display: flex; flex-direction: column; padding: clamp(1.3rem, 3vw, 2rem); border-radius: var(--radius-lg); text-decoration: none; border: 1px solid var(--line-2); background: var(--paper); color: var(--ink); box-shadow: var(--shadow-sm); }
+  .entry-card:hover { border-color: var(--brand); color: var(--ink); box-shadow: var(--shadow-md); }
+  .entry-card:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+  .entry-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .9rem; color: var(--brand-dk); }
+  .entry-card h2 { font-size: clamp(1.2rem, 2.3vw, 1.6rem); }
+  .entry-card p { color: var(--ink-soft); font-size: .95rem; max-width: 48ch; }
+  .entry-action { margin-top: auto; padding-top: .5rem; font-size: .95rem; font-weight: 700; color: var(--brand-dk); display: flex; justify-content: space-between; gap: 1rem; }
+  .entry-business { background: var(--command-2); border-color: var(--command-2); }
+  .entry-business h2 { color: white; }
+  .entry-business p { color: #cbd0db; }
+  .entry-business .entry-label, .entry-business .entry-action { color: var(--accent-lt); }
+  .portal-disclosure { font-size: .8rem; color: var(--ink-soft); margin: 1.2rem 0 0; }
+  #comparativos, #areas, #agenda, #criterios { scroll-margin-top: 5.5rem; }
+  @media (max-width: 640px) { .entry-grid { grid-template-columns: 1fr; } .portal-hero h1 { font-size: 2rem; } }
+
   /* ---------- HERO ---------- */
   .hero {
     position: relative;
@@ -329,7 +343,7 @@ const steps = [
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr; }
   }
-  .hero h1 { color: #fff; }
+  .hero h2 { color: #fff; }
   .hero h1 .hl {
     display: block;
     background: linear-gradient(95deg, var(--accent-lt), var(--brand-lt));
@@ -397,7 +411,7 @@ const steps = [
     height: 5px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.18);
-    outline: none;
+    outline-offset: 5px;
     margin: 0;
   }
   .hc-campo input[type="range"]::-webkit-slider-thumb {
