@@ -1,0 +1,53 @@
+---
+title: "Gelo com Gosto de Freezer? Forma com Tampa Resolve ou o Problema É Outro?"
+description: "Gelo com cheiro de freezer vem do ar e da sujeira, não só da forma. Veja quando a forma de gelo com tampa ajuda e o que ela não resolve sozinha."
+pubDate: 2026-10-26
+niches: ["cozinha"]
+draft: false
+---
+
+import ProductCard from '../../components/ProductCard.astro';
+import Callout from '../../components/Callout.astro';
+import { OFFERS } from '../../consts';
+
+export const cozinha = OFFERS.find((o) => o.slug === 'cozinha');
+export const formas = cozinha.page.products.find((p) => p.name.includes('Formas de Gelo'));
+
+Gelo com gosto de freezer é água que **absorveu cheiro de comida ou de sujeira enquanto congelava**. Forma com tampa ajuda a limitar essa exposição e custa pouco, mas só resolve se o freezer estiver limpo e a comida bem fechada: a tampa sozinha não conserta uma causa que está dentro do freezer.
+
+## Por que o gelo pega gosto de comida?
+
+O gelo absorve cheiro com facilidade. Segundo reportagem do Olhar Digital (outubro de 2026), o ar que circula dentro da geladeira e do freezer carrega moléculas voláteis de recipientes abertos e de resíduos de comida, e a água absorve esses odores enquanto congela devagar; o cubo exposto continua pegando cheiro com o tempo.
+
+O Antagonista (março de 2026) lista outras causas: freezer sujo, gelo velho, alimentos de cheiro forte mal embalados (peixe, carne temperada, sobras), água de qualidade ruim, formas gastas ou porosas que passam cheiro para o gelo e freezer lotado demais, que atrapalha a circulação de ar.
+
+## O que a forma com tampa resolve?
+
+Ela reduz o contato do cubo com o ar do freezer, e foi exatamente esse o conselho do Olhar Digital: usar formas com tampa, de preferência de silicone. Para quem faz gelo toda semana e já sente o cheiro, é uma troca de custo baixo.
+
+<ProductCard product={formas} />
+
+<Callout type="nota">
+  Preço, nota e quantidade de avaliações mudam com frequência; os valores acima refletem a última
+  checagem. Confira o anúncio antes de decidir. Parte das avaliações reclama que a tampa não encaixa
+  perfeitamente, o que importa justamente para quem quer isolar cheiro.
+</Callout>
+
+## O que a tampa não resolve?
+
+Se o freezer está sujo, se há comida sem vedação ou se o gelo fica ali por semanas, a tampa só atrasa o problema. O Antagonista recomenda lavar o interior do freezer com detergente neutro, descartar gelo guardado há muito tempo, separar um canto para as formas, trocar as formas velhas ou porosas, guardar carnes e peixes em recipientes bem fechados, preferir água mineral ou filtrada e não lotar o freezer.
+
+O Olhar Digital acrescenta uma regra de prazo: descartar o gelo com mais de duas semanas e renovar o estoque toda semana, além de limpar o freezer todo mês com bicarbonato. A mesma reportagem lembra que filtrar a água não impede o gelo de pegar cheiro depois de congelado.
+
+## Como decidir?
+
+- **Gelo sempre com cheiro e freezer cheio de comida aberta?** Comece pelos potes fechados, como em [comida estragando rápido na geladeira](/artigos/comida-estragando-rapido-na-geladeira-potes-hermeticos/); depois a forma com tampa.
+- **Freezer limpo, gelo com cheiro leve e forma antiga ou rachada?** A forma com tampa tende a ajudar bastante.
+- **Gelo parado há semanas?** Descarte e refaça: nenhuma forma conserta gelo velho.
+- **Cheiro de ferrugem, de mofo ou de produto químico, ou água com cor?** Não é a forma: O Antagonista recomenda investigar a água.
+
+Quer ver o resto dos itens de cozinha que resolvem um incômodo do dia a dia? [Veja a seleção de cozinha](/cozinha/).
+
+<Callout type="nota">
+  Fontes: <a href="https://olhardigital.com.br/curiosidades/?p=32508" target="_blank" rel="noopener">Técnicos em refrigeração explicam por que o gelo da geladeira pega gosto de comida (Olhar Digital, 19/10/2026)</a> e <a href="https://oantagonista.com.br/ladooa/entretenimento/o-que-significa-quando-o-gelo-do-freezer-fica-com-um-gosto-estranho/" target="_blank" rel="noopener">O que significa quando o gelo do freezer fica com um gosto estranho? (O Antagonista, 21/03/2026)</a>, consultadas em 25/10/2026.
+</Callout>
