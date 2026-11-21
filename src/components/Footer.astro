@@ -48,6 +48,25 @@ const year = new Date().getFullYear();
   </div>
 </footer>
 
+{/* Evento affiliate_click no GA4: qualquer link de afiliado (rel=sponsored) clicado, com o
+    produto (texto/atributo), o nicho (página) e a posição (card, tabela, ranking). Fica no
+    rodapé porque ele está em todas as páginas. */}
+<script is:inline>
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[rel~="sponsored"]') : null;
+    if (!a) return;
+    var g = typeof window.gtag === 'function' ? window.gtag : function () { (window.dataLayer = window.dataLayer || []).push(arguments); };
+    var bloco = a.closest('[data-aff-pos], .product, table, .ranking, article, section');
+    g('event', 'affiliate_click', {
+      item_id: a.getAttribute('data-aff-id') || a.href.split('?')[0],
+      item_name: (a.getAttribute('aria-label') || a.textContent || '').trim().slice(0, 80),
+      position: a.getAttribute('data-aff-pos') || (bloco ? (bloco.getAttribute('data-aff-pos') || bloco.tagName.toLowerCase() + (bloco.className ? '.' + String(bloco.className).split(' ')[0] : '')) : 'pagina'),
+      page_path: location.pathname,
+      transport_type: 'beacon'
+    });
+  }, true);
+</script>
+
 <style>
   .site-footer {
     background: var(--command);
@@ -107,7 +126,8 @@ const year = new Date().getFullYear();
 
   .links-col ul { list-style: none; margin: 0; padding: 0; }
   .links-col li { margin-bottom: 0.55rem; font-size: 0.93rem; color: rgba(255, 255, 255, 0.6); }
-  .links-col a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
+  .links-col a { color: rgba(255, 255, 255, 0.85); text-decoration: none; display: inline-flex; align-items: center; min-height: 40px; }
+  .links-col li { margin: 0; }
   .links-col a:hover { color: var(--accent-lt); }
 
   .disclosure-col p:last-child {
@@ -124,7 +144,7 @@ const year = new Date().getFullYear();
     gap: 0.6rem;
     padding-top: 1.75rem;
     font-size: 0.84rem;
-    color: rgba(255, 255, 255, 0.42);
+    color: rgba(255, 255, 255, 0.66);
   }
   .bottom a {
     color: inherit;
