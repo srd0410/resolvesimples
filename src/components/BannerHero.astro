@@ -40,7 +40,8 @@ const { image, alt = '', width = '48rem' } = Astro.props;
 
   .has-banner { display: grid; padding: 0; }
   .has-banner .hero-top { grid-row: 1; grid-column: 1; padding-block: 1.1rem .8rem; }
-  .has-banner .banner-media { display: block; grid-row: 2; grid-column: 1; aspect-ratio: 1 / 1; background: var(--command); }
+  /* Celular: 4:3 (antes 1:1 empurrava o botão do nicho para mais de 550 px da borda) */
+  .has-banner .banner-media { display: block; grid-row: 2; grid-column: 1; aspect-ratio: 4 / 3; background: var(--command); }
   .has-banner .banner-media :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 65% 50%; }
   .has-banner .hero-inner { display: contents; }
   .has-banner .banner-title {
