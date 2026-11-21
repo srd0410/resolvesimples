@@ -1,35 +1,51 @@
 ---
+// Botão "Menu" + painel lateral (direita). Abre a partir de QUALQUER botão com
+// [data-menu-open] (este botão e a lupa do <Header>); com data-menu-focus="search" abre
+// com o cursor na busca. Conteúdo: busca (Pagefind) → atalhos do site (comparativos,
+// ranking, negócio) → nichos com os 3 primeiros produtos. Fecha com X, Esc, toque fora
+// ou ao seguir um link; foco preso no painel enquanto aberto; `inert` quando fechado.
 import { OFFERS, slugifyProduct } from '../consts';
+const nichos = OFFERS.filter((o) => o.page.products.length > 0);
+const ATALHOS = [
+  { href: '/artigos/', label: 'Artigos e comparativos' },
+  { href: '/ranking/', label: 'Ranking geral do site' },
+  { href: '/#areas', label: 'Áreas' },
+  { href: '/#criterios', label: 'Como escolhemos' },
+];
 ---
-<button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Abrir menu">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+<button type="button" id="menu-toggle" class="menu-toggle" data-menu-open aria-expanded="false" aria-controls="site-menu" aria-label="Abrir menu">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
   <span>Menu</span>
 </button>
 
-<div id="menu-backdrop" class="menu-backdrop" hidden></div>
+<div id="menu-backdrop" class="menu-backdrop" data-menu-close hidden></div>
 
-<aside id="site-menu" class="site-menu" aria-hidden="true">
+<aside id="site-menu" class="site-menu" role="dialog" aria-modal="true" aria-labelledby="site-menu-title" inert>
   <div class="menu-head">
-    <p class="menu-title">Buscar e navegar</p>
-    <button id="menu-close" aria-label="Fechar menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19" /></svg>
+    <p class="menu-title" id="site-menu-title">Buscar e navegar</p>
+    <button type="button" id="menu-close" data-menu-close aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" /></svg>
     </button>
   </div>
 
-  <div class="menu-search">
-    <input id="menu-search-input" type="search" placeholder="Buscar no site (ex: air fryer)..." autocomplete="off" />
-    <ul id="menu-search-results" class="search-results" hidden></ul>
+  <div class="menu-search" role="search">
+    <label for="menu-search-input" class="sr-only">Buscar no site</label>
+    <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
+    <input id="menu-search-input" type="search" placeholder="Buscar (ex.: air fryer)…" autocomplete="off" />
+    <ul id="menu-search-results" class="search-results" hidden aria-live="polite"></ul>
   </div>
 
-  <nav class="menu-nav" aria-label="Categorias e ranking">
-    <a href="/artigos/" class="menu-ranking-link">
-      📝 Artigos e comparativos
-    </a>
-    <a href="/ranking/" class="menu-ranking-link">
-      🏆 Ranking Geral do site
+  <nav class="menu-nav" aria-label="Atalhos e nichos">
+    <ul class="menu-atalhos">
+      {ATALHOS.map((a) => <li><a href={a.href}>{a.label}</a></li>)}
+    </ul>
+    <a href="/#agenda" class="menu-negocio">
+      <span class="mn-rot">Para seu negócio</span>
+      <span class="mn-txt">Calcule quanto a agenda vazia custa por mês</span>
     </a>
 
-    {OFFERS.filter((o) => o.page.products.length > 0).map((offer) => {
+    <p class="menu-label">Nichos</p>
+    {nichos.map((offer) => {
       const top = offer.page.products.filter((p) => p.kind !== 'deal').slice(0, 3);
       return (
         <details class="menu-category">
@@ -38,12 +54,12 @@ import { OFFERS, slugifyProduct } from '../consts';
             {top.map((p) => (
               <li>
                 <a href={`/${offer.slug}/#${slugifyProduct(p.name)}`}>
-                  {p.name} <span>{p.price}</span>
+                  <span class="mp-nome">{p.name}</span> <span class="mp-preco">{p.price}</span>
                 </a>
               </li>
             ))}
           </ul>
-          <a class="menu-see-all" href={`/${offer.slug}/`}>Ver todos em {offer.niche} &rarr;</a>
+          <a class="menu-see-all" href={`/${offer.slug}/`}>Ver tudo em {offer.niche} &rarr;</a>
         </details>
       );
     })}
@@ -51,44 +67,63 @@ import { OFFERS, slugifyProduct } from '../consts';
 </aside>
 
 <script>
-  const toggle = document.getElementById('menu-toggle');
-  const close = document.getElementById('menu-close');
-  const backdrop = document.getElementById('menu-backdrop');
-  const menu = document.getElementById('site-menu');
-  const input = document.getElementById('menu-search-input');
-  const results = document.getElementById('menu-search-results');
+  const menu = document.getElementById('site-menu') as HTMLElement;
+  const backdrop = document.getElementById('menu-backdrop') as HTMLElement;
+  const input = document.getElementById('menu-search-input') as HTMLInputElement;
+  const results = document.getElementById('menu-search-results') as HTMLElement;
+  let opener: HTMLElement | null = null;
 
-  function openMenu() {
+  function focaveis(): HTMLElement[] {
+    return Array.from(menu.querySelectorAll<HTMLElement>('a[href], button, input, summary')).filter((el) => el.offsetParent !== null);
+  }
+  function openMenu(btn: HTMLElement | null) {
+    opener = btn;
+    menu.inert = false;
     menu.classList.add('open');
     backdrop.hidden = false;
-    toggle.setAttribute('aria-expanded', 'true');
-    menu.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => input && input.focus(), 50);
+    document.querySelectorAll('[data-menu-open]').forEach((b) => b.setAttribute('aria-expanded', 'true'));
+    document.documentElement.style.overflow = 'hidden';
+    const alvo = btn?.dataset.menuFocus === 'search' ? input : (document.getElementById('menu-close') as HTMLElement);
+    setTimeout(() => alvo?.focus(), 60);
   }
   function closeMenu() {
+    if (!menu.classList.contains('open')) return;
     menu.classList.remove('open');
+    menu.inert = true;
     backdrop.hidden = true;
-    toggle.setAttribute('aria-expanded', 'false');
-    menu.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    document.querySelectorAll('[data-menu-open]').forEach((b) => b.setAttribute('aria-expanded', 'false'));
+    document.documentElement.style.overflow = '';
+    if (opener && opener.offsetParent !== null) opener.focus();
   }
 
-  toggle.addEventListener('click', openMenu);
-  close.addEventListener('click', closeMenu);
-  backdrop.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+  document.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement | null;
+    if (!t || !t.closest) return;
+    const btn = t.closest<HTMLElement>('[data-menu-open]');
+    if (btn) { e.preventDefault(); openMenu(btn); return; }
+    if (t.closest('[data-menu-close]')) { closeMenu(); return; }
+    if (menu.classList.contains('open') && t.closest('#site-menu a[href]')) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (!menu.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeMenu(); return; }
+    if (e.key !== 'Tab') return;
+    const f = focaveis();
+    if (!f.length) return;
+    const primeiro = f[0], ultimo = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+    else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+  });
 
-  // Busca full-text via Pagefind (índice gerado no build, cobre produtos,
-  // texto de categoria e artigos comparativos). Carregado sob demanda, só
-  // quando o usuário interage com o campo — sem custo no carregamento inicial.
-  let pagefindMod = null;
-  let pagefindLoading = null;
+  // Busca full-text via Pagefind (índice gerado no build, cobre produtos, texto de nicho e
+  // artigos). Carregada sob demanda, só quando o usuário interage com o campo.
+  let pagefindMod: any = null;
+  let pagefindLoading: Promise<any> | null = null;
   function loadPagefind() {
     if (pagefindMod) return Promise.resolve(pagefindMod);
     if (!pagefindLoading) {
       pagefindLoading = import(/* @vite-ignore */ '/pagefind/pagefind.js')
-        .then(async (mod) => {
+        .then(async (mod: any) => {
           await mod.options?.({ excerptLength: 16 });
           await mod.init?.();
           pagefindMod = mod;
@@ -98,40 +133,34 @@ import { OFFERS, slugifyProduct } from '../consts';
     }
     return pagefindLoading;
   }
-
-  function escapeHtml(s) {
-    return s.replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+  function escapeHtml(s: string) {
+    return s.replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m] as string));
   }
-
-  let debounce;
-  async function runSearch(query) {
+  let debounce: number | undefined;
+  async function runSearch(query: string) {
     const q = query.trim();
     if (q.length < 2) { results.hidden = true; results.innerHTML = ''; return; }
-
     const pf = await loadPagefind();
     if (!pf) {
       results.innerHTML = '<li class="no-match">A busca ainda não está disponível.</li>';
       results.hidden = false;
       return;
     }
-
     const search = await pf.search(q);
     if (!search || search.results.length === 0) {
       results.innerHTML = `<li class="no-match">Nada encontrado para "${escapeHtml(q)}".</li>`;
       results.hidden = false;
       return;
     }
-
-    const top = await Promise.all(search.results.slice(0, 8).map((r) => r.data()));
+    const top = await Promise.all(search.results.slice(0, 8).map((r: any) => r.data()));
     results.innerHTML = top
-      .map((it) => {
+      .map((it: any) => {
         const title = escapeHtml(it.meta?.title || 'Página');
         return `<li><a href="${it.url}"><span class="r-name">${title}</span><span class="r-meta">${it.excerpt}</span></a></li>`;
       })
       .join('');
     results.hidden = false;
   }
-
   input.addEventListener('input', () => {
     window.clearTimeout(debounce);
     debounce = window.setTimeout(() => runSearch(input.value), 180);
@@ -143,17 +172,18 @@ import { OFFERS, slugifyProduct } from '../consts';
   .menu-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
+    min-height: var(--tap);
     background: transparent;
-    border: 1px solid var(--line-dk);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     color: #fff;
     border-radius: 999px;
-    padding: 0.45rem 0.9rem;
-    font-size: 0.85rem;
+    padding: 0 1rem;
+    font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
   }
-  .menu-toggle svg { width: 1.05rem; height: 1.05rem; }
+  .menu-toggle svg { width: 1.15rem; height: 1.15rem; }
   .menu-toggle:hover { border-color: var(--accent-lt); color: var(--accent-lt); }
 
   .menu-backdrop {
@@ -166,17 +196,19 @@ import { OFFERS, slugifyProduct } from '../consts';
   .site-menu {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     height: 100dvh;
-    width: min(22rem, 88vw);
+    width: min(23rem, 90vw);
     background: var(--paper);
     box-shadow: var(--shadow-lg);
+    border-left: 3px solid var(--accent);
     z-index: 91;
-    transform: translateX(-100%);
+    transform: translateX(100%);
     transition: transform 0.22s ease;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .site-menu.open { transform: translateX(0); }
 
@@ -184,99 +216,127 @@ import { OFFERS, slugifyProduct } from '../consts';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.1rem 1.25rem;
+    min-height: 60px;
+    padding: 0.3rem 0.6rem 0.3rem 1.25rem;
     border-bottom: 1px solid var(--line);
   }
-  .menu-title { margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--ink); }
-  #menu-close { background: none; border: none; cursor: pointer; color: var(--ink-soft); padding: 0.2rem; }
-  #menu-close svg { width: 1.2rem; height: 1.2rem; }
+  .menu-title { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--ink); }
+  #menu-close {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: var(--tap); height: var(--tap);
+    background: none; border: none; border-radius: 999px; cursor: pointer; color: var(--ink-soft);
+  }
+  #menu-close:hover { background: var(--paper-2); color: var(--ink); }
+  #menu-close svg { width: 1.3rem; height: 1.3rem; }
 
   .menu-search { padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); position: relative; }
+  .search-ico { position: absolute; left: 2.1rem; top: 1rem; height: 48px; width: 1.05rem; color: var(--ink-mute); pointer-events: none; }
   #menu-search-input {
     width: 100%;
-    padding: 0.65rem 0.9rem;
-    border-radius: var(--radius-sm);
+    min-height: 48px;
+    padding: 0 0.9rem 0 2.6rem;
+    border-radius: 999px;
     border: 1px solid var(--line-2);
-    font-size: 0.95rem;
+    background: var(--paper-2);
+    /* 16 px: abaixo disso o iPhone dá zoom na página ao tocar no campo */
+    font-size: 1rem;
     font-family: var(--font-body);
+    color: var(--ink);
   }
-  #menu-search-input:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+  #menu-search-input:focus { outline: 2px solid var(--brand); outline-offset: 1px; background: var(--paper); }
 
+  /* Resultados são montados por script (innerHTML): sem :global() o CSS não chegava neles */
   .search-results {
     list-style: none;
     margin: 0.6rem 0 0;
     padding: 0;
-    max-height: 18rem;
+    max-height: 55vh;
     overflow-y: auto;
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
+    background: var(--paper);
   }
-  .search-results li { border-bottom: 1px solid var(--line); }
-  .search-results li:last-child { border-bottom: 0; }
-  .search-results a {
+  .search-results :global(li) { border-bottom: 1px solid var(--line); margin: 0; }
+  .search-results :global(li:last-child) { border-bottom: 0; }
+  .search-results :global(a) {
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
-    padding: 0.6rem 0.75rem;
+    padding: 0.65rem 0.8rem;
     text-decoration: none;
     color: var(--ink);
+    border-left: 3px solid transparent;
   }
-  .search-results a:hover { background: var(--paper-2); }
-  .r-name { font-size: 0.9rem; font-weight: 600; }
-  .r-meta { font-size: 0.78rem; color: var(--ink-soft); }
-  .no-match { padding: 0.6rem 0.75rem; font-size: 0.85rem; color: var(--ink-soft); }
+  .search-results :global(a:hover), .search-results :global(a:focus) { background: var(--paper-2); border-left-color: var(--accent); outline: none; }
+  .search-results :global(.r-name) { font-family: var(--font-display); font-size: 0.98rem; font-weight: 700; line-height: 1.25; }
+  .search-results :global(.r-meta) { font-size: 0.82rem; line-height: 1.4; color: var(--ink-soft); }
+  .search-results :global(mark) { background: var(--accent-wash); color: var(--accent-text); padding: 0 0.1em; border-radius: 2px; }
+  .search-results :global(.no-match) { padding: 0.8rem; font-size: 0.88rem; color: var(--ink-soft); }
 
-  .menu-nav { padding: 0.75rem 1.25rem 1.5rem; }
-  .menu-ranking-link {
-    display: block;
-    font-weight: 700;
-    color: var(--brand-dk);
-    background: var(--brand-wash);
-    border-radius: var(--radius-sm);
-    padding: 0.7rem 0.85rem;
-    text-decoration: none;
-    margin-bottom: 1rem;
+  .menu-nav { padding: 0.75rem 1.25rem 2rem; }
+  .menu-atalhos { list-style: none; margin: 0 0 0.9rem; padding: 0; }
+  .menu-atalhos li { border-bottom: 1px solid var(--line); }
+  .menu-atalhos a {
+    display: flex; align-items: center; min-height: 48px;
+    font-weight: 600; color: var(--ink); text-decoration: none;
   }
-  .menu-ranking-link:hover { background: var(--paper-3); }
+  .menu-atalhos a::after { content: '›'; margin-left: auto; color: var(--ink-mute); font-size: 1.3rem; }
+  .menu-atalhos a:hover { color: var(--brand-dk); }
 
-  .menu-category {
-    border-bottom: 1px solid var(--line);
+  .menu-negocio {
+    display: flex; flex-direction: column; gap: 0.1rem;
+    padding: 0.75rem 0.9rem; margin-bottom: 1.2rem;
+    background: var(--accent-wash); border: 1px solid rgba(240, 135, 44, 0.32); border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm); text-decoration: none;
   }
+  .mn-rot { font-family: var(--font-display); font-weight: 800; color: var(--ink); }
+  .mn-txt { font-size: 0.85rem; color: var(--accent-text); }
+
+  .menu-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--brand-dk); margin: 0 0 0.2rem;
+  }
+  .menu-category { border-bottom: 1px solid var(--line); }
   .menu-category summary {
+    display: flex; align-items: center; min-height: 48px;
     cursor: pointer;
-    padding: 0.85rem 0.1rem;
     font-weight: 600;
     color: var(--ink);
     list-style: none;
   }
   .menu-category summary::-webkit-details-marker { display: none; }
-  .menu-category summary::after {
-    content: '+';
-    float: right;
-    color: var(--ink-soft);
-  }
+  .menu-category summary::after { content: '+'; margin-left: auto; color: var(--ink-soft); font-size: 1.2rem; }
   .menu-category[open] summary::after { content: '−'; }
 
-  .menu-top-products { list-style: none; margin: 0 0 0.5rem; padding: 0; }
+  .menu-top-products { list-style: none; margin: 0 0 0.3rem; padding: 0; }
   .menu-top-products a {
     display: flex;
     justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.4rem 0.1rem;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: var(--tap);
+    padding: 0.2rem 0.1rem;
     text-decoration: none;
     color: var(--ink-soft);
-    font-size: 0.88rem;
+    font-size: 0.9rem;
   }
   .menu-top-products a:hover { color: var(--ink); }
-  .menu-top-products a span { color: var(--ink-mute); white-space: nowrap; }
+  .mp-preco { color: var(--ink-mute); white-space: nowrap; font-size: 0.85rem; }
 
   .menu-see-all {
-    display: inline-block;
-    font-size: 0.85rem;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    font-size: 0.88rem;
+    font-weight: 700;
     color: var(--brand-dk);
     text-decoration: none;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.4rem;
   }
   .menu-see-all:hover { text-decoration: underline; }
+
+  @media (max-width: 420px) {
+    .menu-toggle span { display: none; }
+    .menu-toggle { padding: 0; width: var(--tap); justify-content: center; }
+  }
 </style>

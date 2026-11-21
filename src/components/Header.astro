@@ -1,27 +1,35 @@
 ---
+// Cabeçalho fixo (grafite). Computador: logo, navegação, CTA de negócio, lupa e Menu.
+// Celular/tablet (≤ 980 px): uma barra só — logo, lupa e Menu (44 px). A navegação e o
+// CTA de negócio ficam dentro do painel (<SiteMenu>), aberto pela lupa (com foco na
+// busca) ou pelo Menu.
 import SiteMenu from './SiteMenu.astro';
 ---
 <header class="site-header">
   <div class="wrap bar">
-    <div class="bar-left">
-      <SiteMenu />
-      <a href="/" class="logo" aria-label="resolvesimples — página inicial">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 12.5 L9.5 18 L20 6" />
-          </svg>
-        </span>
-        <span class="logo-text">resolve<strong>simples</strong></span>
-      </a>
-    </div>
+    <a href="/" class="logo" aria-label="resolvesimples — página inicial">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 12.5 L9.5 18 L20 6" />
+        </svg>
+      </span>
+      <span class="logo-text">resolve<strong>simples</strong></span>
+    </a>
 
     <nav class="nav" aria-label="Navegação principal">
       <a href="/artigos/">Comparativos</a>
       <a href="/ranking/">Ranking</a>
       <a href="/#areas">Áreas</a>
       <a href="/#criterios">Critérios</a>
-      <a href="/#agenda" class="btn btn-primary btn-sm"><span class="label-wide">Para seu negócio</span><span class="label-mobile">Negócio</span></a>
+      <a href="/#agenda" class="btn btn-primary btn-sm">Para seu negócio</a>
     </nav>
+
+    <div class="actions">
+      <button type="button" class="icon-btn" data-menu-open data-menu-focus="search" aria-controls="site-menu" aria-expanded="false" aria-label="Buscar no site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
+      </button>
+      <SiteMenu />
+    </div>
   </div>
 </header>
 
@@ -30,24 +38,25 @@ import SiteMenu from './SiteMenu.astro';
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(13, 16, 23, 0.88);
-    backdrop-filter: blur(10px);
+    /* Fundo sólido, sem backdrop-filter: o filtro fazia o painel e o fundo escurecido
+       (position: fixed, dentro do cabeçalho) se posicionarem pelo cabeçalho, não pela tela. */
+    background: var(--command);
     border-bottom: 1px solid var(--line-dk);
   }
   .bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
     min-height: 4rem;
   }
-  .bar-left { display: flex; align-items: center; gap: 0.9rem; }
   .logo {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
+    min-height: var(--tap);
     text-decoration: none;
     color: #fff;
+    margin-right: auto;
   }
   .logo:hover { color: #fff; }
   .logo-mark {
@@ -57,7 +66,7 @@ import SiteMenu from './SiteMenu.astro';
     height: 1.85rem;
     border-radius: 7px;
     background: var(--accent);
-    color: #fff;
+    color: var(--command);
     flex: none;
   }
   .logo-mark svg { width: 1.05rem; height: 1.05rem; }
@@ -66,31 +75,37 @@ import SiteMenu from './SiteMenu.astro';
     font-weight: 700;
     font-size: 1.08rem;
     letter-spacing: -0.02em;
+    white-space: nowrap;
   }
   .logo-text strong { font-weight: 800; color: var(--accent-lt); }
 
-  .nav {
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
-  }
-  .nav a {
+  .nav { display: flex; align-items: center; gap: 1.4rem; }
+  .nav a:not(.btn) {
+    display: inline-flex; align-items: center; min-height: var(--tap);
     font-size: 0.925rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.72);
+    color: rgba(255, 255, 255, 0.78);
     text-decoration: none;
   }
-  .nav a:hover { color: #fff; }
-  .nav a.btn { color: #fff; }
+  .nav a:not(.btn):hover { color: #fff; }
 
-  .label-mobile { display: none; }
-  @media (max-width: 640px) {
-    .label-wide, .logo-mark { display: none; }
-    .label-mobile { display: inline; }
-    .bar { gap: .5rem; padding-inline: 1rem; }
-    .bar-left { gap: .5rem; }
-    .logo-text { font-size: .95rem; }
-    .nav .btn { padding-inline: .7rem; white-space: nowrap; }
-    .nav a:not(.btn) { display: none; }
+  .actions { display: flex; align-items: center; gap: 0.3rem; }
+  .icon-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: var(--tap); height: var(--tap);
+    background: transparent; border: 0; border-radius: 999px;
+    color: #fff; cursor: pointer;
+  }
+  .icon-btn svg { width: 1.25rem; height: 1.25rem; }
+  .icon-btn:hover { background: var(--command-3); color: var(--accent-lt); }
+
+  /* Celular/tablet: só logo, lupa e Menu (antes o cabeçalho estourava a tela entre 641 e ~830 px;
+     a navegação completa só cabe numa linha a partir de ~980 px) */
+  @media (max-width: 980px) {
+    .nav { display: none; }
+    .bar { gap: 0.4rem; min-height: 3.6rem; padding-inline: 1rem; }
+  }
+  @media (max-width: 360px) {
+    .logo-mark { display: none; }
   }
 </style>
