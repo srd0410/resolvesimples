@@ -37,6 +37,8 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      // Página de resultado da calculadora: é noindex, então não entra no sitemap.
+      filter: (page) => !page.includes('/calculadora-agenda-vazia/obrigado/'),
       // Preenche <lastmod> por URL de artigo, a partir das datas do frontmatter.
       serialize(item) {
         const match = item.url.match(/\/artigos\/([^/]+)\/$/);
